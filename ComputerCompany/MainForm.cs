@@ -17,6 +17,7 @@ namespace ComputerCompany
         ComponentsForm componentsForm;
         SuppliersForm suppliersForm;
         CategoriesForm categoriesForm;
+        FullForm fullForm;
         public MainForm()
         {
             InitializeComponent();
@@ -50,6 +51,12 @@ namespace ComputerCompany
         {
             categoriesForm = new CategoriesForm();
             categoriesForm.ShowDialog();
+        }
+
+        private void buttonFull_Click(object sender, EventArgs e)
+        {
+            fullForm = new FullForm();
+            fullForm.ShowDialog();
         }
     }
 }

@@ -52,7 +52,9 @@
       <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -82,10 +84,19 @@
     <Compile Include="ComponentsForm.Designer.cs">
       <DependentUpon>ComponentsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComputerCompanyDBDataSet.cs">
+      <DependentUpon>ComputerCompanyDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ComputerCompanyDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ComputerCompanyDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FullForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FullForm.Designer.cs">
+      <DependentUpon>FullForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -107,6 +118,12 @@
     <Compile Include="PurchasesForm.Designer.cs">
       <DependentUpon>PurchasesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForm.Designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="SuppliersForm.cs">
       <SubType>Form</SubType>
@@ -122,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComponentsForm.resx">
       <DependentUpon>ComponentsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FullForm.resx">
+      <DependentUpon>FullForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -142,6 +162,9 @@
       <DependentUpon>PurchasesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportCheck.rdlc" />
+    <EmbeddedResource Include="ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportSupplierEarnings.rdlc" />
     <EmbeddedResource Include="SuppliersForm.resx">
       <DependentUpon>SuppliersForm.cs</DependentUpon>

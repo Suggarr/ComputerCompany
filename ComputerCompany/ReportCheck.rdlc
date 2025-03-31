@@ -647,6 +647,7 @@
                 <Value>=Fields!PurchaseDate.Value</Value>
                 <Style>
                   <FontSize>12pt</FontSize>
+                  <Format>D</Format>
                 </Style>
               </TextRun>
             </TextRuns>

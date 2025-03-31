@@ -383,6 +383,7 @@
             this.buttonReport.TabIndex = 47;
             this.buttonReport.Text = "Выдать справку";
             this.buttonReport.UseVisualStyleBackColor = true;
+            this.buttonReport.Click += new System.EventHandler(this.buttonReport_Click);
             // 
             // label1
             // 
@@ -711,8 +712,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button buttonCheck;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
         private System.Windows.Forms.Button buttonReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonPurchases;
@@ -745,5 +744,7 @@
         private ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter componentsTableAdapter;
         private System.Windows.Forms.BindingSource componentsBindingSource;
         public System.Windows.Forms.ComboBox comboBoxPurchaseId;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
+        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
     }
 }

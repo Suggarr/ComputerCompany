@@ -13,7 +13,7 @@ namespace ComputerCompany
     public partial class PurchaseDetailsForm : Form
     {
         private CheckForm checkForm;
-        //private ReportForm reportForm;
+        private ReportForm reportForm;
         public PurchaseDetailsForm()
         {
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace ComputerCompany
             DataGridViewTextBoxColumn componentNameColumn = new DataGridViewTextBoxColumn
             {
                 Name = "ComponentName",
-                HeaderText = "Название компонента",
+                HeaderText = "Название комплектующего",
                 ReadOnly = true // Только для чтения
             };
             purchaseDetailsDataGridView.Columns.Add(componentNameColumn);
@@ -186,6 +186,23 @@ namespace ComputerCompany
                 {
                     MessageBox.Show("Пожалуйста, выберите идентификатор покупки.");
                 }
+            }
+        }
+
+        private void buttonReport_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = dateTimePickerStart.Value; // начальная дата
+            DateTime endDate = dateTimePickerEnd.Value; // конечная дата
+            ShowForm(startDate, endDate); // вызываем окно с датами
+        }
+
+        private void ShowForm(DateTime start, DateTime end)
+        {
+            if (reportForm == null || reportForm.IsDisposed)
+            {
+                reportForm = new ReportForm(start, end); // Передаем даты в конструктор
+                reportForm.FormClosed += (s, args) => reportForm = null;
+                reportForm.ShowDialog(this);
             }
         }
     }

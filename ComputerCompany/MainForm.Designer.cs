@@ -35,6 +35,7 @@
             this.buttonPurchases = new System.Windows.Forms.Button();
             this.buttonSuppliers = new System.Windows.Forms.Button();
             this.buttonComponents = new System.Windows.Forms.Button();
+            this.buttonFull = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +63,7 @@
             // buttonCategories
             // 
             this.buttonCategories.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCategories.Location = new System.Drawing.Point(292, 374);
+            this.buttonCategories.Location = new System.Drawing.Point(75, 373);
             this.buttonCategories.Name = "buttonCategories";
             this.buttonCategories.Size = new System.Drawing.Size(299, 58);
             this.buttonCategories.TabIndex = 20;
@@ -110,15 +111,27 @@
             this.buttonComponents.Name = "buttonComponents";
             this.buttonComponents.Size = new System.Drawing.Size(299, 58);
             this.buttonComponents.TabIndex = 16;
-            this.buttonComponents.Text = "Компоненты";
+            this.buttonComponents.Text = "Комплектующие";
             this.buttonComponents.UseVisualStyleBackColor = true;
             this.buttonComponents.Click += new System.EventHandler(this.buttonComponents_Click);
+            // 
+            // buttonFull
+            // 
+            this.buttonFull.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonFull.Location = new System.Drawing.Point(544, 373);
+            this.buttonFull.Name = "buttonFull";
+            this.buttonFull.Size = new System.Drawing.Size(299, 58);
+            this.buttonFull.TabIndex = 21;
+            this.buttonFull.Text = "Полное окно";
+            this.buttonFull.UseVisualStyleBackColor = true;
+            this.buttonFull.Click += new System.EventHandler(this.buttonFull_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 489);
+            this.Controls.Add(this.buttonFull);
             this.Controls.Add(this.buttonCategories);
             this.Controls.Add(this.buttonPurchaseDetails);
             this.Controls.Add(this.buttonPurchases);
@@ -142,6 +155,7 @@
         private System.Windows.Forms.Button buttonPurchases;
         private System.Windows.Forms.Button buttonSuppliers;
         private System.Windows.Forms.Button buttonComponents;
+        private System.Windows.Forms.Button buttonFull;
     }
 }
 

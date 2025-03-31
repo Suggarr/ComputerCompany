@@ -55,7 +55,7 @@ AS
 BEGIN
     SELECT 
         S.SupplierName,
-		Count(PD.Quantity) AS TotalQuantity,
+	Count(PD.Quantity) AS TotalQuantity,
         SUM(PD.UnitPrice) AS TotalEarnings
     FROM 
         Purchases P
