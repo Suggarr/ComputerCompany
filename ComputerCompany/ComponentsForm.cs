@@ -100,7 +100,15 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            fKComponentCateg6EF57B66BindingSource.AddNew();
+            //Тут добавлена проверка прежде, чем добавить новую строку.
+            try
+            {
+                fKComponentCateg6EF57B66BindingSource.AddNew();
+            }
+            catch {
+                MessageBox.Show("Не можем выполнить данное действие. Закончите редактирование строки которую добавили недавно");
+                fKComponentCateg6EF57B66BindingSource.CancelEdit();
+            }
         }
 
         private void btRemove_Click(object sender, EventArgs e)

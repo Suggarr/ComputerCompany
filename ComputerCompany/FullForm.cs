@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ComputerCompany
@@ -9,20 +9,19 @@ namespace ComputerCompany
     public partial class FullForm : Form
     {
         private SqlConnection connection;
-        private DataSet dataSet; // Новый DataSet
+        private DataSet dataSet;
 
         public FullForm()
         {
             InitializeComponent();
-            // Чтение строки подключения из App.config
-            string connectionString = ConfigurationManager.ConnectionStrings["ComputerCompany.Properties.Settings.ComputerCompanyDBConnectionString"].ConnectionString;
+            string connectionString = "Data Source=LAPTOP-6HNOPOT2;Initial Catalog=ComputerCompanyDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
             connection = new SqlConnection(connectionString);
             LoadData();
         }
 
         private void LoadData()
         {
-            dataSet = new DataSet(); // Инициализация DataSet
+            dataSet = new DataSet();
 
             try
             {
@@ -33,15 +32,8 @@ namespace ComputerCompany
                 SqlDataAdapter adapterSuppliers = new SqlDataAdapter(commandSuppliers, connection);
                 adapterSuppliers.Fill(dataSet, "Suppliers");
 
-                // Проверка наличия столбца SupplierID
-                if (!dataSet.Tables["Suppliers"].Columns.Contains("SupplierID"))
-                {
-                    MessageBox.Show("Столбец SupplierID не найден в таблице Suppliers.");
-                    return;
-                }
-
                 // Загрузка данных о покупках
-                string commandPurchases = "SELECT PurchaseID, PurchaseDate, SupplierID FROM Purchases";
+                string commandPurchases = "SELECT PurchaseID, PurchaseDate, SupplierID, PurchaseReason FROM Purchases";
                 SqlDataAdapter adapterPurchases = new SqlDataAdapter(commandPurchases, connection);
                 adapterPurchases.Fill(dataSet, "Purchases");
 
@@ -49,6 +41,11 @@ namespace ComputerCompany
                 string commandPurchaseDetails = "SELECT PurchaseDetailID, PurchaseID, ComponentID, Quantity, UnitPrice FROM PurchaseDetails";
                 SqlDataAdapter adapterPurchaseDetails = new SqlDataAdapter(commandPurchaseDetails, connection);
                 adapterPurchaseDetails.Fill(dataSet, "PurchaseDetails");
+
+                // Загрузка данных о компонентах
+                string commandComponents = "SELECT ComponentID, ComponentName FROM Components";
+                SqlDataAdapter adapterComponents = new SqlDataAdapter(commandComponents, connection);
+                adapterComponents.Fill(dataSet, "Components");
 
                 // Добавление вычисляемого столбца для общей цены
                 DataColumn totalPriceColumn = new DataColumn("TotalPrice", typeof(decimal), "Quantity * UnitPrice");
@@ -58,6 +55,10 @@ namespace ComputerCompany
                 comboBoxSupplier.DataSource = dataSet.Tables["Suppliers"];
                 comboBoxSupplier.DisplayMember = "SupplierName";
                 comboBoxSupplier.ValueMember = "SupplierID";
+
+                // Установка источника данных для DataGridView
+                dataGridView1.DataSource = dataSet.Tables["Purchases"];
+                dataGridView1.SelectionChanged += DataGridView1_SelectionChanged; // Подписка на событие выбора
             }
             catch (Exception ex)
             {
@@ -69,51 +70,78 @@ namespace ComputerCompany
             }
         }
 
+        private void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedPurchaseId = (int)dataGridView1.SelectedRows[0].Cells["PurchaseID"].Value;
+
+                // Очистка ListBox
+                listBoxItems.Items.Clear();
+
+                // Получение дочерних элементов
+                var childItems = dataSet.Tables["PurchaseDetails"].AsEnumerable()
+                    .Where(row => row.Field<int>("PurchaseID") == selectedPurchaseId);
+
+                decimal totalCost = 0;
+
+                foreach (var item in childItems)
+                {
+                    int componentId = item.Field<int>("ComponentID");
+                    int quantity = item.Field<int>("Quantity");
+                    decimal unitPrice = item.Field<decimal>("UnitPrice");
+                    decimal itemTotal = quantity * unitPrice;
+
+                    // Поиск названия компонента
+                    string componentName = dataSet.Tables["Components"].AsEnumerable()
+                        .FirstOrDefault(c => c.Field<int>("ComponentID") == componentId)?.Field<string>("ComponentName") ?? "Неизвестный компонент";
+
+                    listBoxItems.Items.Add($"Компонент: {componentName}, Количество: {quantity}, Цена: {unitPrice:C}, Общая стоимость: {itemTotal:C}");
+                    totalCost += itemTotal;
+                }
+
+                // Показ общей стоимости в последней строке ListBox
+                listBoxItems.Items.Add($"Общая стоимость товаров: {totalCost:C}");
+            }
+        }
+
         private void buttonFilter_Click(object sender, EventArgs e)
         {
             string filter = "";
 
-            // Фильтрация по выбранному поставщику
-            if (comboBoxSupplier.SelectedItem != null)
+            if (comboBoxSupplier.SelectedItem == null)
             {
-                int supplierId = (int)((DataRowView)comboBoxSupplier.SelectedItem)["SupplierID"];
-                filter += $"SupplierID = {supplierId}";
+                MessageBox.Show("Выберите поставщика.");
+                return;
             }
 
-            // Фильтрация по диапазону дат
+            int supplierId = (int)((DataRowView)comboBoxSupplier.SelectedItem)["SupplierID"];
+            filter += $"SupplierID = {supplierId}";
+
             if (dateTimePicker1.Value != null && dateTimePicker2.Value != null)
             {
-                if (!string.IsNullOrEmpty(filter))
-                {
-                    filter += " AND ";
-                }
-                filter += $"PurchaseDate >= '{dateTimePicker1.Value}' AND PurchaseDate <= '{dateTimePicker2.Value}'";
+                filter += $" AND PurchaseDate >= '{dateTimePicker1.Value:yyyy-MM-dd}' AND PurchaseDate <= '{dateTimePicker2.Value:yyyy-MM-dd}'";
             }
 
-            // Применение фильтра
             try
             {
-                // Создание DataView из таблицы Purchases
-                DataView view = new DataView(dataSet.Tables["Purchases"]); // использование правильного DataTable
-
-                // Проверка доступных столбцов
-                foreach (DataColumn column in view.Table.Columns)
-                {
-                    Console.WriteLine(column.ColumnName); // Для отладки, выводим имена столбцов
-                }
+                DataView view = new DataView(dataSet.Tables["Purchases"]);
 
                 if (!string.IsNullOrWhiteSpace(filter))
                 {
-                    view.RowFilter = filter; // Применение фильтра
+                    view.RowFilter = filter;
                 }
 
-                // Установка источника данных для DataGridView
-                dataGridView1.DataSource = view;
-                int num = dataGridView1.Columns.Count;
-                // Настройка отображаемых столбцов и заголовков для вычисляемых столбцов
-                //dataGridView1.Columns[0].HeaderText = "ID покупки";
-                //dataGridView1.Columns[1].HeaderText = "Дата покупки";
-                //dataGridView1.Columns[1].HeaderText = "ID поставщика";
+                if (view.Count > 0)
+                {
+                    dataGridView1.DataSource = view;
+                    dataGridView1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Нет данных для отображения.");
+                    dataGridView1.Refresh();
+                }
             }
             catch (EvaluateException ex)
             {
