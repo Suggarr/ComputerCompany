@@ -521,6 +521,8 @@
             this.Controls.Add(this.buttonCategories);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.MainLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ComponentsForm";
             this.Text = "Комплектующие";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ComponentsForm_FormClosing);

@@ -66,18 +66,22 @@ namespace ComputerCompany
                 dataGridView1.DataSource = dataSet.Tables["Purchases"];
 
                 // Настройка заголовков столбцов
-                dataGridView1.Columns["PurchaseID"].HeaderText = "ID Закупки";
                 dataGridView1.Columns["PurchaseDate"].HeaderText = "Дата Закупки";
                 dataGridView1.Columns["PurchaseReason"].HeaderText = "Причина Закупки";
                 dataGridView1.Columns["TotalQuantity"].HeaderText = "Общее Количество";
                 dataGridView1.Columns["TotalPrice"].HeaderText = "Общая Стоимость";
 
-                // Удаление столбца SupplierID
-                dataGridView1.Columns.Remove("SupplierID");
-
                 // Обновление данных для новых полей
                 UpdateTotalColumns();
 
+                // Скрытие столбцов
+                dataGridView1.Columns["SupplierID"].Visible = false;
+                dataGridView1.Columns["PurchaseID"].Visible = false;
+
+                dataGridView1.Columns["PurchaseDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // "Имя поставщика" подстраивается под содержимое
+                dataGridView1.Columns["PurchaseReason"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Остальные равномерно занимают оставшуюся ширину
+                dataGridView1.Columns["TotalQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView1.Columns["TotalPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGridView1.Refresh();
             }
             catch (Exception ex)
@@ -103,6 +107,7 @@ namespace ComputerCompany
 
                 purchaseRow["TotalQuantity"] = totalQuantity;
                 purchaseRow["TotalPrice"] = totalPrice;
+
             }
         }
 
@@ -123,13 +128,6 @@ namespace ComputerCompany
 
                 // Очистка ListBox
                 listBoxItems.Items.Clear();
-
-                // Проверка на наличие таблицы PurchaseDetails
-                if (dataSet.Tables["PurchaseDetails"] == null || dataSet.Tables["Components"] == null || dataSet.Tables["Categories"] == null)
-                {
-                    MessageBox.Show("Данные о деталях закупок, компонентах или категориях не загружены.");
-                    return;
-                }
 
                 // Получение деталей закупки
                 var childItems = dataSet.Tables["PurchaseDetails"].AsEnumerable()

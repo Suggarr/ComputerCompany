@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -116,10 +116,10 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabControl1.Location = new System.Drawing.Point(787, 70);
+            this.tabControl1.Location = new System.Drawing.Point(743, 70);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(870, 641);
+            this.tabControl1.Size = new System.Drawing.Size(870, 677);
             this.tabControl1.TabIndex = 49;
             // 
             // tabPage1
@@ -144,7 +144,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(862, 608);
+            this.tabPage1.Size = new System.Drawing.Size(862, 644);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Данные";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -345,7 +345,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage3.Size = new System.Drawing.Size(862, 608);
+            this.tabPage3.Size = new System.Drawing.Size(862, 644);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Справка";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -461,7 +461,7 @@
             this.purchaseDetailsBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.purchaseDetailsBindingNavigator.Name = "purchaseDetailsBindingNavigator";
             this.purchaseDetailsBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.purchaseDetailsBindingNavigator.Size = new System.Drawing.Size(1720, 31);
+            this.purchaseDetailsBindingNavigator.Size = new System.Drawing.Size(1637, 31);
             this.purchaseDetailsBindingNavigator.TabIndex = 52;
             this.purchaseDetailsBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -576,14 +576,14 @@
             this.purchaseDetailsDataGridView.AllowUserToDeleteRows = false;
             this.purchaseDetailsDataGridView.AutoGenerateColumns = false;
             this.purchaseDetailsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.purchaseDetailsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.purchaseDetailsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.purchaseDetailsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.purchaseDetailsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -597,7 +597,7 @@
             this.purchaseDetailsDataGridView.ReadOnly = true;
             this.purchaseDetailsDataGridView.RowHeadersWidth = 51;
             this.purchaseDetailsDataGridView.RowTemplate.Height = 24;
-            this.purchaseDetailsDataGridView.Size = new System.Drawing.Size(689, 528);
+            this.purchaseDetailsDataGridView.Size = new System.Drawing.Size(689, 560);
             this.purchaseDetailsDataGridView.TabIndex = 52;
             // 
             // dataGridViewTextBoxColumn1
@@ -655,9 +655,11 @@
             // 
             // PurchaseDetailsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1720, 759);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1637, 759);
             this.Controls.Add(this.comboBoxPurchaseId);
             this.Controls.Add(this.purchaseDetailsDataGridView);
             this.Controls.Add(this.purchaseDetailsBindingNavigator);
@@ -665,8 +667,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.MainLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "PurchaseDetailsForm";
             this.Text = "Журнал покупок";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.PurchaseDetailsForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

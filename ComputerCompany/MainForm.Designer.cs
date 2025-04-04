@@ -78,7 +78,7 @@
             this.buttonPurchaseDetails.Name = "buttonPurchaseDetails";
             this.buttonPurchaseDetails.Size = new System.Drawing.Size(299, 58);
             this.buttonPurchaseDetails.TabIndex = 19;
-            this.buttonPurchaseDetails.Text = "Детали покупок";
+            this.buttonPurchaseDetails.Text = "Журнал покупок";
             this.buttonPurchaseDetails.UseVisualStyleBackColor = true;
             this.buttonPurchaseDetails.Click += new System.EventHandler(this.buttonPurchaseDetails_Click);
             // 
@@ -130,6 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(915, 489);
             this.Controls.Add(this.buttonFull);
             this.Controls.Add(this.buttonCategories);
@@ -139,6 +140,8 @@
             this.Controls.Add(this.buttonComponents);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MainLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Информационная система закупки комплектующих";
             this.ResumeLayout(false);
