@@ -31,6 +31,8 @@ namespace ComputerCompany
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Suppliers". При необходимости она может быть перемещена или удалена.
             this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Suppliers". При необходимости она может быть перемещена или удалена.
+            this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Purchases". При необходимости она может быть перемещена или удалена.
             this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
 
@@ -66,18 +68,23 @@ namespace ComputerCompany
             purchasesDataGridView.Columns.Add(supplierNameColumn);
 
 
-            purchasesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn purchaseDateColumn = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "PurchaseDate",
                 HeaderText = "Дата покупки"
-            });
+            };
+            purchasesDataGridView.Columns.Add(purchaseDateColumn);
 
-            purchasesDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn purchaseReasonColumn = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "PurchaseReason",
                 HeaderText = "Причина закупки"
-            });
+            };
+            purchasesDataGridView.Columns.Add(purchaseReasonColumn);
 
+            supplierNameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // "Имя поставщика" подстраивается под содержимое
+            purchaseDateColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // Остальные равномерно занимают оставшуюся ширину
+            purchaseReasonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             purchasesDataGridView.CellFormatting += PurchasesDataGridView_CellFormatting;
         }
 
@@ -121,7 +128,15 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            purchasesBindingSource.AddNew();
+            try
+            {
+                purchasesBindingSource.AddNew();
+            }
+            catch
+            {
+                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
+                purchasesBindingSource.CancelEdit();
+            }
         }
 
         private void btRemove_Click(object sender, EventArgs e)
@@ -176,6 +191,20 @@ namespace ComputerCompany
             SuppliersForm suppliersForm = new SuppliersForm(true); // Включаем MessageBox
             suppliersForm.Owner = this;
             suppliersForm.ShowDialog();
+        }
+
+        private void dateTimePickerPurchaseDate_ValueChanged(object sender, EventArgs e)
+        {
+            // Получаем сегодняшнюю дату
+            DateTime today = DateTime.Today;
+
+            // Проверяем, если значение DateTimePicker больше сегодняшней даты
+            if (dateTimePickerPurchaseDate.Value > today)
+            {
+                MessageBox.Show("Выбранная дата не может быть больше сегодняшнего числа.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Устанавливаем значение DateTimePicker на сегодняшнюю дату
+                dateTimePickerPurchaseDate.Value = today;
+            }
         }
     }
 }

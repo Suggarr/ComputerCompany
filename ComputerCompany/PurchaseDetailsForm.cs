@@ -71,18 +71,23 @@ namespace ComputerCompany
             purchaseDetailsDataGridView.Columns.Add(componentNameColumn);
 
             // Добавляем остальные колонки
-            purchaseDetailsDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn quantityColumn = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Quantity",
                 HeaderText = "Количество"
-            });
+            };
+            purchaseDetailsDataGridView.Columns.Add(quantityColumn);
 
-            purchaseDetailsDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn unitPriceColumn = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "UnitPrice",
                 HeaderText = "Цена за единицу"
-            });
+            };
+            purchaseDetailsDataGridView.Columns.Add(unitPriceColumn);
 
+            componentNameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Столбец "Название комплектующего" подстраивается под содержимое
+            quantityColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // Остальные заполняют оставшееся пространство
+            unitPriceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             // Привязываем событие для подмены ComponentID -> ComponentName
             purchaseDetailsDataGridView.CellFormatting += PurchaseDetailsDataGridView_CellFormatting;
         }
@@ -128,7 +133,15 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            fKPurchaseDPurch76969D2EBindingSource.AddNew();
+            try
+            {
+                fKPurchaseDPurch76969D2EBindingSource.AddNew();
+            }
+            catch
+            {
+                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
+                fKPurchaseDPurch76969D2EBindingSource.CancelEdit();
+            }
         }
 
         private void btRemove_Click(object sender, EventArgs e)

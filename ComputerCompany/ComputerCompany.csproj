@@ -84,9 +84,6 @@
     <Compile Include="ComponentsForm.Designer.cs">
       <DependentUpon>ComponentsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ComputerCompanyDBDataSet.cs">
-      <DependentUpon>ComputerCompanyDBDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ComputerCompanyDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

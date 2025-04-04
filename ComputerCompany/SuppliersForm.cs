@@ -43,6 +43,9 @@ namespace ComputerCompany
             suppliersDataGridView.Columns[1].HeaderText = "Имя поставщика";
             suppliersDataGridView.Columns[2].HeaderText = "Контакты";
             suppliersDataGridView.Columns[3].HeaderText = "Адрес";
+            suppliersDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Столбец "Имя поставщика" подстраивается под содержимое
+            suppliersDataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // Остальные заполняют оставшееся пространство
+            suppliersDataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         private void btFirst_Click(object sender, EventArgs e)
@@ -67,7 +70,16 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            suppliersBindingSource.AddNew();
+            try
+            {
+                suppliersBindingSource.AddNew();
+            }
+            catch
+            {
+                MessageBox.Show("Не можем выполнить данное действие. Закончите редактирование строки которую добавили недавно");
+                suppliersBindingSource.CancelEdit();
+            }
+
         }
 
         private void btRemove_Click(object sender, EventArgs e)

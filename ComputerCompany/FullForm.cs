@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace ComputerCompany
@@ -38,18 +39,23 @@ namespace ComputerCompany
                 adapterPurchases.Fill(dataSet, "Purchases");
 
                 // Загрузка данных о деталях покупок
-                string commandPurchaseDetails = "SELECT PurchaseDetailID, PurchaseID, ComponentID, Quantity, UnitPrice FROM PurchaseDetails";
+                string commandPurchaseDetails = "SELECT PurchaseID, ComponentID, Quantity, UnitPrice FROM PurchaseDetails";
                 SqlDataAdapter adapterPurchaseDetails = new SqlDataAdapter(commandPurchaseDetails, connection);
                 adapterPurchaseDetails.Fill(dataSet, "PurchaseDetails");
 
                 // Загрузка данных о компонентах
-                string commandComponents = "SELECT ComponentID, ComponentName FROM Components";
+                string commandComponents = "SELECT ComponentID, ComponentName, CategoryID FROM Components";
                 SqlDataAdapter adapterComponents = new SqlDataAdapter(commandComponents, connection);
                 adapterComponents.Fill(dataSet, "Components");
 
-                // Добавление вычисляемого столбца для общей цены
-                DataColumn totalPriceColumn = new DataColumn("TotalPrice", typeof(decimal), "Quantity * UnitPrice");
-                dataSet.Tables["PurchaseDetails"].Columns.Add(totalPriceColumn);
+                // Загрузка данных о категориях
+                string commandCategories = "SELECT CategoryID, CategoryName, Description FROM Categories";
+                SqlDataAdapter adapterCategories = new SqlDataAdapter(commandCategories, connection);
+                adapterCategories.Fill(dataSet, "Categories");
+
+                // Добавление вычисляемых столбцов
+                dataSet.Tables["Purchases"].Columns.Add("TotalQuantity", typeof(int));
+                dataSet.Tables["Purchases"].Columns.Add("TotalPrice", typeof(decimal));
 
                 // Заполнение комбобокса с поставщиками
                 comboBoxSupplier.DataSource = dataSet.Tables["Suppliers"];
@@ -58,7 +64,21 @@ namespace ComputerCompany
 
                 // Установка источника данных для DataGridView
                 dataGridView1.DataSource = dataSet.Tables["Purchases"];
-                dataGridView1.SelectionChanged += DataGridView1_SelectionChanged; // Подписка на событие выбора
+
+                // Настройка заголовков столбцов
+                dataGridView1.Columns["PurchaseID"].HeaderText = "ID Закупки";
+                dataGridView1.Columns["PurchaseDate"].HeaderText = "Дата Закупки";
+                dataGridView1.Columns["PurchaseReason"].HeaderText = "Причина Закупки";
+                dataGridView1.Columns["TotalQuantity"].HeaderText = "Общее Количество";
+                dataGridView1.Columns["TotalPrice"].HeaderText = "Общая Стоимость";
+
+                // Удаление столбца SupplierID
+                dataGridView1.Columns.Remove("SupplierID");
+
+                // Обновление данных для новых полей
+                UpdateTotalColumns();
+
+                dataGridView1.Refresh();
             }
             catch (Exception ex)
             {
@@ -67,6 +87,31 @@ namespace ComputerCompany
             finally
             {
                 connection.Close();
+            }
+        }
+
+        private void UpdateTotalColumns()
+        {
+            foreach (DataRow purchaseRow in dataSet.Tables["Purchases"].Rows)
+            {
+                int purchaseId = (int)purchaseRow["PurchaseID"];
+                var details = dataSet.Tables["PurchaseDetails"].AsEnumerable()
+                    .Where(d => d.Field<int>("PurchaseID") == purchaseId);
+
+                int totalQuantity = details.Sum(d => d.Field<int>("Quantity"));
+                decimal totalPrice = details.Sum(d => d.Field<int>("Quantity") * d.Field<decimal>("UnitPrice"));
+
+                purchaseRow["TotalQuantity"] = totalQuantity;
+                purchaseRow["TotalPrice"] = totalPrice;
+            }
+        }
+
+        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker1.Value > dateTimePicker2.Value)
+            {
+                MessageBox.Show("Дата начала не может быть больше даты окончания.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dateTimePicker1.Value = dateTimePicker2.Value; // Сбрасываем дату начала на дату окончания
             }
         }
 
@@ -79,12 +124,18 @@ namespace ComputerCompany
                 // Очистка ListBox
                 listBoxItems.Items.Clear();
 
-                // Получение дочерних элементов
+                // Проверка на наличие таблицы PurchaseDetails
+                if (dataSet.Tables["PurchaseDetails"] == null || dataSet.Tables["Components"] == null || dataSet.Tables["Categories"] == null)
+                {
+                    MessageBox.Show("Данные о деталях закупок, компонентах или категориях не загружены.");
+                    return;
+                }
+
+                // Получение деталей закупки
                 var childItems = dataSet.Tables["PurchaseDetails"].AsEnumerable()
                     .Where(row => row.Field<int>("PurchaseID") == selectedPurchaseId);
 
                 decimal totalCost = 0;
-
                 foreach (var item in childItems)
                 {
                     int componentId = item.Field<int>("ComponentID");
@@ -92,11 +143,21 @@ namespace ComputerCompany
                     decimal unitPrice = item.Field<decimal>("UnitPrice");
                     decimal itemTotal = quantity * unitPrice;
 
-                    // Поиск названия компонента
-                    string componentName = dataSet.Tables["Components"].AsEnumerable()
-                        .FirstOrDefault(c => c.Field<int>("ComponentID") == componentId)?.Field<string>("ComponentName") ?? "Неизвестный компонент";
+                    // Получение имени компонента
+                    var componentRow = dataSet.Tables["Components"].AsEnumerable()
+                        .FirstOrDefault(c => c.Field<int>("ComponentID") == componentId);
 
-                    listBoxItems.Items.Add($"Компонент: {componentName}, Количество: {quantity}, Цена: {unitPrice:C}, Общая стоимость: {itemTotal:C}");
+                    string componentName = componentRow?.Field<string>("ComponentName") ?? "Неизвестный компонент";
+
+                    // Получение CategoryID
+                    int categoryId = componentRow?.Field<int>("CategoryID") ?? 0;
+
+                    // Получение имени категории
+                    string categoryName = dataSet.Tables["Categories"].AsEnumerable()
+                        .FirstOrDefault(c => c.Field<int>("CategoryID") == categoryId)?.Field<string>("CategoryName") ?? "Неизвестная категория";
+
+                    // Добавление информации в ListBox
+                    listBoxItems.Items.Add($"Компонент: {componentName}, Категория: {categoryName}, Количество: {quantity}, Цена: {unitPrice:C}, Общая стоимость: {itemTotal:C}");
                     totalCost += itemTotal;
                 }
 
@@ -109,18 +170,29 @@ namespace ComputerCompany
         {
             string filter = "";
 
-            if (comboBoxSupplier.SelectedItem == null)
+            // Проверяем состояние CheckBox
+            if (!checkBoxAllSuppliers.Checked)
             {
-                MessageBox.Show("Выберите поставщика.");
-                return;
+                // Проверяем, выбран ли поставщик
+                if (comboBoxSupplier.SelectedItem == null)
+                {
+                    MessageBox.Show("Выберите поставщика.");
+                    return;
+                }
+
+                int supplierId = (int)((DataRowView)comboBoxSupplier.SelectedItem)["SupplierID"];
+                filter += $"SupplierID = {supplierId}";
             }
 
-            int supplierId = (int)((DataRowView)comboBoxSupplier.SelectedItem)["SupplierID"];
-            filter += $"SupplierID = {supplierId}";
 
+            // Добавляем условия для дат
             if (dateTimePicker1.Value != null && dateTimePicker2.Value != null)
             {
-                filter += $" AND PurchaseDate >= '{dateTimePicker1.Value:yyyy-MM-dd}' AND PurchaseDate <= '{dateTimePicker2.Value:yyyy-MM-dd}'";
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    filter += " AND ";
+                }
+                filter += $"PurchaseDate >= '{dateTimePicker1.Value:yyyy-MM-dd}' AND PurchaseDate <= '{dateTimePicker2.Value:yyyy-MM-dd}'";
             }
 
             try
@@ -132,16 +204,24 @@ namespace ComputerCompany
                     view.RowFilter = filter;
                 }
 
-                if (view.Count > 0)
+                // Обновляем DataGridView
+                dataGridView1.DataSource = view;
+
+                // Обновление новых полей (TotalQuantity и TotalPrice)
+                foreach (DataRowView purchaseRow in view)
                 {
-                    dataGridView1.DataSource = view;
-                    dataGridView1.Refresh();
+                    int purchaseId = (int)purchaseRow["PurchaseID"];
+                    var details = dataSet.Tables["PurchaseDetails"].AsEnumerable()
+                        .Where(d => d.Field<int>("PurchaseID") == purchaseId);
+
+                    int totalQuantity = details.Sum(d => d.Field<int>("Quantity"));
+                    decimal totalPrice = details.Sum(d => d.Field<int>("Quantity") * d.Field<decimal>("UnitPrice"));
+
+                    purchaseRow["TotalQuantity"] = totalQuantity;
+                    purchaseRow["TotalPrice"] = totalPrice;
                 }
-                else
-                {
-                    MessageBox.Show("Нет данных для отображения.");
-                    dataGridView1.Refresh();
-                }
+
+                dataGridView1.Refresh();
             }
             catch (EvaluateException ex)
             {
@@ -151,6 +231,12 @@ namespace ComputerCompany
             {
                 MessageBox.Show("Произошла ошибка: " + ex.Message);
             }
+        }
+
+        private void checkBoxAllSuppliers_CheckedChanged(object sender, EventArgs e)
+        {
+            // Блокируем или разблокируем ComboBox в зависимости от состояния CheckBox
+            comboBoxSupplier.Enabled = !checkBoxAllSuppliers.Checked;
         }
     }
 }

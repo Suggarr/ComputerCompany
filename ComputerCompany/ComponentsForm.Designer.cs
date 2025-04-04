@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonCategories = new System.Windows.Forms.Button();
@@ -90,9 +90,9 @@
             this.MainLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.MainLabel.Location = new System.Drawing.Point(273, 56);
             this.MainLabel.Name = "MainLabel";
-            this.MainLabel.Size = new System.Drawing.Size(143, 25);
+            this.MainLabel.Size = new System.Drawing.Size(184, 25);
             this.MainLabel.TabIndex = 6;
-            this.MainLabel.Text = "Компоненты";
+            this.MainLabel.Text = "Комплектующие";
             // 
             // label2
             // 
@@ -284,14 +284,15 @@
             this.componentsDataGridView.AllowUserToAddRows = false;
             this.componentsDataGridView.AllowUserToDeleteRows = false;
             this.componentsDataGridView.AutoGenerateColumns = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.componentsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.componentsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.componentsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.componentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.componentsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.componentIDDataGridViewTextBoxColumn,
@@ -314,7 +315,6 @@
             this.componentIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.componentIDDataGridViewTextBoxColumn.Name = "componentIDDataGridViewTextBoxColumn";
             this.componentIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.componentIDDataGridViewTextBoxColumn.Width = 125;
             // 
             // componentNameDataGridViewTextBoxColumn
             // 
@@ -323,7 +323,6 @@
             this.componentNameDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.componentNameDataGridViewTextBoxColumn.Name = "componentNameDataGridViewTextBoxColumn";
             this.componentNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.componentNameDataGridViewTextBoxColumn.Width = 125;
             // 
             // priceDataGridViewTextBoxColumn
             // 
@@ -332,7 +331,6 @@
             this.priceDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             this.priceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.priceDataGridViewTextBoxColumn.Width = 125;
             // 
             // categoryIDDataGridViewTextBoxColumn
             // 
@@ -341,7 +339,6 @@
             this.categoryIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.categoryIDDataGridViewTextBoxColumn.Name = "categoryIDDataGridViewTextBoxColumn";
             this.categoryIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.categoryIDDataGridViewTextBoxColumn.Width = 125;
             // 
             // textBoxComponentId
             // 
@@ -490,6 +487,7 @@
             // 
             this.comboBoxCategoryId.DataSource = this.categoriesBindingSource;
             this.comboBoxCategoryId.DisplayMember = "CategoryName";
+            this.comboBoxCategoryId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCategoryId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxCategoryId.FormattingEnabled = true;
             this.comboBoxCategoryId.Location = new System.Drawing.Point(264, 109);

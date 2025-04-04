@@ -74,8 +74,10 @@ namespace ComputerCompany
                 ReadOnly = true // Только для чтения
             };
             componentsDataGridView.Columns.Add(categoryNameColumn);
+            categoryNameColumn.Visible = false;
 
             componentsDataGridView.CellFormatting += ComponentsDataGridView_CellFormatting;
+            // Автоматическая подгонка ширины столбцов
         }
 
         private void btFirst_Click(object sender, EventArgs e)
@@ -106,7 +108,7 @@ namespace ComputerCompany
                 fKComponentCateg6EF57B66BindingSource.AddNew();
             }
             catch {
-                MessageBox.Show("Не можем выполнить данное действие. Закончите редактирование строки которую добавили недавно");
+                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
                 fKComponentCateg6EF57B66BindingSource.CancelEdit();
             }
         }
@@ -126,6 +128,7 @@ namespace ComputerCompany
         private void btCancel_Click(object sender, EventArgs e)
         {
             computerCompanyDBDataSet.Components.RejectChanges();
+            componentsDataGridView.Refresh();
         }
 
         private void ComponentsDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

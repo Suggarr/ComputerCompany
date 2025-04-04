@@ -40,7 +40,9 @@ namespace ComputerCompany
 
             categoriesDataGridView.Columns[0].Visible = false;
             categoriesDataGridView.Columns[1].HeaderText = "Название категории";
+            categoriesDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             categoriesDataGridView.Columns[2].HeaderText = "Описание";
+            categoriesDataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void btFirst_Click(object sender, EventArgs e)
@@ -65,7 +67,15 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            categoriesBindingSource.AddNew();
+            try
+            {
+                categoriesBindingSource.AddNew();
+            }
+            catch
+            {
+                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
+                categoriesBindingSource.CancelEdit();
+            }
         }
 
         private void btRemove_Click(object sender, EventArgs e)

@@ -1831,6 +1831,7 @@ namespace ComputerCompany {
                 this.columnPurchaseID.AllowDBNull = false;
                 this.columnPurchaseID.ReadOnly = true;
                 this.columnPurchaseID.Unique = true;
+                this.columnPurchaseDate.AllowDBNull = false;
                 this.columnPurchaseReason.MaxLength = 255;
             }
             
@@ -2140,6 +2141,7 @@ namespace ComputerCompany {
                 this.columnSupplierName.MaxLength = 100;
                 this.columnContactInfo.AllowDBNull = false;
                 this.columnContactInfo.MaxLength = 100;
+                this.columnAddress.AllowDBNull = false;
                 this.columnAddress.MaxLength = 255;
             }
             
@@ -2774,6 +2776,7 @@ namespace ComputerCompany {
                 this.columnPurchaseID.AllowDBNull = false;
                 this.columnComponentName.AllowDBNull = false;
                 this.columnComponentName.MaxLength = 100;
+                this.columnPurchaseDate.AllowDBNull = false;
                 this.columnPurchaseReason.MaxLength = 255;
                 this.columnQuantity.AllowDBNull = false;
                 this.columnUnitPrice.AllowDBNull = false;
@@ -3655,6 +3658,7 @@ namespace ComputerCompany {
                 this.columnPurchaseID.Unique = true;
                 this.columnSupplierName.AllowDBNull = false;
                 this.columnSupplierName.MaxLength = 100;
+                this.columnPurchaseDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3992,6 +3996,7 @@ namespace ComputerCompany {
                 this.columnQuantity.AllowDBNull = false;
                 this.columnUnitPrice.AllowDBNull = false;
                 this.columnTotalPrice.ReadOnly = true;
+                this.columnPurchaseDate.AllowDBNull = false;
                 this.columnSupplierName.AllowDBNull = false;
                 this.columnSupplierName.MaxLength = 100;
             }
@@ -4296,6 +4301,7 @@ namespace ComputerCompany {
                 this.columnPurchaseID.AllowDBNull = false;
                 this.columnPurchaseID.ReadOnly = true;
                 this.columnPurchaseID.Unique = true;
+                this.columnPurchaseDate.AllowDBNull = false;
                 this.columnPurchaseReason.MaxLength = 255;
             }
             
@@ -5030,12 +5036,7 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.DateTime PurchaseDate {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablePurchases.PurchaseDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'PurchaseDate\' в таблице \'Purchases\' равно DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tablePurchases.PurchaseDateColumn]));
                 }
                 set {
                     this[this.tablePurchases.PurchaseDateColumn] = value;
@@ -5079,18 +5080,6 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetSupplierIDNull() {
                 this[this.tablePurchases.SupplierIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsPurchaseDateNull() {
-                return this.IsNull(this.tablePurchases.PurchaseDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetPurchaseDateNull() {
-                this[this.tablePurchases.PurchaseDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5168,28 +5157,11 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Address {
                 get {
-                    try {
-                        return ((string)(this[this.tableSuppliers.AddressColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Address\' в таблице \'Suppliers\' равно DBNull.", e);
-                    }
+                    return ((string)(this[this.tableSuppliers.AddressColumn]));
                 }
                 set {
                     this[this.tableSuppliers.AddressColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsAddressNull() {
-                return this.IsNull(this.tableSuppliers.AddressColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetAddressNull() {
-                this[this.tableSuppliers.AddressColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5321,13 +5293,7 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.DateTime PurchaseDate {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableView_PurchaseSummary.PurchaseDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'PurchaseDate\' в таблице \'View_PurchaseSummary\' равно DBNull" +
-                                ".", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableView_PurchaseSummary.PurchaseDateColumn]));
                 }
                 set {
                     this[this.tableView_PurchaseSummary.PurchaseDateColumn] = value;
@@ -5371,18 +5337,6 @@ namespace ComputerCompany {
                 set {
                     this[this.tableView_PurchaseSummary.UnitPriceColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsPurchaseDateNull() {
-                return this.IsNull(this.tableView_PurchaseSummary.PurchaseDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetPurchaseDateNull() {
-                this[this.tableView_PurchaseSummary.PurchaseDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5599,28 +5553,11 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.DateTime PurchaseDate {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablevw_Purchases.PurchaseDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'PurchaseDate\' в таблице \'vw_Purchases\' равно DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tablevw_Purchases.PurchaseDateColumn]));
                 }
                 set {
                     this[this.tablevw_Purchases.PurchaseDateColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsPurchaseDateNull() {
-                return this.IsNull(this.tablevw_Purchases.PurchaseDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetPurchaseDateNull() {
-                this[this.tablevw_Purchases.PurchaseDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5703,13 +5640,7 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.DateTime PurchaseDate {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableGetPurchaseDetailsByPurchaseID.PurchaseDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'PurchaseDate\' в таблице \'GetPurchaseDetailsByPurchaseID\' ра" +
-                                "вно DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableGetPurchaseDetailsByPurchaseID.PurchaseDateColumn]));
                 }
                 set {
                     this[this.tableGetPurchaseDetailsByPurchaseID.PurchaseDateColumn] = value;
@@ -5737,18 +5668,6 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTotalPriceNull() {
                 this[this.tableGetPurchaseDetailsByPurchaseID.TotalPriceColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsPurchaseDateNull() {
-                return this.IsNull(this.tableGetPurchaseDetailsByPurchaseID.PurchaseDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetPurchaseDateNull() {
-                this[this.tableGetPurchaseDetailsByPurchaseID.PurchaseDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5798,13 +5717,7 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public System.DateTime PurchaseDate {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableGetPurchasesBySupplier.PurchaseDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'PurchaseDate\' в таблице \'GetPurchasesBySupplier\' равно DBNu" +
-                                "ll.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableGetPurchasesBySupplier.PurchaseDateColumn]));
                 }
                 set {
                     this[this.tableGetPurchasesBySupplier.PurchaseDateColumn] = value;
@@ -5838,18 +5751,6 @@ namespace ComputerCompany {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetSupplierIDNull() {
                 this[this.tableGetPurchasesBySupplier.SupplierIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsPurchaseDateNull() {
-                return this.IsNull(this.tableGetPurchasesBySupplier.PurchaseDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetPurchaseDateNull() {
-                this[this.tableGetPurchasesBySupplier.PurchaseDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7591,12 +7492,11 @@ SELECT PurchaseDetailID, PurchaseID, ComponentID, Quantity, UnitPrice FROM Purch
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Purchases] WHERE (([PurchaseID] = @Original_PurchaseID) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_PurchaseDate = 1 AND [PurchaseDate] IS NULL) OR ([PurchaseDate] = @Original_PurchaseDate)) AND ((@IsNull_PurchaseReason = 1 AND [PurchaseReason] IS NULL) OR ([PurchaseReason] = @Original_PurchaseReason)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Purchases] WHERE (([PurchaseID] = @Original_PurchaseID) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ([PurchaseDate] = @Original_PurchaseDate) AND ((@IsNull_PurchaseReason = 1 AND [PurchaseReason] IS NULL) OR ([PurchaseReason] = @Original_PurchaseReason)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PurchaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PurchaseDate", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseDate", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PurchaseDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PurchaseReason", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseReason", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PurchaseReason", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseReason", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7612,7 +7512,7 @@ SELECT PurchaseDetailID, PurchaseID, ComponentID, Quantity, UnitPrice FROM Purch
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PurchaseReason", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseReason", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Purchases] SET [SupplierID] = @SupplierID, [PurchaseDate] = @PurchaseDate, [PurchaseReason] = @PurchaseReason WHERE (([PurchaseID] = @Original_PurchaseID) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ((@IsNull_PurchaseDate = 1 AND [PurchaseDate] IS NULL) OR ([PurchaseDate] = @Original_PurchaseDate)) AND ((@IsNull_PurchaseReason = 1 AND [PurchaseReason] IS NULL) OR ([PurchaseReason] = @Original_PurchaseReason)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Purchases] SET [SupplierID] = @SupplierID, [PurchaseDate] = @PurchaseDate, [PurchaseReason] = @PurchaseReason WHERE (([PurchaseID] = @Original_PurchaseID) AND ((@IsNull_SupplierID = 1 AND [SupplierID] IS NULL) OR ([SupplierID] = @Original_SupplierID)) AND ([PurchaseDate] = @Original_PurchaseDate) AND ((@IsNull_PurchaseReason = 1 AND [PurchaseReason] IS NULL) OR ([PurchaseReason] = @Original_PurchaseReason)));
 SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE (PurchaseID = @PurchaseID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7621,7 +7521,6 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PurchaseID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PurchaseDate", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseDate", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PurchaseDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PurchaseReason", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseReason", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PurchaseReason", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PurchaseReason", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7702,7 +7601,7 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_PurchaseID, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_PurchaseDate, string Original_PurchaseReason) {
+        public virtual int Delete(int Original_PurchaseID, global::System.Nullable<int> Original_SupplierID, System.DateTime Original_PurchaseDate, string Original_PurchaseReason) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_PurchaseID));
             if ((Original_SupplierID.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -7712,21 +7611,14 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((Original_PurchaseDate.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_PurchaseDate.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_PurchaseDate));
             if ((Original_PurchaseReason == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_PurchaseReason));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_PurchaseReason));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -7748,19 +7640,14 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> PurchaseDate, string PurchaseReason) {
+        public virtual int Insert(global::System.Nullable<int> SupplierID, System.DateTime PurchaseDate, string PurchaseReason) {
             if ((SupplierID.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((int)(SupplierID.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((PurchaseDate.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(PurchaseDate.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(PurchaseDate));
             if ((PurchaseReason == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -7787,19 +7674,14 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> PurchaseDate, string PurchaseReason, int Original_PurchaseID, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_PurchaseDate, string Original_PurchaseReason, int PurchaseID) {
+        public virtual int Update(global::System.Nullable<int> SupplierID, System.DateTime PurchaseDate, string PurchaseReason, int Original_PurchaseID, global::System.Nullable<int> Original_SupplierID, System.DateTime Original_PurchaseDate, string Original_PurchaseReason, int PurchaseID) {
             if ((SupplierID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(SupplierID.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((PurchaseDate.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(PurchaseDate.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(PurchaseDate));
             if ((PurchaseReason == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
@@ -7815,23 +7697,16 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((Original_PurchaseDate.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_PurchaseDate.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(Original_PurchaseDate));
             if ((Original_PurchaseReason == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_PurchaseReason));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_PurchaseReason));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(PurchaseID));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(PurchaseID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7852,7 +7727,7 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> SupplierID, global::System.Nullable<global::System.DateTime> PurchaseDate, string PurchaseReason, int Original_PurchaseID, global::System.Nullable<int> Original_SupplierID, global::System.Nullable<global::System.DateTime> Original_PurchaseDate, string Original_PurchaseReason) {
+        public virtual int Update(global::System.Nullable<int> SupplierID, System.DateTime PurchaseDate, string PurchaseReason, int Original_PurchaseID, global::System.Nullable<int> Original_SupplierID, System.DateTime Original_PurchaseDate, string Original_PurchaseReason) {
             return this.Update(SupplierID, PurchaseDate, PurchaseReason, Original_PurchaseID, Original_SupplierID, Original_PurchaseDate, Original_PurchaseReason, Original_PurchaseID);
         }
     }
@@ -7987,13 +7862,11 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Suppliers] WHERE (([SupplierID] = @Original_SupplierID) AND ([" +
                 "SupplierName] = @Original_SupplierName) AND ([ContactInfo] = @Original_ContactIn" +
-                "fo) AND ((@IsNull_Address = 1 AND [Address] IS NULL) OR ([Address] = @Original_A" +
-                "ddress)))";
+                "fo) AND ([Address] = @Original_Address))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SupplierName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactInfo", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactInfo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Address", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Address", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -8006,7 +7879,7 @@ SELECT PurchaseID, SupplierID, PurchaseDate, PurchaseReason FROM Purchases WHERE
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Address", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Suppliers] SET [SupplierName] = @SupplierName, [ContactInfo] = @ContactInfo, [Address] = @Address WHERE (([SupplierID] = @Original_SupplierID) AND ([SupplierName] = @Original_SupplierName) AND ([ContactInfo] = @Original_ContactInfo) AND ((@IsNull_Address = 1 AND [Address] IS NULL) OR ([Address] = @Original_Address)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Suppliers] SET [SupplierName] = @SupplierName, [ContactInfo] = @ContactInfo, [Address] = @Address WHERE (([SupplierID] = @Original_SupplierID) AND ([SupplierName] = @Original_SupplierName) AND ([ContactInfo] = @Original_ContactInfo) AND ([Address] = @Original_Address));
 SELECT SupplierID, SupplierName, ContactInfo, Address FROM Suppliers WHERE (SupplierID = @SupplierID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SupplierName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8015,7 +7888,6 @@ SELECT SupplierID, SupplierName, ContactInfo, Address FROM Suppliers WHERE (Supp
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SupplierID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SupplierName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContactInfo", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContactInfo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Address", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Address", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Address", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SupplierID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SupplierID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -8109,12 +7981,10 @@ SELECT SupplierID, SupplierName, ContactInfo, Address FROM Suppliers WHERE (Supp
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_ContactInfo));
             }
             if ((Original_Address == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_Address");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Address));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Address));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8150,7 +8020,7 @@ SELECT SupplierID, SupplierName, ContactInfo, Address FROM Suppliers WHERE (Supp
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(ContactInfo));
             }
             if ((Address == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Address");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Address));
@@ -8189,7 +8059,7 @@ SELECT SupplierID, SupplierName, ContactInfo, Address FROM Suppliers WHERE (Supp
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(ContactInfo));
             }
             if ((Address == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Address");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Address));
@@ -8208,14 +8078,12 @@ SELECT SupplierID, SupplierName, ContactInfo, Address FROM Suppliers WHERE (Supp
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_ContactInfo));
             }
             if ((Original_Address == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_Address");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Address));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Address));
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(SupplierID));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(SupplierID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

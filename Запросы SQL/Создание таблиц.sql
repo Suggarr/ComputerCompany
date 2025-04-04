@@ -21,7 +21,7 @@ CREATE TABLE Suppliers (
     SupplierID INT IDENTITY(1,1) PRIMARY KEY,  
     SupplierName NVARCHAR(100) NOT NULL UNIQUE, 
 	ContactInfo NVARCHAR(100) NOT NULL DEFAULT 'Нет данных',
-    Address NVARCHAR(255) DEFAULT 'Не указан'
+    Address NVARCHAR(255) NOT NULL DEFAULT 'Не указан'
 );
 
 GO
@@ -39,7 +39,7 @@ GO
 CREATE TABLE Purchases (
     PurchaseID INT IDENTITY(1,1) PRIMARY KEY,  
     SupplierID INT,  -- Обязательная ссылка на поставщика
-    PurchaseDate DATE DEFAULT GETDATE(),  
+    PurchaseDate DATE NOT NULL DEFAULT GETDATE(),  
 	PurchaseReason NVARCHAR(255) NULL,
     FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID) ON DELETE SET NULL ON UPDATE CASCADE, --Лучше ON DELETE SET NULL
 );
