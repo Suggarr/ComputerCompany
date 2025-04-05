@@ -98,3 +98,43 @@ BEGIN
     WHERE 
         pd.PurchaseID = @PurchaseID;
 END;
+
+Go
+
+CREATE PROCEDURE GetPurchaseDetailsForSuppliers
+    @StartDate DATE = NULL,
+    @EndDate DATE = NULL,
+    @SupplierID INT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        p.PurchaseID,
+        p.PurchaseDate,
+        p.PurchaseReason,
+        s.SupplierName,
+        pd.Quantity,
+        pd.UnitPrice,
+        (pd.Quantity * pd.UnitPrice) AS ItemTotal,
+        c.ComponentName,
+        cat.CategoryName
+    FROM 
+        Purchases p
+    LEFT JOIN 
+        PurchaseDetails pd ON p.PurchaseID = pd.PurchaseID
+    LEFT JOIN 
+        Components c ON pd.ComponentID = c.ComponentID
+    LEFT JOIN 
+        Suppliers s ON p.SupplierID = s.SupplierID
+    LEFT JOIN 
+        Categories cat ON c.CategoryID = cat.CategoryID  
+    WHERE 
+        (@StartDate IS NULL OR p.PurchaseDate >= @StartDate) AND
+        (@EndDate IS NULL OR p.PurchaseDate <= @EndDate) AND
+        (@SupplierID IS NULL OR p.SupplierID = @SupplierID)
+    ORDER BY 
+        p.PurchaseID, c.ComponentName;
+END
+
+Exec GetPurchaseDetailsForSuppliers

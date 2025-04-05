@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasesForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.btCancel = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
@@ -208,6 +208,7 @@
             this.buttonSuppliers.TabIndex = 134;
             this.buttonSuppliers.Text = "Список поставщиков";
             this.buttonSuppliers.UseVisualStyleBackColor = true;
+            this.buttonSuppliers.Click += new System.EventHandler(this.buttonSuppliers_Click);
             // 
             // comboBoxSupplierId
             // 
@@ -326,7 +327,7 @@
             this.purchasesBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.purchasesBindingNavigator.Name = "purchasesBindingNavigator";
             this.purchasesBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.purchasesBindingNavigator.Size = new System.Drawing.Size(1611, 31);
+            this.purchasesBindingNavigator.Size = new System.Drawing.Size(1611, 27);
             this.purchasesBindingNavigator.TabIndex = 145;
             this.purchasesBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -336,7 +337,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorAddNewItem.Text = "Добавить";
             // 
             // bindingNavigatorCountItem
@@ -431,14 +432,14 @@
             this.purchasesDataGridView.AllowUserToDeleteRows = false;
             this.purchasesDataGridView.AutoGenerateColumns = false;
             this.purchasesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.purchasesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.purchasesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.purchasesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.purchasesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -520,6 +521,7 @@
             this.MaximizeBox = false;
             this.Name = "PurchasesForm";
             this.Text = "Покупки";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PurchasesForm_FormClosing);
             this.Load += new System.EventHandler(this.PurchasesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.suppliersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
