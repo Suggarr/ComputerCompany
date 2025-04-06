@@ -145,7 +145,7 @@
             // 
             // componentsBindingNavigator
             // 
-            this.componentsBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.componentsBindingNavigator.AddNewItem = null;
             this.componentsBindingNavigator.BindingSource = this.fKComponentCateg6EF57B66BindingSource;
             this.componentsBindingNavigator.CountItem = this.bindingNavigatorCountItem;
             this.componentsBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
@@ -182,6 +182,7 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorAddNewItem.Text = "Добавить";
+            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // fKComponentCateg6EF57B66BindingSource
             // 

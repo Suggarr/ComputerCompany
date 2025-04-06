@@ -111,7 +111,7 @@
             // 
             // categoriesBindingNavigator
             // 
-            this.categoriesBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.categoriesBindingNavigator.AddNewItem = null;
             this.categoriesBindingNavigator.BindingSource = this.categoriesBindingSource;
             this.categoriesBindingNavigator.CountItem = this.bindingNavigatorCountItem;
             this.categoriesBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
@@ -148,6 +148,7 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorAddNewItem.Text = "Добавить";
+            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // bindingNavigatorCountItem
             // 
