@@ -178,6 +178,7 @@
     <EmbeddedResource Include="ReportCheck.rdlc" />
     <EmbeddedResource Include="ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportOfAll.rdlc" />
     <EmbeddedResource Include="ReportSupplierEarnings.rdlc" />

@@ -4,12 +4,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
+using System.Net;
 
 namespace ComputerCompany
 {
     public partial class FullForm : Form
     {
-
+        private ReportForm reportForm;
         public FullForm()
         {
             InitializeComponent();
@@ -43,18 +44,19 @@ namespace ComputerCompany
                 comboBoxSupplier.ValueMember = "SupplierID";
 
                 // Установка источника данных для DataGridView
-                dataGridView1.DataSource = computerCompanyDBDataSet.Purchases;
-
-                // Настройка заголовков столбцов
-                SetupDataGridView();
+                dataGridViewFull.DataSource = computerCompanyDBDataSet.Purchases;
 
                 // Обновление данных для новых полей
                 UpdateTotalColumns();
 
+                // Настройка заголовков столбцов
+                SetupDataGridView();
+
 
                 // Скрытие столбцов
-                dataGridView1.Columns["SupplierID"].Visible = true;
-                dataGridView1.Columns["PurchaseID"].Visible = false;
+                dataGridViewFull.Columns["SupplierID"].Visible = false;
+                dataGridViewFull.Columns["PurchaseID"].Visible = false;
+                dataGridViewFull.CellFormatting += DataGridViewFull_CellFormatting;
             }
             catch (Exception ex)
             {
@@ -64,16 +66,52 @@ namespace ComputerCompany
 
         private void SetupDataGridView()
         {
-            dataGridView1.Columns["PurchaseDate"].HeaderText = "Дата Закупки";
-            dataGridView1.Columns["PurchaseReason"].HeaderText = "Причина Закупки";
-            dataGridView1.Columns["TotalQuantity"].HeaderText = "Общее Количество";
-            dataGridView1.Columns["TotalPrice"].HeaderText = "Общая Стоимость";
+            // Настройка заголовков столбцов
+            dataGridViewFull.Columns["PurchaseDate"].HeaderText = "Дата Закупки";
+            dataGridViewFull.Columns["PurchaseReason"].HeaderText = "Причина Закупки";
+            dataGridViewFull.Columns["TotalQuantity"].HeaderText = "Общее Количество";
+            dataGridViewFull.Columns["TotalPrice"].HeaderText = "Общая Стоимость";
 
-            dataGridView1.Columns["PurchaseDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns["PurchaseReason"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView1.Columns["TotalQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns["TotalPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Refresh();
+            // Добавление столбца для SupplierName
+            if (!dataGridViewFull.Columns.Contains("SupplierName"))
+            {
+                DataGridViewTextBoxColumn supplierNameColumn = new DataGridViewTextBoxColumn
+                {
+                    Name = "SupplierName",
+                    HeaderText = "Имя Поставщика",
+                    ReadOnly = true // Только для чтения
+                };
+                dataGridViewFull.Columns.Add(supplierNameColumn);
+            }
+
+            // Перемещение столбца SupplierName на вторую позицию (индекс 1)
+            dataGridViewFull.Columns["SupplierName"].DisplayIndex = 1;
+
+            // Настройка AutoSizeMode для столбцов
+            dataGridViewFull.Columns["PurchaseDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewFull.Columns["PurchaseReason"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewFull.Columns["TotalQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewFull.Columns["TotalPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridViewFull.Refresh();
+        }
+
+        private void DataGridViewFull_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridViewFull.Columns[e.ColumnIndex].Name == "SupplierName")
+            {
+                var row = dataGridViewFull.Rows[e.RowIndex];
+
+                if (row.Cells["SupplierID"].Value != null && int.TryParse(row.Cells["SupplierID"].Value.ToString(), out int supplierID))
+                {
+                    DataRow[] foundRows = computerCompanyDBDataSet.Suppliers.Select($"SupplierID = {supplierID}");
+                    if (foundRows.Length > 0)
+                    {
+                        e.Value = foundRows[0]["SupplierName"].ToString();
+                        e.FormattingApplied = true;
+                    }
+                }
+            }
         }
 
         private void UpdateTotalColumns()
@@ -103,9 +141,9 @@ namespace ComputerCompany
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridViewFull.SelectedRows.Count > 0)
             {
-                int selectedPurchaseId = (int)dataGridView1.SelectedRows[0].Cells["PurchaseID"].Value;
+                int selectedPurchaseId = (int)dataGridViewFull.SelectedRows[0].Cells["PurchaseID"].Value;
 
                 // Очистка ListBox
                 listBoxItems.Items.Clear();
@@ -176,13 +214,39 @@ namespace ComputerCompany
                 {
                     view.RowFilter = filter;
                 }
-                dataGridView1.DataSource = null;
-                // Обновляем DataGridView
 
-                dataGridView1.DataSource = view;
-                dataGridView1.Columns["PurchaseID"].Visible = false; // Всегда показываем PurchaseID
-                dataGridView1.Columns["SupplierID"].Visible = checkBoxAllSuppliers.Checked; // Скрываем SupplierID, если не активирован checkBoxAllSuppliers
-                // Скрытие столбцов в зависимости от состояния CheckBox
+                dataGridViewFull.DataSource = null; // Обновляем DataGridView
+                dataGridViewFull.DataSource = view;
+
+                // Добавление столбца SupplierName в DataGridView
+                if (!dataGridViewFull.Columns.Contains("SupplierName"))
+                {
+                    DataGridViewTextBoxColumn supplierNameColumn = new DataGridViewTextBoxColumn
+                    {
+                        Name = "SupplierName",
+                        HeaderText = "Имя Поставщика",
+                        ReadOnly = true // Только для чтения
+                    };
+                    dataGridViewFull.Columns.Add(supplierNameColumn);
+                }
+
+                // Перемещение столбца SupplierName на вторую позицию
+                dataGridViewFull.Columns["SupplierName"].DisplayIndex = 1;
+
+                dataGridViewFull.Columns["PurchaseID"].Visible = false; // Всегда скрываем PurchaseID
+                dataGridViewFull.Columns["SupplierID"].Visible = false;
+                dataGridViewFull.Columns["SupplierName"].Visible = checkBoxAllSuppliers.Checked; // Скрываем SupplierID, если не активирован checkBoxAllSuppliers
+                                                                                                 // Настройка заголовков столбцов
+                dataGridViewFull.Columns["PurchaseDate"].HeaderText = "Дата Закупки";
+                dataGridViewFull.Columns["PurchaseReason"].HeaderText = "Причина Закупки";
+                dataGridViewFull.Columns["TotalQuantity"].HeaderText = "Общее Количество";
+                dataGridViewFull.Columns["TotalPrice"].HeaderText = "Общая Стоимость";
+
+                // Настройка AutoSizeMode для столбцов
+                dataGridViewFull.Columns["PurchaseDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewFull.Columns["PurchaseReason"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridViewFull.Columns["TotalQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewFull.Columns["TotalPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 // Обновление новых полей (TotalQuantity и TotalPrice)
                 foreach (DataRowView purchaseRow in view)
@@ -198,8 +262,8 @@ namespace ComputerCompany
                     purchaseRow["TotalPrice"] = totalPrice;
                 }
 
-                dataGridView1.Refresh();
-                BindReport();
+                dataGridViewFull.Refresh();
+                listBoxItems.Items.Clear(); 
             }
             catch (Exception ex)
             {
@@ -210,10 +274,21 @@ namespace ComputerCompany
         private void FullForm_Load(object sender, EventArgs e)
         {
             LoadData(); // Загрузка данных
-            BindReport();
         }
 
-        private void BindReport()
+        private void checkBoxAllSuppliers_CheckedChanged(object sender, EventArgs e)
+        {
+            // Блокируем или разблокируем ComboBox в зависимости от состояния CheckBox
+            comboBoxSupplier.Enabled = !checkBoxAllSuppliers.Checked;
+        }
+
+        private void checkBoxAllTime_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker1.Enabled = !checkBoxAllTime.Checked;
+            dateTimePicker2.Enabled = !checkBoxAllTime.Checked;
+        }
+
+        private void buttonReport_Click(object sender, EventArgs e)
         {
             int? supplierId = null;
             DateTime? startDate = null;
@@ -232,35 +307,19 @@ namespace ComputerCompany
                 startDate = dateTimePicker1.Value;
                 endDate = dateTimePicker2.Value;
             }
-            this.computerCompanyDBDataSet.GetPurchaseDetailsForSuppliers.Reset();
-            // Вызов хранимой процедуры через TableAdapter
-            this.getPurchaseDetailsForSuppliersTableAdapter.Fill(this.computerCompanyDBDataSet.GetPurchaseDetailsForSuppliers, startDate, endDate, supplierId);
-
-            // Настройка источника данных для ReportViewer
-            reportViewer1.LocalReport.DataSources.Clear();
-
-            // Создание источника данных для отчета
-            ReportDataSource rds = new ReportDataSource("PurchaseForSuppliersDataSet",
-                computerCompanyDBDataSet.GetPurchaseDetailsForSuppliers as DataTable);
-
-            // Добавление источника данных в ReportViewer
-            reportViewer1.LocalReport.DataSources.Add(rds);
-
-            // Обновление отчета
-            reportViewer1.RefreshReport();
+            ShowForm(startDate, endDate, supplierId); // вызываем окно с датами
         }
 
-        private void checkBoxAllSuppliers_CheckedChanged(object sender, EventArgs e)
+        private void ShowForm(DateTime? start, DateTime? end, int? supplierId)
         {
-            // Блокируем или разблокируем ComboBox в зависимости от состояния CheckBox
-            comboBoxSupplier.Enabled = !checkBoxAllSuppliers.Checked;
+            if (reportForm == null || reportForm.IsDisposed)
+            {
+                reportForm = new ReportForm(start, end, supplierId); // Передаем даты в конструктор
+                reportForm.FormClosed += (s, args) => reportForm = null;
+                reportForm.ShowDialog(this);
+            }
         }
 
-        private void checkBoxAllTime_CheckedChanged(object sender, EventArgs e)
-        {
-            dateTimePicker1.Enabled = !checkBoxAllTime.Checked;
-            dateTimePicker2.Enabled = !checkBoxAllTime.Checked;
-        }
     }
 }
 
