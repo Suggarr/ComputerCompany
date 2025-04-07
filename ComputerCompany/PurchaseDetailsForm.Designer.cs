@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseDetailsForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.buttonCheck = new System.Windows.Forms.Button();
             this.buttonComponents = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,10 +52,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
-            this.buttonReport = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonPurchases = new System.Windows.Forms.Button();
             this.purchaseDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -66,7 +60,6 @@
             this.componentsTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter();
             this.purchasesTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.PurchasesTableAdapter();
             this.purchaseDetailsBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.fKPurchaseDPurch76969D2EBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.purchasesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -79,6 +72,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.purchaseDetailsBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.purchaseDetailsDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,11 +81,8 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxPurchaseId = new System.Windows.Forms.ComboBox();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.componentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseDetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseDetailsBindingNavigator)).BeginInit();
             this.purchaseDetailsBindingNavigator.SuspendLayout();
@@ -111,49 +102,10 @@
             this.MainLabel.TabIndex = 8;
             this.MainLabel.Text = "Журнал покупок";
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabControl1.Location = new System.Drawing.Point(743, 70);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(870, 677);
-            this.tabControl1.TabIndex = 49;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.buttonCheck);
-            this.tabPage1.Controls.Add(this.buttonComponents);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.btFirst);
-            this.tabPage1.Controls.Add(this.comboBoxComponentId);
-            this.tabPage1.Controls.Add(this.btLast);
-            this.tabPage1.Controls.Add(this.btPrevious);
-            this.tabPage1.Controls.Add(this.textBoxPurchaseDetailId);
-            this.tabPage1.Controls.Add(this.btNext);
-            this.tabPage1.Controls.Add(this.btAdd);
-            this.tabPage1.Controls.Add(this.btCancel);
-            this.tabPage1.Controls.Add(this.btRemove);
-            this.tabPage1.Controls.Add(this.textBoxUnitPrice);
-            this.tabPage1.Controls.Add(this.btSave);
-            this.tabPage1.Controls.Add(this.textBoxQuantity);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(862, 644);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Данные";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // buttonCheck
             // 
             this.buttonCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCheck.Location = new System.Drawing.Point(287, 548);
+            this.buttonCheck.Location = new System.Drawing.Point(1023, 685);
             this.buttonCheck.Name = "buttonCheck";
             this.buttonCheck.Size = new System.Drawing.Size(327, 49);
             this.buttonCheck.TabIndex = 50;
@@ -164,7 +116,7 @@
             // buttonComponents
             // 
             this.buttonComponents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonComponents.Location = new System.Drawing.Point(420, 158);
+            this.buttonComponents.Location = new System.Drawing.Point(1156, 295);
             this.buttonComponents.Name = "buttonComponents";
             this.buttonComponents.Size = new System.Drawing.Size(276, 39);
             this.buttonComponents.TabIndex = 107;
@@ -176,7 +128,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(172, 63);
+            this.label5.Location = new System.Drawing.Point(908, 200);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(202, 22);
             this.label5.TabIndex = 38;
@@ -185,7 +137,7 @@
             // btFirst
             // 
             this.btFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btFirst.Location = new System.Drawing.Point(101, 388);
+            this.btFirst.Location = new System.Drawing.Point(837, 525);
             this.btFirst.Name = "btFirst";
             this.btFirst.Size = new System.Drawing.Size(143, 48);
             this.btFirst.TabIndex = 22;
@@ -200,7 +152,7 @@
             this.comboBoxComponentId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxComponentId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxComponentId.FormattingEnabled = true;
-            this.comboBoxComponentId.Location = new System.Drawing.Point(421, 122);
+            this.comboBoxComponentId.Location = new System.Drawing.Point(1157, 259);
             this.comboBoxComponentId.Name = "comboBoxComponentId";
             this.comboBoxComponentId.Size = new System.Drawing.Size(275, 30);
             this.comboBoxComponentId.TabIndex = 41;
@@ -219,7 +171,7 @@
             // btLast
             // 
             this.btLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btLast.Location = new System.Drawing.Point(287, 388);
+            this.btLast.Location = new System.Drawing.Point(1023, 525);
             this.btLast.Name = "btLast";
             this.btLast.Size = new System.Drawing.Size(143, 48);
             this.btLast.TabIndex = 23;
@@ -230,7 +182,7 @@
             // btPrevious
             // 
             this.btPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btPrevious.Location = new System.Drawing.Point(471, 388);
+            this.btPrevious.Location = new System.Drawing.Point(1207, 525);
             this.btPrevious.Name = "btPrevious";
             this.btPrevious.Size = new System.Drawing.Size(143, 49);
             this.btPrevious.TabIndex = 24;
@@ -242,7 +194,7 @@
             // 
             this.textBoxPurchaseDetailId.Enabled = false;
             this.textBoxPurchaseDetailId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPurchaseDetailId.Location = new System.Drawing.Point(422, 60);
+            this.textBoxPurchaseDetailId.Location = new System.Drawing.Point(1158, 197);
             this.textBoxPurchaseDetailId.Name = "textBoxPurchaseDetailId";
             this.textBoxPurchaseDetailId.Size = new System.Drawing.Size(275, 28);
             this.textBoxPurchaseDetailId.TabIndex = 39;
@@ -250,7 +202,7 @@
             // btNext
             // 
             this.btNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btNext.Location = new System.Drawing.Point(649, 388);
+            this.btNext.Location = new System.Drawing.Point(1385, 525);
             this.btNext.Name = "btNext";
             this.btNext.Size = new System.Drawing.Size(143, 49);
             this.btNext.TabIndex = 25;
@@ -261,7 +213,7 @@
             // btAdd
             // 
             this.btAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btAdd.Location = new System.Drawing.Point(101, 469);
+            this.btAdd.Location = new System.Drawing.Point(837, 606);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(143, 49);
             this.btAdd.TabIndex = 26;
@@ -272,7 +224,7 @@
             // btCancel
             // 
             this.btCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btCancel.Location = new System.Drawing.Point(649, 469);
+            this.btCancel.Location = new System.Drawing.Point(1385, 606);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(143, 49);
             this.btCancel.TabIndex = 37;
@@ -283,7 +235,7 @@
             // btRemove
             // 
             this.btRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btRemove.Location = new System.Drawing.Point(287, 469);
+            this.btRemove.Location = new System.Drawing.Point(1023, 606);
             this.btRemove.Name = "btRemove";
             this.btRemove.Size = new System.Drawing.Size(143, 49);
             this.btRemove.TabIndex = 27;
@@ -294,7 +246,7 @@
             // textBoxUnitPrice
             // 
             this.textBoxUnitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxUnitPrice.Location = new System.Drawing.Point(426, 291);
+            this.textBoxUnitPrice.Location = new System.Drawing.Point(1162, 428);
             this.textBoxUnitPrice.Name = "textBoxUnitPrice";
             this.textBoxUnitPrice.Size = new System.Drawing.Size(275, 28);
             this.textBoxUnitPrice.TabIndex = 36;
@@ -302,7 +254,7 @@
             // btSave
             // 
             this.btSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btSave.Location = new System.Drawing.Point(471, 469);
+            this.btSave.Location = new System.Drawing.Point(1207, 606);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(143, 49);
             this.btSave.TabIndex = 28;
@@ -313,7 +265,7 @@
             // textBoxQuantity
             // 
             this.textBoxQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxQuantity.Location = new System.Drawing.Point(426, 228);
+            this.textBoxQuantity.Location = new System.Drawing.Point(1162, 365);
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(275, 28);
             this.textBoxQuantity.TabIndex = 35;
@@ -322,7 +274,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(156, 297);
+            this.label4.Location = new System.Drawing.Point(892, 434);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(218, 22);
             this.label4.TabIndex = 32;
@@ -332,7 +284,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(177, 122);
+            this.label2.Location = new System.Drawing.Point(913, 259);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(197, 22);
             this.label2.TabIndex = 30;
@@ -342,48 +294,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(265, 231);
+            this.label3.Location = new System.Drawing.Point(1001, 368);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 22);
             this.label3.TabIndex = 31;
             this.label3.Text = "Количество";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.dateTimePickerEnd);
-            this.tabPage3.Controls.Add(this.dateTimePickerStart);
-            this.tabPage3.Controls.Add(this.buttonReport);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage3.Size = new System.Drawing.Size(862, 644);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Справка";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePickerEnd
-            // 
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(159, 151);
-            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(200, 27);
-            this.dateTimePickerEnd.TabIndex = 49;
-            // 
-            // dateTimePickerStart
-            // 
-            this.dateTimePickerStart.Location = new System.Drawing.Point(159, 79);
-            this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(200, 27);
-            this.dateTimePickerStart.TabIndex = 48;
-            // 
-            // buttonReport
-            // 
-            this.buttonReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.buttonReport.Location = new System.Drawing.Point(439, 111);
-            this.buttonReport.Name = "buttonReport";
-            this.buttonReport.Size = new System.Drawing.Size(306, 49);
-            this.buttonReport.TabIndex = 47;
-            this.buttonReport.Text = "Выдать справку";
-            this.buttonReport.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -463,16 +378,6 @@
             this.purchaseDetailsBindingNavigator.Size = new System.Drawing.Size(1637, 27);
             this.purchaseDetailsBindingNavigator.TabIndex = 52;
             this.purchaseDetailsBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorAddNewItem.Text = "Добавить";
-            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // fKPurchaseDPurch76969D2EBindingSource
             // 
@@ -560,6 +465,16 @@
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Text = "Добавить";
+            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // purchaseDetailsBindingNavigatorSaveItem
             // 
@@ -660,24 +575,37 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1637, 759);
+            this.Controls.Add(this.buttonCheck);
             this.Controls.Add(this.comboBoxPurchaseId);
+            this.Controls.Add(this.buttonComponents);
             this.Controls.Add(this.purchaseDetailsDataGridView);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btFirst);
             this.Controls.Add(this.purchaseDetailsBindingNavigator);
+            this.Controls.Add(this.comboBoxComponentId);
             this.Controls.Add(this.buttonPurchases);
+            this.Controls.Add(this.btLast);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.btPrevious);
+            this.Controls.Add(this.textBoxPurchaseDetailId);
             this.Controls.Add(this.MainLabel);
+            this.Controls.Add(this.btNext);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btAdd);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btCancel);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btRemove);
+            this.Controls.Add(this.textBoxQuantity);
+            this.Controls.Add(this.textBoxUnitPrice);
+            this.Controls.Add(this.btSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "PurchaseDetailsForm";
             this.Text = "Журнал покупок";
             this.Load += new System.EventHandler(this.PurchaseDetailsForm_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.componentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
-            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.purchaseDetailsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseDetailsBindingNavigator)).EndInit();
             this.purchaseDetailsBindingNavigator.ResumeLayout(false);
@@ -693,8 +621,6 @@
         #endregion
 
         private System.Windows.Forms.Label MainLabel;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button buttonComponents;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btFirst;
@@ -712,12 +638,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button buttonCheck;
-        private System.Windows.Forms.Button buttonReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonPurchases;
-        private ComputerCompanyDBDataSet computerCompanyDBDataSet;
         private System.Windows.Forms.BindingSource purchaseDetailsBindingSource;
         private ComputerCompanyDBDataSetTableAdapters.PurchaseDetailsTableAdapter purchaseDetailsTableAdapter;
         private ComputerCompanyDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
@@ -734,19 +657,18 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton purchaseDetailsBindingNavigatorSaveItem;
-        private ComputerCompanyDBDataSetTableAdapters.PurchasesTableAdapter purchasesTableAdapter;
         private System.Windows.Forms.DataGridView purchaseDetailsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.BindingSource purchasesBindingSource;
         private System.Windows.Forms.BindingSource fKPurchaseDPurch76969D2EBindingSource;
         private ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter componentsTableAdapter;
         private System.Windows.Forms.BindingSource componentsBindingSource;
         public System.Windows.Forms.ComboBox comboBoxPurchaseId;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
+        public System.Windows.Forms.BindingSource purchasesBindingSource;
+        public ComputerCompanyDBDataSet computerCompanyDBDataSet;
+        public ComputerCompanyDBDataSetTableAdapters.PurchasesTableAdapter purchasesTableAdapter;
     }
 }

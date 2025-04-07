@@ -201,22 +201,5 @@ namespace ComputerCompany
                 }
             }
         }
-
-        //private void buttonReport_Click(object sender, EventArgs e)
-        //{
-        //    DateTime startDate = dateTimePickerStart.Value; // начальная дата
-        //    DateTime endDate = dateTimePickerEnd.Value; // конечная дата
-        //    ShowForm(startDate, endDate); // вызываем окно с датами
-        //}
-
-        //private void ShowForm(DateTime start, DateTime end)
-        //{
-        //    if (reportForm == null || reportForm.IsDisposed)
-        //    {
-        //        reportForm = new ReportForm(start, end,3); // Передаем даты в конструктор
-        //        reportForm.FormClosed += (s, args) => reportForm = null;
-        //        reportForm.ShowDialog(this);
-        //    }
-        //}
     }
 }

@@ -172,10 +172,14 @@ namespace ComputerCompany
                     this.purchasesBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
 
-                    // Обновляем привязку в родительской форме
-                    //main.purchasesBindingSource.ResetBindings(false);
-                    main.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
+                    // Обновляем данные в родительской форме
+                    main.purchasesTableAdapter.Fill(main.computerCompanyDBDataSet.Purchases); // Обновляем данные
 
+                    main.comboBoxPurchaseId.DataSource = main.purchasesBindingSource; // Связываем заново
+                    main.comboBoxPurchaseId.DisplayMember = "PurchaseID"; // Устанавливаем DisplayMember
+                    main.comboBoxPurchaseId.ValueMember = "PurchaseID"; // Устанавливаем ValueMember
+
+                    // Опционально: сбросить выбранный индекс
                     if (main.comboBoxPurchaseId.Items.Count > 0)
                     {
                         int remInd = main.comboBoxPurchaseId.SelectedIndex;

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using System.Net;
+using System.Drawing;
 
 namespace ComputerCompany
 {
@@ -14,7 +15,7 @@ namespace ComputerCompany
         public FullForm()
         {
             InitializeComponent();
-            LoadData();
+           
         }
 
         private void LoadData()
@@ -51,7 +52,6 @@ namespace ComputerCompany
 
                 // Настройка заголовков столбцов
                 SetupDataGridView();
-
 
                 // Скрытие столбцов
                 dataGridViewFull.Columns["SupplierID"].Visible = false;
@@ -116,6 +116,9 @@ namespace ComputerCompany
 
         private void UpdateTotalColumns()
         {
+            int grandTotalQuantity = 0;
+            decimal grandTotalPrice = 0;
+
             foreach (DataRow purchaseRow in computerCompanyDBDataSet.Purchases.Rows)
             {
                 int purchaseId = (int)purchaseRow["PurchaseID"];
@@ -127,7 +130,21 @@ namespace ComputerCompany
 
                 purchaseRow["TotalQuantity"] = totalQuantity;
                 purchaseRow["TotalPrice"] = totalPrice;
+
+                grandTotalQuantity += totalQuantity;
+                grandTotalPrice += totalPrice;
             }
+            labelTotals.Text = $"Итого: Количество = {grandTotalQuantity}, Сумма = {grandTotalPrice}";
+
+            // Добавление итоговой строки
+            DataRowView totalRow = (DataRowView)computerCompanyDBDataSet.Purchases.DefaultView.AddNew();
+            totalRow["TotalQuantity"] = grandTotalQuantity;
+            totalRow["TotalPrice"] = grandTotalPrice;
+
+            // Установка заголовка строки
+            int totalRowIndex = computerCompanyDBDataSet.Purchases.Rows.Count; // Индекс итоговой строки
+            dataGridViewFull.Rows[totalRowIndex].HeaderCell.Value = "Итого"; // Устанавливаем заголовок
+            dataGridViewFull.Rows[totalRowIndex].Cells["PurchaseDate"].Style.ForeColor = Color.White;
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -141,7 +158,8 @@ namespace ComputerCompany
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridViewFull.SelectedRows.Count > 0)
+            if (dataGridViewFull.SelectedRows.Count > 0 &&
+                dataGridViewFull.SelectedRows[0].Index < dataGridViewFull.Rows.Count - 1)
             {
                 int selectedPurchaseId = (int)dataGridViewFull.SelectedRows[0].Cells["PurchaseID"].Value;
 
@@ -181,10 +199,15 @@ namespace ComputerCompany
                 // Показ общей стоимости в последней строке ListBox
                 listBoxItems.Items.Add($"Общая стоимость товаров: {totalCost:C}");
             }
+            else
+            {
+                listBoxItems.Items.Clear();
+            }
         }
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
+            computerCompanyDBDataSet.Purchases.RejectChanges();
             string filter = "";
 
             // Проверяем состояние CheckBox
@@ -193,10 +216,10 @@ namespace ComputerCompany
                 int supplierId = (int)((DataRowView)comboBoxSupplier.SelectedItem)["SupplierID"];
                 filter += $"SupplierID = {supplierId}";
             }
+
             // Проверяем состояние CheckBox для дат
             if (!checkBoxAllTime.Checked)
             {
-                // Добавляем условия для дат
                 if (dateTimePicker1.Value != null && dateTimePicker2.Value != null)
                 {
                     if (!string.IsNullOrEmpty(filter))
@@ -206,6 +229,7 @@ namespace ComputerCompany
                     filter += $"PurchaseDate >= '{dateTimePicker1.Value:yyyy-MM-dd}' AND PurchaseDate <= '{dateTimePicker2.Value:yyyy-MM-dd}'";
                 }
             }
+
             try
             {
                 DataView view = new DataView(computerCompanyDBDataSet.Purchases);
@@ -235,8 +259,9 @@ namespace ComputerCompany
 
                 dataGridViewFull.Columns["PurchaseID"].Visible = false; // Всегда скрываем PurchaseID
                 dataGridViewFull.Columns["SupplierID"].Visible = false;
-                dataGridViewFull.Columns["SupplierName"].Visible = checkBoxAllSuppliers.Checked; // Скрываем SupplierID, если не активирован checkBoxAllSuppliers
-                                                                                                 // Настройка заголовков столбцов
+                dataGridViewFull.Columns["SupplierName"].Visible = checkBoxAllSuppliers.Checked;
+
+                // Настройка заголовков столбцов
                 dataGridViewFull.Columns["PurchaseDate"].HeaderText = "Дата Закупки";
                 dataGridViewFull.Columns["PurchaseReason"].HeaderText = "Причина Закупки";
                 dataGridViewFull.Columns["TotalQuantity"].HeaderText = "Общее Количество";
@@ -249,6 +274,9 @@ namespace ComputerCompany
                 dataGridViewFull.Columns["TotalPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 // Обновление новых полей (TotalQuantity и TotalPrice)
+                int grandTotalQuantity = 0;
+                decimal grandTotalPrice = 0;
+
                 foreach (DataRowView purchaseRow in view)
                 {
                     int purchaseId = (int)purchaseRow["PurchaseID"];
@@ -260,10 +288,28 @@ namespace ComputerCompany
 
                     purchaseRow["TotalQuantity"] = totalQuantity;
                     purchaseRow["TotalPrice"] = totalPrice;
+
+                    grandTotalQuantity += totalQuantity;
+                    grandTotalPrice += totalPrice;
+                }
+                labelTotals.Text = $"Итого: Количество = {grandTotalQuantity}, Сумма = {grandTotalPrice}";
+
+                // Проверка на наличие хотя бы одной строки перед добавлением итоговой строки
+                if (view.Count > 0) // Если есть хотя бы одна строка в отфильтрованных данных
+                {
+                    // Добавление итоговой строки
+                    DataRowView totalRow = view.AddNew();
+                    totalRow["TotalQuantity"] = grandTotalQuantity;
+                    totalRow["TotalPrice"] = grandTotalPrice;
+
+                    // Установка заголовка строки
+                    int totalRowIndex = view.Count-1; // Индекс итоговой строки
+                    dataGridViewFull.Rows[totalRowIndex].HeaderCell.Value = "Итого"; // Устанавливаем заголовок
+                    dataGridViewFull.Rows[totalRowIndex].Cells["PurchaseDate"].Style.ForeColor = Color.White;
                 }
 
                 dataGridViewFull.Refresh();
-                listBoxItems.Items.Clear(); 
+                listBoxItems.Items.Clear();
             }
             catch (Exception ex)
             {

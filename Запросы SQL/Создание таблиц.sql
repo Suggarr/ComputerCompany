@@ -39,7 +39,7 @@ GO
 CREATE TABLE Purchases (
     PurchaseID INT IDENTITY(1,1) PRIMARY KEY,  
     SupplierID INT,  -- Обязательная ссылка на поставщика
-    PurchaseDate DATE NOT NULL DEFAULT GETDATE(),  
+    PurchaseDate DATE DEFAULT GETDATE(),  
 	PurchaseReason NVARCHAR(255) NULL,
     FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID) ON DELETE SET NULL ON UPDATE CASCADE, --Лучше ON DELETE SET NULL
 );

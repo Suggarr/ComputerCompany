@@ -52,6 +52,7 @@
             this.purchaseDetailsTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.PurchaseDetailsTableAdapter();
             this.suppliersTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter();
             this.buttonReport = new System.Windows.Forms.Button();
+            this.labelTotals = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFull)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GetPurchaseDetailsForSuppliersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
@@ -169,7 +170,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(338, 144);
+            this.label5.Location = new System.Drawing.Point(341, 131);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(210, 25);
             this.label5.TabIndex = 11;
@@ -192,9 +193,10 @@
             this.dataGridViewFull.Location = new System.Drawing.Point(25, 186);
             this.dataGridViewFull.Name = "dataGridViewFull";
             this.dataGridViewFull.ReadOnly = true;
-            this.dataGridViewFull.RowHeadersWidth = 51;
+            this.dataGridViewFull.RowHeadersWidth = 60;
             this.dataGridViewFull.RowTemplate.Height = 24;
-            this.dataGridViewFull.Size = new System.Drawing.Size(950, 524);
+            this.dataGridViewFull.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewFull.Size = new System.Drawing.Size(950, 561);
             this.dataGridViewFull.TabIndex = 0;
             this.dataGridViewFull.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
             // 
@@ -253,9 +255,18 @@
             this.buttonReport.Name = "buttonReport";
             this.buttonReport.Size = new System.Drawing.Size(268, 50);
             this.buttonReport.TabIndex = 14;
-            this.buttonReport.Text = "Сформировать отчет";
+            this.buttonReport.Text = "Отчет";
             this.buttonReport.UseVisualStyleBackColor = true;
             this.buttonReport.Click += new System.EventHandler(this.buttonReport_Click);
+            // 
+            // labelTotals
+            // 
+            this.labelTotals.AutoSize = true;
+            this.labelTotals.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTotals.Location = new System.Drawing.Point(25, 164);
+            this.labelTotals.Name = "labelTotals";
+            this.labelTotals.Size = new System.Drawing.Size(0, 20);
+            this.labelTotals.TabIndex = 15;
             // 
             // FullForm
             // 
@@ -264,6 +275,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1722, 733);
+            this.Controls.Add(this.labelTotals);
             this.Controls.Add(this.buttonReport);
             this.Controls.Add(this.checkBoxAllTime);
             this.Controls.Add(this.label5);
@@ -312,5 +324,6 @@
         private ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter suppliersTableAdapter;
         private System.Windows.Forms.BindingSource GetPurchaseDetailsForSuppliersBindingSource;
         private System.Windows.Forms.Button buttonReport;
+        private System.Windows.Forms.Label labelTotals;
     }
 }
