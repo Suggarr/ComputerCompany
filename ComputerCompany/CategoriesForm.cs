@@ -12,6 +12,7 @@ namespace ComputerCompany
 {
     public partial class CategoriesForm : Form
     {
+        private AddCategoriesForm addCategoriesForm;
         private bool promptOnClose; // Флаг для показа MessageBox
         public CategoriesForm(bool promptOnClose = false) // По умолчанию false
         {
@@ -67,14 +68,21 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            try
+            addCategoriesForm = new AddCategoriesForm();
+            if (addCategoriesForm.ShowDialog() == DialogResult.OK)
             {
-                categoriesBindingSource.AddNew();
-            }
-            catch
-            {
-                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
-                categoriesBindingSource.CancelEdit();
+                // Получение данных из формы
+                string categoryName = addCategoriesForm.CategoryName;
+                string description = addCategoriesForm.Description;
+
+                // Добавление новой категории в временную таблицу
+                DataRow newRow = computerCompanyDBDataSet.Categories.NewRow();
+                newRow["CategoryName"] = categoryName;
+                newRow["Description"] = description;
+                computerCompanyDBDataSet.Categories.Rows.Add(newRow);
+
+                // Обновление привязки данных
+                categoriesBindingSource.ResetBindings(false);
             }
         }
 
@@ -106,21 +114,38 @@ namespace ComputerCompany
                     MessageBoxIcon.Question
                 );
 
-                if (result == DialogResult.Yes && this.Owner is ComponentsForm main)
+                if (result == DialogResult.Yes)
                 {
                     this.Validate();
                     this.categoriesBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
 
                     // Обновляем привязку в родительской форме
-                    //main.suppliersBindingSource.ResetBindings(false);
-                    main.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
-
-                    if (main.comboBoxCategoryId.Items.Count > 0)
+                    if (this.Owner is ComponentsForm mainComponents)
                     {
-                        int remInd = main.comboBoxCategoryId.SelectedIndex;
-                        this.categoriesTableAdapter.Fill(this.computerCompanyDBDataSet.Categories);
-                        main.comboBoxCategoryId.SelectedIndex = remInd;
+                        mainComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
+
+                        mainComponents.comboBoxCategoryId.DataSource = mainComponents.categoriesBindingSource; // Связываем заново
+                        mainComponents.comboBoxCategoryId.DisplayMember = "CategoryName"; // Устанавливаем DisplayMember
+                        mainComponents.comboBoxCategoryId.ValueMember = "CategoryID"; // Устанавливаем ValueMember
+
+                        if (mainComponents.comboBoxCategoryId.Items.Count > 0)
+                        {
+                            int remInd = mainComponents.comboBoxCategoryId.SelectedIndex;
+                            this.categoriesTableAdapter.Fill(this.computerCompanyDBDataSet.Categories);
+                            mainComponents.comboBoxCategoryId.SelectedIndex = remInd;
+                        }
+                    }
+                    else if (this.Owner is AddComponentsForm addComponents)
+                    {
+                        addComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
+
+                        if (addComponents.comboBoxCategoryId.Items.Count > 0)
+                        {
+                            int remInd = addComponents.comboBoxCategoryId.SelectedIndex;
+                            this.categoriesTableAdapter.Fill(this.computerCompanyDBDataSet.Categories);
+                            addComponents.comboBoxCategoryId.SelectedIndex = remInd;
+                        }
                     }
                 }
             }

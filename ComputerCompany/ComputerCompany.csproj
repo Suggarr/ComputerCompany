@@ -81,6 +81,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCategoriesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCategoriesForm.Designer.cs">
+      <DependentUpon>AddCategoriesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddComponentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddComponentsForm.Designer.cs">
+      <DependentUpon>AddComponentsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddPurchaseDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPurchaseDetailsForm.Designer.cs">
+      <DependentUpon>AddPurchaseDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddPurchasesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPurchasesForm.Designer.cs">
+      <DependentUpon>AddPurchasesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddSuppliersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSuppliersForm.Designer.cs">
+      <DependentUpon>AddSuppliersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoriesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,12 +133,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ComputerCompanyDBDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="FullForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FullForm.Designer.cs">
-      <DependentUpon>FullForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -143,6 +167,21 @@
     <Compile Include="SuppliersForm.Designer.cs">
       <DependentUpon>SuppliersForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddCategoriesForm.resx">
+      <DependentUpon>AddCategoriesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddComponentsForm.resx">
+      <DependentUpon>AddComponentsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddPurchaseDetailsForm.resx">
+      <DependentUpon>AddPurchaseDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddPurchasesForm.resx">
+      <DependentUpon>AddPurchasesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSuppliersForm.resx">
+      <DependentUpon>AddSuppliersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CategoriesForm.resx">
       <DependentUpon>CategoriesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,9 +190,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComponentsForm.resx">
       <DependentUpon>ComponentsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FullForm.resx">
-      <DependentUpon>FullForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -137,4 +137,8 @@ D:\Учеба\Семестр 2\База данных\Курсовая работ
 D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\Computer.C88E1779.Up2Date
 D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.exe
 D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.pdb
-D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.FullForm.resources
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.AddCategoriesForm.resources
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.AddComponentsForm.resources
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.AddPurchaseDetailsForm.resources
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.AddSuppliersForm.resources
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany\obj\Debug\ComputerCompany.AddPurchasesForm.resources

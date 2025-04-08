@@ -12,6 +12,7 @@ namespace ComputerCompany
 {
     public partial class PurchasesForm : Form
     {
+        private AddPurchasesForm addPurchaseForm;
         private bool promptOnClose; // Флаг для показа MessageBox
         public PurchasesForm(bool promptOnClose = false) // По умолчанию false
         {
@@ -128,14 +129,23 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            try
+            addPurchaseForm = new AddPurchasesForm();
+            if (addPurchaseForm.ShowDialog() == DialogResult.OK)
             {
-                purchasesBindingSource.AddNew();
-            }
-            catch
-            {
-                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
-                purchasesBindingSource.CancelEdit();
+                // Получение данных из формы
+                int supplierId = addPurchaseForm.SelectedSupplierId;
+                DateTime purchaseDate = addPurchaseForm.PurchaseDate;
+                string purchaseReason = addPurchaseForm.PurchaseReason;
+
+                // Добавление новой записи в временную таблицу
+                DataRow newRow = computerCompanyDBDataSet.Purchases.NewRow();
+                newRow["SupplierId"] = supplierId;
+                newRow["PurchaseDate"] = purchaseDate;
+                newRow["PurchaseReason"] = purchaseReason;
+                computerCompanyDBDataSet.Purchases.Rows.Add(newRow);
+
+                // Обновление привязки данных
+                purchasesBindingSource.ResetBindings(false);
             }
         }
 
@@ -166,25 +176,39 @@ namespace ComputerCompany
                     MessageBoxIcon.Question
                 );
 
-                if (result == DialogResult.Yes && this.Owner is PurchaseDetailsForm main)
+                if (result == DialogResult.Yes)
                 {
                     this.Validate();
                     this.purchasesBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
 
-                    // Обновляем данные в родительской форме
-                    main.purchasesTableAdapter.Fill(main.computerCompanyDBDataSet.Purchases); // Обновляем данные
-
-                    main.comboBoxPurchaseId.DataSource = main.purchasesBindingSource; // Связываем заново
-                    main.comboBoxPurchaseId.DisplayMember = "PurchaseID"; // Устанавливаем DisplayMember
-                    main.comboBoxPurchaseId.ValueMember = "PurchaseID"; // Устанавливаем ValueMember
-
-                    // Опционально: сбросить выбранный индекс
-                    if (main.comboBoxPurchaseId.Items.Count > 0)
+                    if (this.Owner is PurchaseDetailsForm main)
                     {
-                        int remInd = main.comboBoxPurchaseId.SelectedIndex;
-                        this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
-                        main.comboBoxPurchaseId.SelectedIndex = remInd;
+                        // Обновляем привязку в родительской форме
+                        main.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
+
+                        main.comboBoxPurchaseId.DataSource = main.purchasesBindingSource; // Связываем заново
+                        main.comboBoxPurchaseId.DisplayMember = "PurchaseID"; // Устанавливаем DisplayMember
+                        main.comboBoxPurchaseId.ValueMember = "PurchaseID"; // Устанавливаем ValueMember
+
+                        if (main.comboBoxPurchaseId.Items.Count > 0)
+                        {
+                            int remInd = main.comboBoxPurchaseId.SelectedIndex;
+                            this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
+                            main.comboBoxPurchaseId.SelectedIndex = remInd;
+                        }
+                    }
+                    else if (this.Owner is AddPurchaseDetailsForm addPurchaseDetails)
+                    {
+                        // Обновляем привязку в родительской форме
+                        addPurchaseDetails.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
+
+                        if (addPurchaseDetails.comboBoxPurchaseId.Items.Count > 0)
+                        {
+                            int remInd = addPurchaseDetails.comboBoxPurchaseId.SelectedIndex;
+                            this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
+                            addPurchaseDetails.comboBoxPurchaseId.SelectedIndex = remInd;
+                        }
                     }
                 }
             }

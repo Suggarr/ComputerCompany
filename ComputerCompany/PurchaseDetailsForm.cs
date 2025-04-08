@@ -12,8 +12,8 @@ namespace ComputerCompany
 {
     public partial class PurchaseDetailsForm : Form
     {
+        private AddPurchaseDetailsForm addPurchaseDetailsForm;
         private CheckForm checkForm;
-        private ReportForm reportForm;
         public PurchaseDetailsForm()
         {
             InitializeComponent();
@@ -55,12 +55,7 @@ namespace ComputerCompany
             };
             purchaseDetailsDataGridView.Columns.Add(hiddenComponentColumn);
             hiddenComponentColumn.Visible = false;
-            //// Добавляем колонку "Номер покупки" (PurchaseID)
-            //purchaseDetailsDataGridView.Columns.Add(new DataGridViewTextBoxColumn
-            //{
-            //    DataPropertyName = "PurchaseID",
-            //    HeaderText = "Номер покупки"
-            //});
+
             // Добавляем колонку для отображения ComponentName
             DataGridViewTextBoxColumn componentNameColumn = new DataGridViewTextBoxColumn
             {
@@ -133,14 +128,28 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            try
+            addPurchaseDetailsForm = new AddPurchaseDetailsForm();
+            if (addPurchaseDetailsForm.ShowDialog() == DialogResult.OK)
             {
-                fKPurchaseDPurch76969D2EBindingSource.AddNew();
-            }
-            catch
-            {
-                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
-                fKPurchaseDPurch76969D2EBindingSource.CancelEdit();
+                // Получение данных из формы
+                int purchaseId = addPurchaseDetailsForm.SelectedPurchaseId;
+                int componentId = addPurchaseDetailsForm.SelectedComponentId;
+                int quantity = addPurchaseDetailsForm.Quantity;
+                decimal unitPrice = addPurchaseDetailsForm.UnitPrice;
+
+                // Добавление новой записи в временную таблицу
+                DataRow newRow = computerCompanyDBDataSet.PurchaseDetails.NewRow();
+                newRow["PurchaseId"] = purchaseId;
+                newRow["ComponentId"] = componentId;
+                newRow["Quantity"] = quantity;
+                newRow["UnitPrice"] = unitPrice;
+                computerCompanyDBDataSet.PurchaseDetails.Rows.Add(newRow);
+
+                // Обновление привязки данных
+                purchaseDetailsBindingSource.ResetBindings(false);
+
+                // Установка выбранного значения в комбобоксе
+                comboBoxPurchaseId.SelectedValue = purchaseId;
             }
         }
 

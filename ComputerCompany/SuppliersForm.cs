@@ -12,6 +12,7 @@ namespace ComputerCompany
 {
     public partial class SuppliersForm : Form
     {
+        private AddSuppliersForm addSuppliersForm;
         private bool promptOnClose; // Флаг для показа MessageBox
         public SuppliersForm(bool promptOnClose = false) // По умолчанию false
         {
@@ -70,16 +71,24 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            try
+            addSuppliersForm = new AddSuppliersForm();
+            if (addSuppliersForm.ShowDialog() == DialogResult.OK)
             {
-                suppliersBindingSource.AddNew();
-            }
-            catch
-            {
-                MessageBox.Show("Не можем выполнить данное действие. Закончите редактирование строки которую добавили недавно");
-                suppliersBindingSource.CancelEdit();
-            }
+                // Получение данных из формы
+                string supplierName = addSuppliersForm.SupplierName;
+                string contacts = addSuppliersForm.Contacts;
+                string address = addSuppliersForm.Address;
 
+                // Добавление новой записи в временную таблицу
+                DataRow newRow = computerCompanyDBDataSet.Suppliers.NewRow();
+                newRow["SupplierName"] = supplierName;
+                newRow["ContactInfo"] = contacts;
+                newRow["Address"] = address;
+                computerCompanyDBDataSet.Suppliers.Rows.Add(newRow);
+
+                // Обновление привязки данных
+                suppliersBindingSource.ResetBindings(false);
+            }
         }
 
         private void btRemove_Click(object sender, EventArgs e)
@@ -111,21 +120,34 @@ namespace ComputerCompany
                     MessageBoxIcon.Question
                 );
 
-                if (result == DialogResult.Yes && this.Owner is PurchasesForm main)
+                if (result == DialogResult.Yes)
                 {
                     this.Validate();
                     this.suppliersBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
 
-                    // Обновляем привязку в родительской форме
-                    //main.suppliersBindingSource.ResetBindings(false);
-                    main.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
-
-                    if (main.comboBoxSupplierId.Items.Count > 0)
+                    if (this.Owner is PurchasesForm main)
                     {
-                        int remInd = main.comboBoxSupplierId.SelectedIndex;
-                        this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
-                        main.comboBoxSupplierId.SelectedIndex = remInd;
+                        // Обновляем привязку в родительской форме
+                        main.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
+
+                        if (main.comboBoxSupplierId.Items.Count > 0)
+                        {
+                            int remInd = main.comboBoxSupplierId.SelectedIndex;
+                            this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
+                            main.comboBoxSupplierId.SelectedIndex = remInd;
+                        }
+                    }
+                    else if (this.Owner is AddPurchasesForm addPurchase)
+                    {
+                        addPurchase.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
+
+                        if (addPurchase.comboBoxSupplierId.Items.Count > 0)
+                        {
+                            int remInd = addPurchase.comboBoxSupplierId.SelectedIndex;
+                            this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
+                            addPurchase.comboBoxSupplierId.SelectedIndex = remInd;
+                        }
                     }
                 }
             }

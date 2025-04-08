@@ -72,7 +72,7 @@ BEGIN
 END;
 
 Go
-CREATE PROCEDURE GetPurchaseDetailsByPurchaseID
+CREATE PROCEDURE GetPurchaseDetailsByPurchaseID --Для чека
     @PurchaseID INT
 AS
 BEGIN
@@ -101,7 +101,7 @@ END;
 
 Go
 
-CREATE PROCEDURE GetPurchaseDetailsForSuppliers
+CREATE PROCEDURE GetPurchaseDetailsForSuppliers --Подробный вариант отчета
     @StartDate DATE = NULL,
     @EndDate DATE = NULL,
     @SupplierID INT = NULL
@@ -137,4 +137,56 @@ BEGIN
         p.PurchaseID, c.ComponentName;
 END
 
-Exec GetPurchaseDetailsForSuppliers
+Go
+CREATE PROCEDURE GetPurchaseSummaryBySupplier --Отчетик но поменьше
+    @SupplierID INT = NULL,
+    @StartDate DATE = NULL,
+    @EndDate DATE = NULL
+AS
+BEGIN
+    SELECT 
+        s.SupplierName,
+        SUM(pd.Quantity) AS TotalQuantity,
+        SUM(pd.Quantity * pd.UnitPrice) AS TotalPrice
+    FROM 
+        Purchases p
+        JOIN Suppliers s ON p.SupplierID = s.SupplierID
+        JOIN PurchaseDetails pd ON p.PurchaseID = pd.PurchaseID
+    WHERE 
+        (@SupplierID IS NULL OR p.SupplierID = @SupplierID)
+        AND (@StartDate IS NULL OR p.PurchaseDate >= @StartDate)
+        AND (@EndDate IS NULL OR p.PurchaseDate <= @EndDate)
+    GROUP BY 
+        s.SupplierName
+    ORDER BY 
+        s.SupplierName
+END
+
+Go
+CREATE PROCEDURE GetFilteredPurchases
+    @SupplierID INT = NULL,
+    @StartDate DATE = NULL,
+    @EndDate DATE = NULL
+AS
+BEGIN
+    SELECT 
+        p.PurchaseID,
+        p.SupplierID,
+        s.SupplierName,
+        p.PurchaseDate,
+        p.PurchaseReason,
+        ISNULL(SUM(d.Quantity), 0) AS TotalQuantity,
+        ISNULL(SUM(d.Quantity * d.UnitPrice), 0) AS TotalPrice
+    FROM Purchases p
+    LEFT JOIN PurchaseDetails d ON p.PurchaseID = d.PurchaseID
+    INNER JOIN Suppliers s ON p.SupplierID = s.SupplierID
+    WHERE 
+        (@SupplierID IS NULL OR p.SupplierID = @SupplierID)
+        AND (@StartDate IS NULL OR p.PurchaseDate >= @StartDate)
+        AND (@EndDate IS NULL OR p.PurchaseDate <= @EndDate)
+    GROUP BY 
+        p.PurchaseID, p.SupplierID, s.SupplierName, p.PurchaseDate, p.PurchaseReason
+    ORDER BY p.PurchaseDate;
+END
+
+Exec GetFilteredPurchases Null, Null, Null

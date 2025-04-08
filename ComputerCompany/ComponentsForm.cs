@@ -12,6 +12,7 @@ namespace ComputerCompany
 {
     public partial class ComponentsForm : Form
     {
+        private AddComponentsForm addComponentsForm;
         private bool promptOnClose; // Флаг для показа MessageBox
         public ComponentsForm(bool promptOnClose = false)
         {
@@ -102,14 +103,26 @@ namespace ComputerCompany
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            //Тут добавлена проверка прежде, чем добавить новую строку.
-            try
+            addComponentsForm = new AddComponentsForm();
+            if (addComponentsForm.ShowDialog() == DialogResult.OK)
             {
-                fKComponentCateg6EF57B66BindingSource.AddNew();
-            }
-            catch {
-                MessageBox.Show("Не можем выполнить добавление новой записи. Отмена добавления прошлой записи(Причина: незаполнены все строки)");
-                fKComponentCateg6EF57B66BindingSource.CancelEdit();
+                // Получаем данные из формы
+                string componentName = addComponentsForm.ComponentName;
+                decimal price = addComponentsForm.Price;
+                int categoryId = addComponentsForm.SelectedCategoryId;
+
+                // Добавление новой строки в DataTable
+                DataRow newRow = computerCompanyDBDataSet.Components.NewRow();
+                newRow["ComponentName"] = componentName;
+                newRow["Price"] = price;
+                newRow["CategoryID"] = categoryId;
+                computerCompanyDBDataSet.Components.Rows.Add(newRow);
+
+                // Обновление привязки данных
+                componentsBindingSource.ResetBindings(false);
+
+                // Установка выбранного значения в комбобоксе
+                comboBoxCategoryId.SelectedValue = categoryId;
             }
         }
 
@@ -160,22 +173,35 @@ namespace ComputerCompany
                     MessageBoxIcon.Question
                 );
 
-                if (result == DialogResult.Yes && this.Owner is PurchaseDetailsForm main)
+                if (result == DialogResult.Yes)
                 {
                     this.Validate();
                     this.componentsBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
-
-                    // Обновляем привязку в родительской форме
-                    main.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
-
-                    if (main.comboBoxComponentId.Items.Count > 0)
+                    if (this.Owner is PurchaseDetailsForm main)
                     {
-                        int remInd = main.comboBoxComponentId.SelectedIndex;
-                        this.componentsTableAdapter.Fill(this.computerCompanyDBDataSet.Components);
-                        main.comboBoxComponentId.SelectedIndex = remInd;
-                    }
+                        // Обновляем привязку в родительской форме
+                        main.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
 
+                        if (main.comboBoxComponentId.Items.Count > 0)
+                        {
+                            int remInd = main.comboBoxComponentId.SelectedIndex;
+                            this.componentsTableAdapter.Fill(this.computerCompanyDBDataSet.Components);
+                            main.comboBoxComponentId.SelectedIndex = remInd;
+                        }
+                    }
+                    else if (this.Owner is AddPurchaseDetailsForm addPurchaseDetails)
+                    {
+                        // Обновляем привязку в форме AddPurchaseDetailsForm
+                        addPurchaseDetails.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
+
+                        if (addPurchaseDetails.comboBoxComponentId.Items.Count > 0)
+                        {
+                            int remInd = addPurchaseDetails.comboBoxComponentId.SelectedIndex;
+                            this.componentsTableAdapter.Fill(this.computerCompanyDBDataSet.Components);
+                            addPurchaseDetails.comboBoxComponentId.SelectedIndex = remInd;
+                        }
+                    }
                 }
             }
         }
