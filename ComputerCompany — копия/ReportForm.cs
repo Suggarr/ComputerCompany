@@ -12,6 +12,8 @@ using System.Net.Mail;
 using System.Net;
 using System.IO;
 using System.Threading;
+using ComputerCompany.Properties;
+using System.Diagnostics;
 
 namespace ComputerCompany
 {
@@ -20,14 +22,16 @@ namespace ComputerCompany
         private DateTime? startDate;
         private DateTime? endDate;
         private int? supplierId;
+        private string supplierName;
         //const string senderPassword = "snio cuui zztn linv"; /// Пароль отправителя.
         //const string senderEmail = "gogle35673@gmail.com";   /// Email отправителя.
-        public ReportForm(DateTime? startDate, DateTime? endDate, int? supplierId)
+        public ReportForm(DateTime? startDate, DateTime? endDate, int? supplierId, string supplierName)
         {
             InitializeComponent();
             this.startDate = startDate;
             this.endDate = endDate;
             this.supplierId = supplierId;
+            this.supplierName = supplierName;
             this.computerCompanyDBDataSet.GetPurchaseDetailsForSuppliers.Reset();
         }
 
@@ -54,11 +58,11 @@ namespace ComputerCompany
             {
                 if (startDate == null && endDate == null)
                 {
-                    total = $"Отчет по закупкам комплектующих за все время для поставщика {supplierId}";
+                    total = $"Отчет по закупкам комплектующих за все время для поставщика {supplierName}";
                 }
                 else
                 {
-                    total = $"Отчет по закупкам комплектующих с {startDate?.ToString("dd MMM yyyy")} до {endDate?.ToString("dd MMM yyyy")} для поставщика с ID {supplierId}";
+                    total = $"Отчет по закупкам комплектующих с {startDate?.ToString("dd MMM yyyy")} до {endDate?.ToString("dd MMM yyyy")} для поставщика {supplierName}";
                 }
                 flag = true;
             }
@@ -74,6 +78,62 @@ namespace ComputerCompany
 
 
             this.reportViewer1.RefreshReport();
+        }
+
+        private void reportViewer1_ReportExport(object sender, ReportExportEventArgs e)
+        {
+            e.Cancel = true;
+
+            string extension = this.GetRenderingExtension(e.Extension);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                Title = "Save As",
+                CheckPathExists = true,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = e.Extension.LocalizedName + " (*" + extension + ")|*" + extension + "|All files(*.*)|*.*",
+                FilterIndex = 0
+            };
+
+            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                this.reportViewer1.ExportDialog(e.Extension, e.DeviceInfo, saveFileDialog.FileName);
+
+                // Here's where I call my method to prompt user to open the file.
+                OpenFileWithPrompt(saveFileDialog.FileName);
+            }
+        }
+
+        private string GetRenderingExtension(RenderingExtension extension)
+        {
+            switch (extension.Name)
+            {
+                case "PDF":
+                    return ".pdf";
+                case "EXCELOPENXML":
+                    return ".xlsx";
+                case "WORDOPENXML":
+                    return ".docx";
+                case "NULL":
+                    throw new NotImplementedException("Extension not implemented.");
+            }
+
+            throw new NotImplementedException("Extension not implemented.");
+        }
+
+        public static void OpenFileWithPrompt(string file)
+        {
+            DialogResult result = MessageBox.Show(
+                "Файл успешно сохранён.\nОткрыть его сейчас?",
+                "Открыть файл",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button1);
+
+            if (result == DialogResult.Yes)
+            {
+                Process.Start(new ProcessStartInfo(file) { UseShellExecute = true });
+            }
         }
 
 

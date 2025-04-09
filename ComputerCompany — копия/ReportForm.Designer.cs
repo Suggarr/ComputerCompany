@@ -44,12 +44,13 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "ComputerCompany.Report1.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "ComputerCompany.ReportTable.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1276, 596);
             this.reportViewer1.TabIndex = 0;
+            this.reportViewer1.ReportExport += new Microsoft.Reporting.WinForms.ExportEventHandler(this.reportViewer1_ReportExport);
             // 
             // computerCompanyDBDataSet
             // 

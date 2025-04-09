@@ -29,28 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.getPurchaseDetailsForSuppliersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.getPurchaseDetailsForSuppliersTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.GetPurchaseDetailsForSuppliersTableAdapter();
             this.tableAdapterManager = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.TableAdapterManager();
+            this.getFilteredPurchasesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.getFilteredPurchasesTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.GetFilteredPurchasesTableAdapter();
+            this.reportViewerMain = new Microsoft.Reporting.WinForms.ReportViewer();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getPurchaseDetailsForSuppliersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.getFilteredPurchasesBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // reportViewer1
-            // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "PurchaseForSuppliersDataSet";
-            reportDataSource1.Value = null;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "ComputerCompany.ReportOfAll.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(1256, 576);
-            this.reportViewer1.TabIndex = 0;
             // 
             // computerCompanyDBDataSet
             // 
@@ -77,26 +66,48 @@
             this.tableAdapterManager.SuppliersTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = ComputerCompany.ComputerCompanyDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
+            // getFilteredPurchasesBindingSource
+            // 
+            this.getFilteredPurchasesBindingSource.DataMember = "GetFilteredPurchases";
+            this.getFilteredPurchasesBindingSource.DataSource = this.computerCompanyDBDataSet;
+            // 
+            // getFilteredPurchasesTableAdapter
+            // 
+            this.getFilteredPurchasesTableAdapter.ClearBeforeFill = true;
+            // 
+            // reportViewerMain
+            // 
+            this.reportViewerMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewerMain.Location = new System.Drawing.Point(0, 0);
+            this.reportViewerMain.Name = "reportViewerMain";
+            this.reportViewerMain.ServerReport.BearerToken = null;
+            this.reportViewerMain.Size = new System.Drawing.Size(1256, 576);
+            this.reportViewerMain.TabIndex = 0;
+            this.reportViewerMain.ReportExport += new Microsoft.Reporting.WinForms.ExportEventHandler(this.reportViewer_ReportExport);
+            // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1256, 576);
-            this.Controls.Add(this.reportViewer1);
+            this.Controls.Add(this.reportViewerMain);
             this.Name = "ReportForm";
             this.Text = "Окно отчета";
             this.Load += new System.EventHandler(this.ReportForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.getPurchaseDetailsForSuppliersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.getFilteredPurchasesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private ComputerCompanyDBDataSet computerCompanyDBDataSet;
         private System.Windows.Forms.BindingSource getPurchaseDetailsForSuppliersBindingSource;
         private ComputerCompanyDBDataSetTableAdapters.GetPurchaseDetailsForSuppliersTableAdapter getPurchaseDetailsForSuppliersTableAdapter;
         private ComputerCompanyDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private System.Windows.Forms.BindingSource getFilteredPurchasesBindingSource;
+        private ComputerCompanyDBDataSetTableAdapters.GetFilteredPurchasesTableAdapter getFilteredPurchasesTableAdapter;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewerMain;
     }
 }

@@ -331,9 +331,10 @@ namespace ComputerCompany
             dateTimePicker2.Enabled = !checkBoxAllTime.Checked;
         }
 
-        private void buttonReport_Click(object sender, EventArgs e)
+        private void ShowForm(bool reportFlag)
         {
             int? supplierId = null;
+            string supplierName = null;
             DateTime? startDate = null;
             DateTime? endDate = null;
 
@@ -343,6 +344,7 @@ namespace ComputerCompany
                 if (comboBoxSupplier.SelectedItem != null)
                 {
                     supplierId = (int)((DataRowView)comboBoxSupplier.SelectedItem)["SupplierID"];
+                    supplierName = ((DataRowView)comboBoxSupplier.SelectedItem)["SupplierName"].ToString();
                 }
             }
             if (!checkBoxAllTime.Checked)
@@ -350,17 +352,23 @@ namespace ComputerCompany
                 startDate = dateTimePicker1.Value;
                 endDate = dateTimePicker2.Value;
             }
-            ShowForm(startDate, endDate, supplierId); // вызываем окно с датами
-        }
 
-        private void ShowForm(DateTime? start, DateTime? end, int? supplierId)
-        {
             if (reportForm == null || reportForm.IsDisposed)
             {
-                reportForm = new ReportForm(start, end, supplierId); // Передаем даты в конструктор
+                reportForm = new ReportForm(startDate, endDate, supplierId, supplierName, reportFlag); // Передаем даты в конструктор
                 reportForm.FormClosed += (s, args) => reportForm = null;
                 reportForm.ShowDialog(this);
             }
+        }
+
+        private void buttonReport_Click(object sender, EventArgs e)
+        {
+            ShowForm(true);
+        }
+
+        private void buttonFullReport_Click(object sender, EventArgs e)
+        {
+            ShowForm(false);
         }
 
         private void toolStripButtonPurchases_Click(object sender, EventArgs e)

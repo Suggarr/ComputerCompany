@@ -218,6 +218,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportOfAll.rdlc" />
     <EmbeddedResource Include="ReportSupplierEarnings.rdlc" />
+    <EmbeddedResource Include="ReportTable.rdlc" />
     <EmbeddedResource Include="SuppliersForm.resx">
       <DependentUpon>SuppliersForm.cs</DependentUpon>
     </EmbeddedResource>
