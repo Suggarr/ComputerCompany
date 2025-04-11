@@ -6,16 +6,23 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Net;
 using System.Drawing;
+using MaterialSkin.Controls;
+using MaterialSkin;
+using ComputerCompany.Properties;
+using static MaterialSkin.MaterialSkinManager;
 
 namespace ComputerCompany
 {
-    public partial class FullForm : Form
+    public partial class FullForm : MaterialForm
     {
         private ReportForm reportForm;
         public FullForm()
         {
             InitializeComponent();
-           
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue800, Primary.Blue900, Primary.BlueGrey500, Accent.LightBlue700, TextShade.WHITE);
         }
 
         private void LoadData()

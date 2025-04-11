@@ -38,6 +38,7 @@ namespace ComputerCompany
         private void ReportForm_Load(object sender, EventArgs e)
         {
             this.getFilteredPurchasesTableAdapter.Fill(this.computerCompanyDBDataSet.GetFilteredPurchases, supplierId, startDate, endDate);
+            this.getPurchaseDetailsForSuppliersTableAdapter.Fill(this.computerCompanyDBDataSet.GetPurchaseDetailsForSuppliers, startDate, endDate, supplierId);
             // Вызов хранимой процедуры через TableAdapter
             reportViewer1.LocalReport.DataSources.Clear();
             string total;

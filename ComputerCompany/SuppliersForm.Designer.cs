@@ -54,8 +54,6 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxSupplierId = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.textBoxContactInfo = new System.Windows.Forms.TextBox();
             this.textBoxSupplierName = new System.Windows.Forms.TextBox();
@@ -139,7 +137,7 @@
             this.suppliersBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.suppliersBindingNavigator.Name = "suppliersBindingNavigator";
             this.suppliersBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.suppliersBindingNavigator.Size = new System.Drawing.Size(1547, 31);
+            this.suppliersBindingNavigator.Size = new System.Drawing.Size(1547, 27);
             this.suppliersBindingNavigator.TabIndex = 6;
             this.suppliersBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -156,7 +154,7 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorDeleteItem.Text = "Удалить";
             // 
             // bindingNavigatorMoveFirstItem
@@ -301,29 +299,10 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
-            // textBoxSupplierId
-            // 
-            this.textBoxSupplierId.Enabled = false;
-            this.textBoxSupplierId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSupplierId.Location = new System.Drawing.Point(1077, 190);
-            this.textBoxSupplierId.Name = "textBoxSupplierId";
-            this.textBoxSupplierId.Size = new System.Drawing.Size(261, 28);
-            this.textBoxSupplierId.TabIndex = 71;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(891, 193);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(172, 22);
-            this.label5.TabIndex = 70;
-            this.label5.Text = "Номер поставщика";
-            // 
             // textBoxAddress
             // 
             this.textBoxAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxAddress.Location = new System.Drawing.Point(1082, 403);
+            this.textBoxAddress.Location = new System.Drawing.Point(1082, 336);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(256, 28);
             this.textBoxAddress.TabIndex = 69;
@@ -331,7 +310,7 @@
             // textBoxContactInfo
             // 
             this.textBoxContactInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxContactInfo.Location = new System.Drawing.Point(1082, 332);
+            this.textBoxContactInfo.Location = new System.Drawing.Point(1082, 265);
             this.textBoxContactInfo.Name = "textBoxContactInfo";
             this.textBoxContactInfo.Size = new System.Drawing.Size(256, 28);
             this.textBoxContactInfo.TabIndex = 68;
@@ -339,7 +318,7 @@
             // textBoxSupplierName
             // 
             this.textBoxSupplierName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSupplierName.Location = new System.Drawing.Point(1077, 261);
+            this.textBoxSupplierName.Location = new System.Drawing.Point(1077, 194);
             this.textBoxSupplierName.Name = "textBoxSupplierName";
             this.textBoxSupplierName.Size = new System.Drawing.Size(261, 28);
             this.textBoxSupplierName.TabIndex = 67;
@@ -348,7 +327,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(995, 403);
+            this.label4.Location = new System.Drawing.Point(995, 336);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 22);
             this.label4.TabIndex = 66;
@@ -358,7 +337,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(966, 335);
+            this.label3.Location = new System.Drawing.Point(966, 268);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 22);
             this.label3.TabIndex = 65;
@@ -368,7 +347,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(913, 264);
+            this.label1.Location = new System.Drawing.Point(913, 197);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(152, 22);
             this.label1.TabIndex = 64;
@@ -475,8 +454,6 @@
             this.Controls.Add(this.btPrevious);
             this.Controls.Add(this.btLast);
             this.Controls.Add(this.btFirst);
-            this.Controls.Add(this.textBoxSupplierId);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxAddress);
             this.Controls.Add(this.textBoxContactInfo);
             this.Controls.Add(this.textBoxSupplierName);
@@ -528,8 +505,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.TextBox textBoxSupplierId;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.TextBox textBoxContactInfo;
         private System.Windows.Forms.TextBox textBoxSupplierName;

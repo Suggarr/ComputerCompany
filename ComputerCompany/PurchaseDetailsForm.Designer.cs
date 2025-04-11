@@ -30,18 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseDetailsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.buttonCheck = new System.Windows.Forms.Button();
             this.buttonComponents = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.btFirst = new System.Windows.Forms.Button();
             this.comboBoxComponentId = new System.Windows.Forms.ComboBox();
             this.componentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.btLast = new System.Windows.Forms.Button();
             this.btPrevious = new System.Windows.Forms.Button();
-            this.textBoxPurchaseDetailId = new System.Windows.Forms.TextBox();
             this.btNext = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
@@ -98,9 +96,9 @@
             this.MainLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.MainLabel.Location = new System.Drawing.Point(275, 47);
             this.MainLabel.Name = "MainLabel";
-            this.MainLabel.Size = new System.Drawing.Size(176, 25);
+            this.MainLabel.Size = new System.Drawing.Size(175, 25);
             this.MainLabel.TabIndex = 8;
-            this.MainLabel.Text = "Журнал покупок";
+            this.MainLabel.Text = "Журнал закупок";
             // 
             // buttonCheck
             // 
@@ -116,23 +114,13 @@
             // buttonComponents
             // 
             this.buttonComponents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonComponents.Location = new System.Drawing.Point(1156, 295);
+            this.buttonComponents.Location = new System.Drawing.Point(1156, 277);
             this.buttonComponents.Name = "buttonComponents";
             this.buttonComponents.Size = new System.Drawing.Size(276, 39);
             this.buttonComponents.TabIndex = 107;
             this.buttonComponents.Text = "Список компонентов";
             this.buttonComponents.UseVisualStyleBackColor = true;
             this.buttonComponents.Click += new System.EventHandler(this.buttonComponents_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(908, 200);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(202, 22);
-            this.label5.TabIndex = 38;
-            this.label5.Text = "Номер детали покупки";
             // 
             // btFirst
             // 
@@ -152,7 +140,7 @@
             this.comboBoxComponentId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxComponentId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxComponentId.FormattingEnabled = true;
-            this.comboBoxComponentId.Location = new System.Drawing.Point(1157, 259);
+            this.comboBoxComponentId.Location = new System.Drawing.Point(1157, 241);
             this.comboBoxComponentId.Name = "comboBoxComponentId";
             this.comboBoxComponentId.Size = new System.Drawing.Size(275, 30);
             this.comboBoxComponentId.TabIndex = 41;
@@ -189,15 +177,6 @@
             this.btPrevious.Text = "Предыдущая";
             this.btPrevious.UseVisualStyleBackColor = true;
             this.btPrevious.Click += new System.EventHandler(this.btPrevious_Click);
-            // 
-            // textBoxPurchaseDetailId
-            // 
-            this.textBoxPurchaseDetailId.Enabled = false;
-            this.textBoxPurchaseDetailId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPurchaseDetailId.Location = new System.Drawing.Point(1158, 197);
-            this.textBoxPurchaseDetailId.Name = "textBoxPurchaseDetailId";
-            this.textBoxPurchaseDetailId.Size = new System.Drawing.Size(275, 28);
-            this.textBoxPurchaseDetailId.TabIndex = 39;
             // 
             // btNext
             // 
@@ -246,7 +225,7 @@
             // textBoxUnitPrice
             // 
             this.textBoxUnitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxUnitPrice.Location = new System.Drawing.Point(1162, 428);
+            this.textBoxUnitPrice.Location = new System.Drawing.Point(1162, 410);
             this.textBoxUnitPrice.Name = "textBoxUnitPrice";
             this.textBoxUnitPrice.Size = new System.Drawing.Size(275, 28);
             this.textBoxUnitPrice.TabIndex = 36;
@@ -265,7 +244,7 @@
             // textBoxQuantity
             // 
             this.textBoxQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxQuantity.Location = new System.Drawing.Point(1162, 365);
+            this.textBoxQuantity.Location = new System.Drawing.Point(1162, 347);
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(275, 28);
             this.textBoxQuantity.TabIndex = 35;
@@ -274,7 +253,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(892, 434);
+            this.label4.Location = new System.Drawing.Point(892, 416);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(218, 22);
             this.label4.TabIndex = 32;
@@ -284,7 +263,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(913, 259);
+            this.label2.Location = new System.Drawing.Point(913, 241);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(197, 22);
             this.label2.TabIndex = 30;
@@ -294,7 +273,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(1001, 368);
+            this.label3.Location = new System.Drawing.Point(1001, 350);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 22);
             this.label3.TabIndex = 31;
@@ -491,14 +470,14 @@
             this.purchaseDetailsDataGridView.AllowUserToDeleteRows = false;
             this.purchaseDetailsDataGridView.AutoGenerateColumns = false;
             this.purchaseDetailsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.purchaseDetailsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.purchaseDetailsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.purchaseDetailsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.purchaseDetailsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -580,7 +559,6 @@
             this.Controls.Add(this.comboBoxPurchaseId);
             this.Controls.Add(this.buttonComponents);
             this.Controls.Add(this.purchaseDetailsDataGridView);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.btFirst);
             this.Controls.Add(this.purchaseDetailsBindingNavigator);
             this.Controls.Add(this.comboBoxComponentId);
@@ -588,7 +566,6 @@
             this.Controls.Add(this.btLast);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btPrevious);
-            this.Controls.Add(this.textBoxPurchaseDetailId);
             this.Controls.Add(this.MainLabel);
             this.Controls.Add(this.btNext);
             this.Controls.Add(this.label3);
@@ -603,7 +580,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "PurchaseDetailsForm";
-            this.Text = "Журнал покупок";
+            this.Text = "Журнал закупок";
             this.Load += new System.EventHandler(this.PurchaseDetailsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.componentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
@@ -623,12 +600,10 @@
 
         private System.Windows.Forms.Label MainLabel;
         private System.Windows.Forms.Button buttonComponents;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btFirst;
         public System.Windows.Forms.ComboBox comboBoxComponentId;
         private System.Windows.Forms.Button btLast;
         private System.Windows.Forms.Button btPrevious;
-        private System.Windows.Forms.TextBox textBoxPurchaseDetailId;
         private System.Windows.Forms.Button btNext;
         private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.Button btCancel;

@@ -38,11 +38,11 @@ namespace ComputerCompany
             purchaseDetailsBindingSource.DataSource = computerCompanyDBDataSet.PurchaseDetails;
 
             // Привязка элементов управления к полям данных
-            textBoxPurchaseDetailId.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "PurchaseDetailID", true, DataSourceUpdateMode.Never);
+            //textBoxPurchaseDetailId.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "PurchaseDetailID", true, DataSourceUpdateMode.Never);
             //comboBoxPurchaseId.DataBindings.Add("SelectedValue", purchaseDetailsBindingSource, "PurchaseID", true, DataSourceUpdateMode.OnPropertyChanged);
             comboBoxComponentId.DataBindings.Add("SelectedValue", fKPurchaseDPurch76969D2EBindingSource, "ComponentID", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxQuantity.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "Quantity", true, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxUnitPrice.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "UnitPrice", true, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxUnitPrice.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "UnitPrice", true, DataSourceUpdateMode.Never);
             // Удаляем все колонки перед добавлением новых
             purchaseDetailsDataGridView.Columns.Clear();
             purchaseDetailsDataGridView.AutoGenerateColumns = false;

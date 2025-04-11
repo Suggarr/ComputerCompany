@@ -35,7 +35,7 @@ namespace ComputerCompany
             categoriesBindingSource.DataSource = computerCompanyDBDataSet.Categories;
 
             // Привязка элементов управления к полям данных
-            textBoxCategoryId.DataBindings.Add("Text", categoriesBindingSource, "CategoryID", true, DataSourceUpdateMode.Never);
+            //textBoxCategoryId.DataBindings.Add("Text", categoriesBindingSource, "CategoryID", true, DataSourceUpdateMode.Never);
             textBoxCategoryName.DataBindings.Add("Text", categoriesBindingSource, "CategoryName", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxDescription.DataBindings.Add("Text", categoriesBindingSource, "Description", true, DataSourceUpdateMode.OnPropertyChanged);
 

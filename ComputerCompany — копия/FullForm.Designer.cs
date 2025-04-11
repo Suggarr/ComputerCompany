@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
@@ -64,7 +64,7 @@
             this.comboBoxSupplier.Enabled = false;
             this.comboBoxSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxSupplier.FormattingEnabled = true;
-            this.comboBoxSupplier.Location = new System.Drawing.Point(112, 84);
+            this.comboBoxSupplier.Location = new System.Drawing.Point(83, 127);
             this.comboBoxSupplier.Name = "comboBoxSupplier";
             this.comboBoxSupplier.Size = new System.Drawing.Size(212, 30);
             this.comboBoxSupplier.TabIndex = 1;
@@ -73,7 +73,7 @@
             // 
             this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(554, 78);
+            this.dateTimePicker1.Location = new System.Drawing.Point(641, 139);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 28);
             this.dateTimePicker1.TabIndex = 2;
@@ -83,7 +83,7 @@
             // 
             this.dateTimePicker2.Enabled = false;
             this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(831, 78);
+            this.dateTimePicker2.Location = new System.Drawing.Point(918, 139);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 28);
             this.dateTimePicker2.TabIndex = 3;
@@ -92,7 +92,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(1146, 68);
+            this.button1.Location = new System.Drawing.Point(1149, 81);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(218, 50);
             this.button1.TabIndex = 4;
@@ -118,7 +118,7 @@
             this.checkBoxAllSuppliers.Checked = true;
             this.checkBoxAllSuppliers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxAllSuppliers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAllSuppliers.Location = new System.Drawing.Point(112, 35);
+            this.checkBoxAllSuppliers.Location = new System.Drawing.Point(83, 93);
             this.checkBoxAllSuppliers.Name = "checkBoxAllSuppliers";
             this.checkBoxAllSuppliers.Size = new System.Drawing.Size(219, 24);
             this.checkBoxAllSuppliers.TabIndex = 6;
@@ -130,7 +130,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(504, 32);
+            this.label1.Location = new System.Drawing.Point(591, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(142, 25);
             this.label1.TabIndex = 7;
@@ -140,7 +140,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(501, 78);
+            this.label2.Location = new System.Drawing.Point(588, 139);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 25);
             this.label2.TabIndex = 8;
@@ -150,7 +150,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(774, 79);
+            this.label3.Location = new System.Drawing.Point(861, 140);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 25);
             this.label3.TabIndex = 9;
@@ -181,14 +181,14 @@
             this.dataGridViewFull.AllowUserToAddRows = false;
             this.dataGridViewFull.AllowUserToDeleteRows = false;
             this.dataGridViewFull.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewFull.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewFull.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewFull.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFull.Location = new System.Drawing.Point(25, 186);
             this.dataGridViewFull.Name = "dataGridViewFull";
@@ -206,7 +206,7 @@
             this.checkBoxAllTime.Checked = true;
             this.checkBoxAllTime.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxAllTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAllTime.Location = new System.Drawing.Point(679, 33);
+            this.checkBoxAllTime.Location = new System.Drawing.Point(766, 94);
             this.checkBoxAllTime.Name = "checkBoxAllTime";
             this.checkBoxAllTime.Size = new System.Drawing.Size(259, 24);
             this.checkBoxAllTime.TabIndex = 13;
@@ -251,7 +251,7 @@
             // buttonReport
             // 
             this.buttonReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonReport.Location = new System.Drawing.Point(1404, 68);
+            this.buttonReport.Location = new System.Drawing.Point(1407, 81);
             this.buttonReport.Name = "buttonReport";
             this.buttonReport.Size = new System.Drawing.Size(268, 50);
             this.buttonReport.TabIndex = 14;

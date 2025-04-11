@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComputerCompanyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Components" Relationship="Self.FK__Component__Categ__6EF57B66" FromRole="Categories" ToRole="Components" />
+  </EntityType>
+  <EntityType Name="Components">
+    <Key>
+      <PropertyRef Name="ComponentID" />
+    </Key>
+    <Property Name="ComponentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ComponentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK__Component__Categ__6EF57B66" FromRole="Components" ToRole="Categories" />
+    <NavigationProperty Name="PurchaseDetails" Relationship="Self.FK__PurchaseD__Compo__778AC167" FromRole="Components" ToRole="PurchaseDetails" />
+  </EntityType>
+  <EntityType Name="PurchaseDetails">
+    <Key>
+      <PropertyRef Name="PurchaseDetailID" />
+    </Key>
+    <Property Name="PurchaseDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+    <Property Name="ComponentID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Components" Relationship="Self.FK__PurchaseD__Compo__778AC167" FromRole="PurchaseDetails" ToRole="Components" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__PurchaseD__Purch__76969D2E" FromRole="PurchaseDetails" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="PurchaseID" />
+    </Key>
+    <Property Name="PurchaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupplierID" Type="Int32" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+    <Property Name="PurchaseReason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PurchaseDetails" Relationship="Self.FK__PurchaseD__Purch__76969D2E" FromRole="Purchases" ToRole="PurchaseDetails" />
+    <NavigationProperty Name="Suppliers" Relationship="Self.FK__Purchases__Suppl__72C60C4A" FromRole="Purchases" ToRole="Suppliers" />
+  </EntityType>
+  <EntityType Name="Suppliers">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchases__Suppl__72C60C4A" FromRole="Suppliers" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="View_ComponentPurchaseTotal">
+    <Key>
+      <PropertyRef Name="ComponentID" />
+      <PropertyRef Name="ComponentName" />
+    </Key>
+    <Property Name="ComponentID" Type="Int32" Nullable="false" />
+    <Property Name="ComponentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TotalSpent" Type="Decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <EntityType Name="View_PurchaseSummary">
+    <Key>
+      <PropertyRef Name="PurchaseDetailID" />
+      <PropertyRef Name="PurchaseID" />
+      <PropertyRef Name="ComponentName" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="UnitPrice" />
+    </Key>
+    <Property Name="PurchaseDetailID" Type="Int32" Nullable="false" />
+    <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+    <Property Name="ComponentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+    <Property Name="PurchaseReason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_SupplierPurchases">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+      <PropertyRef Name="SupplierName" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TotalPurchases" Type="Int32" />
+  </EntityType>
+  <EntityType Name="View_SupplierTotalRevenue">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+      <PropertyRef Name="SupplierName" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TotalQuantity" Type="Int32" />
+    <Property Name="TotalRevenue" Type="Decimal" Precision="38" Scale="2" />
+  </EntityType>
+  <EntityType Name="vw_Purchases">
+    <Key>
+      <PropertyRef Name="PurchaseID" />
+      <PropertyRef Name="SupplierName" />
+    </Key>
+    <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK__Component__Categ__6EF57B66">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+    <End Role="Components" Type="Self.Components" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Components">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PurchaseD__Compo__778AC167">
+    <End Role="Components" Type="Self.Components" Multiplicity="0..1" />
+    <End Role="PurchaseDetails" Type="Self.PurchaseDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Components">
+        <PropertyRef Name="ComponentID" />
+      </Principal>
+      <Dependent Role="PurchaseDetails">
+        <PropertyRef Name="ComponentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PurchaseD__Purch__76969D2E">
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PurchaseDetails" Type="Self.PurchaseDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchases">
+        <PropertyRef Name="PurchaseID" />
+      </Principal>
+      <Dependent Role="PurchaseDetails">
+        <PropertyRef Name="PurchaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Purchases__Suppl__72C60C4A">
+    <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppliers">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ComputerCompanyDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Categories" />
+    <EntitySet Name="Components" EntityType="Self.Components" />
+    <EntitySet Name="PurchaseDetails" EntityType="Self.PurchaseDetails" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchases" />
+    <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="View_ComponentPurchaseTotal" EntityType="Self.View_ComponentPurchaseTotal" />
+    <EntitySet Name="View_PurchaseSummary" EntityType="Self.View_PurchaseSummary" />
+    <EntitySet Name="View_SupplierPurchases" EntityType="Self.View_SupplierPurchases" />
+    <EntitySet Name="View_SupplierTotalRevenue" EntityType="Self.View_SupplierTotalRevenue" />
+    <EntitySet Name="vw_Purchases" EntityType="Self.vw_Purchases" />
+    <AssociationSet Name="FK__Component__Categ__6EF57B66" Association="Self.FK__Component__Categ__6EF57B66">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Components" EntitySet="Components" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PurchaseD__Compo__778AC167" Association="Self.FK__PurchaseD__Compo__778AC167">
+      <End Role="Components" EntitySet="Components" />
+      <End Role="PurchaseDetails" EntitySet="PurchaseDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PurchaseD__Purch__76969D2E" Association="Self.FK__PurchaseD__Purch__76969D2E">
+      <End Role="Purchases" EntitySet="Purchases" />
+      <End Role="PurchaseDetails" EntitySet="PurchaseDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Purchases__Suppl__72C60C4A" Association="Self.FK__Purchases__Suppl__72C60C4A">
+      <End Role="Suppliers" EntitySet="Suppliers" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <FunctionImport Name="AddComponent">
+      <Parameter Name="ComponentName" Mode="In" Type="String" />
+      <Parameter Name="Price" Mode="In" Type="Decimal" />
+      <Parameter Name="WarrantyMonths" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddPurchase">
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PurchaseReason" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddSupplier">
+      <Parameter Name="SupplierName" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetFilteredPurchases" ReturnType="Collection(ComputerCompanyDBModel.GetFilteredPurchases_Result)">
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetPurchaseDetailsByPurchaseID" ReturnType="Collection(ComputerCompanyDBModel.GetPurchaseDetailsByPurchaseID_Result)">
+      <Parameter Name="PurchaseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetPurchaseDetailsForSuppliers" ReturnType="Collection(ComputerCompanyDBModel.GetPurchaseDetailsForSuppliers_Result)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetPurchasesBySupplier" ReturnType="Collection(ComputerCompanyDBModel.GetPurchasesBySupplier_Result)">
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetPurchaseSummaryBySupplier" ReturnType="Collection(ComputerCompanyDBModel.GetPurchaseSummaryBySupplier_Result)">
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetSupplierEarnings" ReturnType="Collection(ComputerCompanyDBModel.GetSupplierEarnings_Result)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ComputerCompanyDBModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ComputerCompanyDBModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="GetFilteredPurchases_Result">
+    <Property Type="Int32" Name="PurchaseID" Nullable="false" />
+    <Property Type="Int32" Name="SupplierID" Nullable="true" />
+    <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="PurchaseDate" Nullable="true" />
+    <Property Type="String" Name="PurchaseReason" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="TotalQuantity" Nullable="false" />
+    <Property Type="Decimal" Name="TotalPrice" Nullable="false" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="GetPurchaseDetailsByPurchaseID_Result">
+    <Property Type="Int32" Name="PurchaseID" Nullable="false" />
+    <Property Type="String" Name="ComponentName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="21" Scale="2" />
+    <Property Type="DateTime" Name="PurchaseDate" Nullable="true" />
+    <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetPurchaseDetailsForSuppliers_Result">
+    <Property Type="Int32" Name="PurchaseID" Nullable="false" />
+    <Property Type="DateTime" Name="PurchaseDate" Nullable="true" />
+    <Property Type="String" Name="PurchaseReason" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="ItemTotal" Nullable="true" Precision="21" Scale="2" />
+    <Property Type="String" Name="ComponentName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="GetPurchasesBySupplier_Result">
+    <Property Type="Int32" Name="PurchaseID" Nullable="false" />
+    <Property Type="Int32" Name="SupplierID" Nullable="true" />
+    <Property Type="DateTime" Name="PurchaseDate" Nullable="true" />
+    <Property Type="String" Name="PurchaseReason" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="GetPurchaseSummaryBySupplier_Result">
+    <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+    <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="GetSupplierEarnings_Result">
+    <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="TotalQuantity" Nullable="true" />
+    <Property Type="Decimal" Name="TotalEarnings" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

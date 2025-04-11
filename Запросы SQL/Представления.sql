@@ -61,10 +61,56 @@ SELECT
     s.SupplierID,
     s.SupplierName,
 	Sum(pd.Quantity) AS TotalQuantity,
-    SUM(pd.UnitPrice) AS TotalRevenue
+    SUM(pd.UnitPrice*pd.Quantity) AS TotalRevenue
 FROM 
     Suppliers s
 JOIN Purchases p ON s.SupplierID = p.SupplierID
 JOIN PurchaseDetails pd ON p.PurchaseID = pd.PurchaseID
 GROUP BY 
     s.SupplierID, s.SupplierName;
+
+----------------------------------------------
+
+Go
+CREATE VIEW vw_ComponentsWithCategoryAndPrice AS
+SELECT 
+    c.ComponentID,
+    c.ComponentName,
+    cat.CategoryName,
+    c.Price
+FROM Components c
+LEFT JOIN Categories cat ON c.CategoryID = cat.CategoryID;
+
+Go
+CREATE VIEW vw_SupplierStatistics AS
+SELECT 
+    s.SupplierID,
+    s.SupplierName,
+    COUNT(DISTINCT p.PurchaseID) AS TotalPurchases,
+    SUM(pd.Quantity) AS TotalItems,
+    SUM(pd.Quantity * pd.UnitPrice) AS TotalAmount
+FROM Suppliers s
+LEFT JOIN Purchases p ON s.SupplierID = p.SupplierID
+LEFT JOIN PurchaseDetails pd ON p.PurchaseID = pd.PurchaseID
+GROUP BY s.SupplierID, s.SupplierName;
+
+Go
+CREATE VIEW vw_CategoryComponentCount AS
+SELECT 
+    cat.CategoryID,
+    cat.CategoryName,
+    COUNT(c.ComponentID) AS ComponentCount
+FROM Categories cat
+LEFT JOIN Components c ON c.CategoryID = cat.CategoryID
+GROUP BY cat.CategoryID, cat.CategoryName;
+
+Go
+CREATE VIEW vw_RecentPurchases AS
+SELECT TOP 5
+    p.PurchaseID,
+    p.PurchaseDate,
+    s.SupplierName,
+    p.PurchaseReason
+FROM Purchases p
+JOIN Suppliers s ON p.SupplierID = s.SupplierID
+ORDER BY p.PurchaseDate DESC;

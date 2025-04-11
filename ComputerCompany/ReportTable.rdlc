@@ -70,7 +70,7 @@
                   <Width>3.32973cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.82173cm</Width>
+                  <Width>3.2239cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>3.56256cm</Width>
@@ -715,7 +715,7 @@
             <Top>0.60536cm</Top>
             <Left>0.5207cm</Left>
             <Height>3.197cm</Height>
-            <Width>15.88898cm</Width>
+            <Width>16.29115cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -754,9 +754,9 @@
               </Paragraphs>
               <rd:DefaultName>TotalText</rd:DefaultName>
               <Top>0.2667cm</Top>
-              <Left>2.76437cm</Left>
+              <Left>0.5207cm</Left>
               <Height>1.2985cm</Height>
-              <Width>12.9775cm</Width>
+              <Width>15.88898cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>

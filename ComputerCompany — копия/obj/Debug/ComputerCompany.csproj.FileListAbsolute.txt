@@ -209,3 +209,9 @@ D:\Учеба\Семестр 2\База данных\Курсовая работ
 D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\obj\Debug\Computer.C88E1779.Up2Date
 D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\obj\Debug\ComputerCompany.exe
 D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\obj\Debug\ComputerCompany.pdb
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\bin\Debug\MaterialSkin.dll
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\bin\Debug\EntityFramework.dll
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\bin\Debug\EntityFramework.SqlServer.dll
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\bin\Debug\EntityFramework.xml
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\bin\Debug\EntityFramework.SqlServer.xml
+D:\Учеба\Семестр 2\База данных\Курсовая работа\ComputerCompany — копия\bin\Debug\ru\EntityFramework.resources.dll

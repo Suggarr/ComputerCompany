@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonCategories = new System.Windows.Forms.Button();
@@ -59,8 +59,6 @@
             this.componentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxComponentId = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.textBoxComponentName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -170,7 +168,7 @@
             this.componentsBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.componentsBindingNavigator.Name = "componentsBindingNavigator";
             this.componentsBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.componentsBindingNavigator.Size = new System.Drawing.Size(1561, 31);
+            this.componentsBindingNavigator.Size = new System.Drawing.Size(1561, 27);
             this.componentsBindingNavigator.TabIndex = 109;
             this.componentsBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -197,7 +195,7 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorDeleteItem.Text = "Удалить";
             // 
             // bindingNavigatorMoveFirstItem
@@ -286,14 +284,14 @@
             this.componentsDataGridView.AllowUserToDeleteRows = false;
             this.componentsDataGridView.AutoGenerateColumns = false;
             this.componentsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.componentsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.componentsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.componentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.componentsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.componentIDDataGridViewTextBoxColumn,
@@ -341,25 +339,6 @@
             this.categoryIDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.categoryIDDataGridViewTextBoxColumn.Name = "categoryIDDataGridViewTextBoxColumn";
             this.categoryIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // textBoxComponentId
-            // 
-            this.textBoxComponentId.Enabled = false;
-            this.textBoxComponentId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxComponentId.Location = new System.Drawing.Point(1155, 234);
-            this.textBoxComponentId.Name = "textBoxComponentId";
-            this.textBoxComponentId.Size = new System.Drawing.Size(261, 28);
-            this.textBoxComponentId.TabIndex = 115;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(940, 237);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(171, 22);
-            this.label5.TabIndex = 114;
-            this.label5.Text = "Номер компонента";
             // 
             // textBoxPrice
             // 
@@ -512,8 +491,6 @@
             this.Controls.Add(this.btPrevious);
             this.Controls.Add(this.btLast);
             this.Controls.Add(this.btFirst);
-            this.Controls.Add(this.textBoxComponentId);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.textBoxComponentName);
             this.Controls.Add(this.label3);
@@ -566,8 +543,6 @@
         private System.Windows.Forms.ToolStripButton componentsBindingNavigatorSaveItem;
         private ComputerCompanyDBDataSetTableAdapters.CategoriesTableAdapter categoriesTableAdapter;
         private System.Windows.Forms.DataGridView componentsDataGridView;
-        private System.Windows.Forms.TextBox textBoxComponentId;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.TextBox textBoxComponentName;
         private System.Windows.Forms.Label label3;

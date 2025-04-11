@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -53,8 +53,6 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxCategoryId = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.textBoxCategoryName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -136,7 +134,7 @@
             this.categoriesBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.categoriesBindingNavigator.Name = "categoriesBindingNavigator";
             this.categoriesBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.categoriesBindingNavigator.Size = new System.Drawing.Size(1561, 31);
+            this.categoriesBindingNavigator.Size = new System.Drawing.Size(1561, 27);
             this.categoriesBindingNavigator.TabIndex = 91;
             this.categoriesBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -153,7 +151,7 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorDeleteItem.Text = "Удалить";
             // 
             // bindingNavigatorMoveFirstItem
@@ -242,14 +240,14 @@
             this.categoriesDataGridView.AllowUserToDeleteRows = false;
             this.categoriesDataGridView.AutoGenerateColumns = false;
             this.categoriesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.categoriesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.categoriesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.categoriesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.categoriesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -289,29 +287,10 @@
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
-            // textBoxCategoryId
-            // 
-            this.textBoxCategoryId.Enabled = false;
-            this.textBoxCategoryId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxCategoryId.Location = new System.Drawing.Point(1126, 245);
-            this.textBoxCategoryId.Name = "textBoxCategoryId";
-            this.textBoxCategoryId.Size = new System.Drawing.Size(336, 28);
-            this.textBoxCategoryId.TabIndex = 102;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(925, 248);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(155, 22);
-            this.label5.TabIndex = 101;
-            this.label5.Text = "Номер категории";
-            // 
             // textBoxDescription
             // 
             this.textBoxDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxDescription.Location = new System.Drawing.Point(1131, 387);
+            this.textBoxDescription.Location = new System.Drawing.Point(1131, 285);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(331, 87);
@@ -320,7 +299,7 @@
             // textBoxCategoryName
             // 
             this.textBoxCategoryName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxCategoryName.Location = new System.Drawing.Point(1126, 316);
+            this.textBoxCategoryName.Location = new System.Drawing.Point(1126, 214);
             this.textBoxCategoryName.Name = "textBoxCategoryName";
             this.textBoxCategoryName.Size = new System.Drawing.Size(336, 28);
             this.textBoxCategoryName.TabIndex = 99;
@@ -329,7 +308,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(899, 412);
+            this.label3.Location = new System.Drawing.Point(899, 288);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(182, 22);
             this.label3.TabIndex = 98;
@@ -339,7 +318,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(899, 322);
+            this.label1.Location = new System.Drawing.Point(899, 220);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(181, 22);
             this.label1.TabIndex = 97;
@@ -446,8 +425,6 @@
             this.Controls.Add(this.btPrevious);
             this.Controls.Add(this.btLast);
             this.Controls.Add(this.btFirst);
-            this.Controls.Add(this.textBoxCategoryId);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.textBoxCategoryName);
             this.Controls.Add(this.label3);
@@ -496,8 +473,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.TextBox textBoxCategoryId;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.TextBox textBoxCategoryName;
         private System.Windows.Forms.Label label3;

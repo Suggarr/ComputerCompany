@@ -120,10 +120,10 @@ namespace ComputerCompany
                 case "WORDOPENXML":
                     return ".docx";
                 case "NULL":
-                    throw new NotImplementedException("Extension not implemented.");
+                    throw new NotImplementedException("Расширение не реализовано");
             }
 
-            throw new NotImplementedException("Extension not implemented.");
+            throw new NotImplementedException("Расширение не реализовано");
         }
 
         public static void OpenFileWithPrompt(string file)

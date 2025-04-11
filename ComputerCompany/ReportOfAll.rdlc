@@ -1076,7 +1076,7 @@
                     <TextRun>
                       <Value>=Parameters!TotalText.Value</Value>
                       <Style>
-                        <FontSize>14pt</FontSize>
+                        <FontSize>13pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1087,9 +1087,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.79587cm</Top>
-              <Left>3.36667cm</Left>
+              <Left>0.5842cm</Left>
               <Height>1.31966cm</Height>
-              <Width>10.64916cm</Width>
+              <Width>14.78864cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>

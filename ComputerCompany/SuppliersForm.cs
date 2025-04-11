@@ -35,7 +35,7 @@ namespace ComputerCompany
             suppliersBindingSource.DataSource = computerCompanyDBDataSet.Suppliers;
 
             // Привязка элементов управления к полям данных
-            textBoxSupplierId.DataBindings.Add("Text", suppliersBindingSource, "SupplierID", true, DataSourceUpdateMode.Never);
+            //textBoxSupplierId.DataBindings.Add("Text", suppliersBindingSource, "SupplierID", true, DataSourceUpdateMode.Never);
             textBoxSupplierName.DataBindings.Add("Text", suppliersBindingSource, "SupplierName", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxContactInfo.DataBindings.Add("Text", suppliersBindingSource, "ContactInfo", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxAddress.DataBindings.Add("Text", suppliersBindingSource, "Address", true, DataSourceUpdateMode.OnPropertyChanged);

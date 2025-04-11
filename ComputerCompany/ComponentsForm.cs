@@ -38,7 +38,7 @@ namespace ComputerCompany
             categoriesBindingSource.DataSource = computerCompanyDBDataSet.Categories;
 
             // Привязка элементов управления к полям данных
-            textBoxComponentId.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "ComponentID", true, DataSourceUpdateMode.Never);
+            //textBoxComponentId.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "ComponentID", true, DataSourceUpdateMode.Never);
             textBoxComponentName.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "ComponentName", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxPrice.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "Price", true, DataSourceUpdateMode.OnPropertyChanged);
             //comboBoxCategoryName.DataBindings.Add("SelectedValue", componentsBindingSource, "CategoryID", true, DataSourceUpdateMode.OnPropertyChanged);
