@@ -33,16 +33,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.buttonSuppliers = new System.Windows.Forms.Button();
             this.comboBoxSupplierId = new System.Windows.Forms.ComboBox();
+            this.suppliersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.dateTimePickerPurchaseDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
-            this.suppliersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.suppliersTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.suppliersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxPurchaseReason
@@ -87,6 +87,16 @@
             this.comboBoxSupplierId.Size = new System.Drawing.Size(331, 30);
             this.comboBoxSupplierId.TabIndex = 140;
             this.comboBoxSupplierId.ValueMember = "SupplierID";
+            // 
+            // suppliersBindingSource
+            // 
+            this.suppliersBindingSource.DataMember = "Suppliers";
+            this.suppliersBindingSource.DataSource = this.computerCompanyDBDataSet;
+            // 
+            // computerCompanyDBDataSet
+            // 
+            this.computerCompanyDBDataSet.DataSetName = "ComputerCompanyDBDataSet";
+            this.computerCompanyDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dateTimePickerPurchaseDate
             // 
@@ -140,21 +150,11 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // computerCompanyDBDataSet
-            // 
-            this.computerCompanyDBDataSet.DataSetName = "ComputerCompanyDBDataSet";
-            this.computerCompanyDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // suppliersBindingSource
-            // 
-            this.suppliersBindingSource.DataMember = "Suppliers";
-            this.suppliersBindingSource.DataSource = this.computerCompanyDBDataSet;
-            // 
             // suppliersTableAdapter
             // 
             this.suppliersTableAdapter.ClearBeforeFill = true;
             // 
-            // AddPurchaseForm
+            // AddPurchasesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -170,11 +170,11 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "AddPurchaseForm";
+            this.Name = "AddPurchasesForm";
             this.Text = "Добавление покупки";
             this.Load += new System.EventHandler(this.AddPurchaseForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.suppliersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,8 +191,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonAdd;
-        private ComputerCompanyDBDataSet computerCompanyDBDataSet;
         private System.Windows.Forms.BindingSource suppliersBindingSource;
-        private ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter suppliersTableAdapter;
+        public ComputerCompanyDBDataSet computerCompanyDBDataSet;
+        public ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter suppliersTableAdapter;
     }
 }

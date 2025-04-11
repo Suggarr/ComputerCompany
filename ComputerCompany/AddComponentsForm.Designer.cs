@@ -209,7 +209,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.ComboBox comboBoxCategoryId;
-        private ComputerCompanyDBDataSetTableAdapters.CategoriesTableAdapter categoriesTableAdapter;
         private ComputerCompanyDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonAdd;
@@ -219,5 +218,6 @@
         public System.Windows.Forms.BindingSource componentsBindingSource;
         public ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter componentsTableAdapter;
         public System.Windows.Forms.BindingSource categoriesBindingSource;
+        public ComputerCompanyDBDataSetTableAdapters.CategoriesTableAdapter categoriesTableAdapter;
     }
 }

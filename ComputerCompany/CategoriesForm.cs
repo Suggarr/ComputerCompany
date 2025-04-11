@@ -123,27 +123,27 @@ namespace ComputerCompany
                     // Обновляем привязку в родительской форме
                     if (this.Owner is ComponentsForm mainComponents)
                     {
-                        mainComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
+                        //mainComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
 
-                        mainComponents.comboBoxCategoryId.DataSource = mainComponents.categoriesBindingSource; // Связываем заново
-                        mainComponents.comboBoxCategoryId.DisplayMember = "CategoryName"; // Устанавливаем DisplayMember
-                        mainComponents.comboBoxCategoryId.ValueMember = "CategoryID"; // Устанавливаем ValueMember
+                        //mainComponents.comboBoxCategoryId.DataSource = mainComponents.categoriesBindingSource; // Связываем заново
+                        //mainComponents.comboBoxCategoryId.DisplayMember = "CategoryName"; // Устанавливаем DisplayMember
+                        //mainComponents.comboBoxCategoryId.ValueMember = "CategoryID"; // Устанавливаем ValueMember
 
                         if (mainComponents.comboBoxCategoryId.Items.Count > 0)
                         {
                             int remInd = mainComponents.comboBoxCategoryId.SelectedIndex;
-                            this.categoriesTableAdapter.Fill(this.computerCompanyDBDataSet.Categories);
+                            mainComponents.categoriesTableAdapter.Fill(mainComponents.computerCompanyDBDataSet.Categories);
                             mainComponents.comboBoxCategoryId.SelectedIndex = remInd;
                         }
                     }
                     else if (this.Owner is AddComponentsForm addComponents)
                     {
-                        addComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
+                        //addComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
 
                         if (addComponents.comboBoxCategoryId.Items.Count > 0)
                         {
                             int remInd = addComponents.comboBoxCategoryId.SelectedIndex;
-                            this.categoriesTableAdapter.Fill(this.computerCompanyDBDataSet.Categories);
+                            addComponents.categoriesTableAdapter.Fill(addComponents.computerCompanyDBDataSet.Categories);
                             addComponents.comboBoxCategoryId.SelectedIndex = remInd;
                         }
                     }

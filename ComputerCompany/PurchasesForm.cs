@@ -184,29 +184,29 @@ namespace ComputerCompany
 
                     if (this.Owner is PurchaseDetailsForm main)
                     {
-                        // Обновляем привязку в родительской форме
-                        main.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
+                        //// Обновляем привязку в родительской форме
+                        //main.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
 
-                        main.comboBoxPurchaseId.DataSource = main.purchasesBindingSource; // Связываем заново
-                        main.comboBoxPurchaseId.DisplayMember = "PurchaseID"; // Устанавливаем DisplayMember
-                        main.comboBoxPurchaseId.ValueMember = "PurchaseID"; // Устанавливаем ValueMember
+                        //main.comboBoxPurchaseId.DataSource = main.purchasesBindingSource; // Связываем заново
+                        //main.comboBoxPurchaseId.DisplayMember = "PurchaseID"; // Устанавливаем DisplayMember
+                        //main.comboBoxPurchaseId.ValueMember = "PurchaseID"; // Устанавливаем ValueMember
 
                         if (main.comboBoxPurchaseId.Items.Count > 0)
                         {
                             int remInd = main.comboBoxPurchaseId.SelectedIndex;
-                            this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
+                            main.purchasesTableAdapter.Fill(main.computerCompanyDBDataSet.Purchases);
                             main.comboBoxPurchaseId.SelectedIndex = remInd;
                         }
                     }
                     else if (this.Owner is AddPurchaseDetailsForm addPurchaseDetails)
                     {
                         // Обновляем привязку в родительской форме
-                        addPurchaseDetails.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
+                        //addPurchaseDetails.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
 
                         if (addPurchaseDetails.comboBoxPurchaseId.Items.Count > 0)
                         {
                             int remInd = addPurchaseDetails.comboBoxPurchaseId.SelectedIndex;
-                            this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
+                            addPurchaseDetails.purchasesTableAdapter.Fill(addPurchaseDetails.computerCompanyDBDataSet.Purchases);
                             addPurchaseDetails.comboBoxPurchaseId.SelectedIndex = remInd;
                         }
                     }

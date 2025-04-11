@@ -180,25 +180,25 @@ namespace ComputerCompany
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
                     if (this.Owner is PurchaseDetailsForm main)
                     {
-                        // Обновляем привязку в родительской форме
-                        main.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
+                        //// Обновляем привязку в родительской форме
+                        //main.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
 
                         if (main.comboBoxComponentId.Items.Count > 0)
                         {
                             int remInd = main.comboBoxComponentId.SelectedIndex;
-                            this.componentsTableAdapter.Fill(this.computerCompanyDBDataSet.Components);
+                            main.componentsTableAdapter.Fill(main.computerCompanyDBDataSet.Components);
                             main.comboBoxComponentId.SelectedIndex = remInd;
                         }
                     }
                     else if (this.Owner is AddPurchaseDetailsForm addPurchaseDetails)
                     {
-                        // Обновляем привязку в форме AddPurchaseDetailsForm
-                        addPurchaseDetails.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
+                        //// Обновляем привязку в форме AddPurchaseDetailsForm
+                        //addPurchaseDetails.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
 
                         if (addPurchaseDetails.comboBoxComponentId.Items.Count > 0)
                         {
                             int remInd = addPurchaseDetails.comboBoxComponentId.SelectedIndex;
-                            this.componentsTableAdapter.Fill(this.computerCompanyDBDataSet.Components);
+                            addPurchaseDetails.componentsTableAdapter.Fill(addPurchaseDetails.computerCompanyDBDataSet.Components);
                             addPurchaseDetails.comboBoxComponentId.SelectedIndex = remInd;
                         }
                     }

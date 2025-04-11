@@ -46,6 +46,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.purchasesTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.PurchasesTableAdapter();
             this.componentsTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter();
+            this.tableAdapterManager = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.componentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchasesBindingSource)).BeginInit();
@@ -201,6 +202,16 @@
             // 
             this.componentsTableAdapter.ClearBeforeFill = true;
             // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.CategoriesTableAdapter = null;
+            this.tableAdapterManager.ComponentsTableAdapter = this.componentsTableAdapter;
+            this.tableAdapterManager.PurchaseDetailsTableAdapter = null;
+            this.tableAdapterManager.PurchasesTableAdapter = this.purchasesTableAdapter;
+            this.tableAdapterManager.SuppliersTableAdapter = null;
+            this.tableAdapterManager.UpdateOrder = ComputerCompany.ComputerCompanyDBDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
             // AddPurchaseDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -246,9 +257,10 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.BindingSource componentsBindingSource;
-        private ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter componentsTableAdapter;
         public ComputerCompanyDBDataSet computerCompanyDBDataSet;
         public System.Windows.Forms.BindingSource purchasesBindingSource;
         public ComputerCompanyDBDataSetTableAdapters.PurchasesTableAdapter purchasesTableAdapter;
+        public ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter componentsTableAdapter;
+        private ComputerCompanyDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
     }
 }

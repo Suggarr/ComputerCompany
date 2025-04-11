@@ -129,23 +129,23 @@ namespace ComputerCompany
                     if (this.Owner is PurchasesForm main)
                     {
                         // Обновляем привязку в родительской форме
-                        main.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
+                        //main.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
 
                         if (main.comboBoxSupplierId.Items.Count > 0)
                         {
                             int remInd = main.comboBoxSupplierId.SelectedIndex;
-                            this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
+                            main.suppliersTableAdapter.Fill(main.computerCompanyDBDataSet.Suppliers);
                             main.comboBoxSupplierId.SelectedIndex = remInd;
                         }
                     }
                     else if (this.Owner is AddPurchasesForm addPurchase)
                     {
-                        addPurchase.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
+                        //addPurchase.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
 
                         if (addPurchase.comboBoxSupplierId.Items.Count > 0)
                         {
                             int remInd = addPurchase.comboBoxSupplierId.SelectedIndex;
-                            this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
+                            addPurchase.suppliersTableAdapter.Fill(addPurchase.computerCompanyDBDataSet.Suppliers);
                             addPurchase.comboBoxSupplierId.SelectedIndex = remInd;
                         }
                     }
