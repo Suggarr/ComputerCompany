@@ -182,32 +182,40 @@ namespace ComputerCompany
                     this.purchasesBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
 
-                    if (this.Owner is PurchaseDetailsForm main)
+                    if (this.Owner is PurchaseDetailsForm purchaseDetailsForm)
                     {
-                        //// Обновляем привязку в родительской форме
-                        //main.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
-
-                        //main.comboBoxPurchaseId.DataSource = main.purchasesBindingSource; // Связываем заново
-                        //main.comboBoxPurchaseId.DisplayMember = "PurchaseID"; // Устанавливаем DisplayMember
-                        //main.comboBoxPurchaseId.ValueMember = "PurchaseID"; // Устанавливаем ValueMember
-
-                        if (main.comboBoxPurchaseId.Items.Count > 0)
+                        if (purchaseDetailsForm.comboBoxPurchaseId.Items.Count > 0)
                         {
-                            int remInd = main.comboBoxPurchaseId.SelectedIndex;
-                            main.purchasesTableAdapter.Fill(main.computerCompanyDBDataSet.Purchases);
-                            main.comboBoxPurchaseId.SelectedIndex = remInd;
+                            // Сохраняем текущий PurchaseID
+                            object prevPurchaseId = purchaseDetailsForm.comboBoxPurchaseId.SelectedValue;
+                            purchaseDetailsForm.purchasesTableAdapter.Fill(purchaseDetailsForm.computerCompanyDBDataSet.Purchases);
+
+                            // Пытаемся снова выбрать предыдущий PurchaseID
+                            if (prevPurchaseId != null && purchaseDetailsForm.comboBoxPurchaseId.Items.Contains(prevPurchaseId))
+                            {
+                                purchaseDetailsForm.comboBoxPurchaseId.SelectedValue = prevPurchaseId;
+                            }
+                            else
+                            {
+                                purchaseDetailsForm.comboBoxPurchaseId.SelectedIndex = 0; 
+                            }
                         }
                     }
                     else if (this.Owner is AddPurchaseDetailsForm addPurchaseDetails)
                     {
-                        // Обновляем привязку в родительской форме
-                        //addPurchaseDetails.comboBoxPurchaseId.DataSource = this.computerCompanyDBDataSet.Purchases;
-
                         if (addPurchaseDetails.comboBoxPurchaseId.Items.Count > 0)
                         {
-                            int remInd = addPurchaseDetails.comboBoxPurchaseId.SelectedIndex;
+                            object prevPurchaseId = addPurchaseDetails.comboBoxPurchaseId.SelectedValue;
                             addPurchaseDetails.purchasesTableAdapter.Fill(addPurchaseDetails.computerCompanyDBDataSet.Purchases);
-                            addPurchaseDetails.comboBoxPurchaseId.SelectedIndex = remInd;
+
+                            if (prevPurchaseId != null && addPurchaseDetails.comboBoxPurchaseId.Items.Contains(prevPurchaseId))
+                            {
+                                addPurchaseDetails.comboBoxPurchaseId.SelectedValue = prevPurchaseId;
+                            }
+                            else
+                            {
+                                addPurchaseDetails.comboBoxPurchaseId.SelectedIndex = 0;
+                            }
                         }
                     }
                 }
@@ -221,17 +229,15 @@ namespace ComputerCompany
             suppliersForm.ShowDialog();
         }
 
-        private void dateTimePickerPurchaseDate_ValueChanged(object sender, EventArgs e)
+        private void textBox_Validating(object sender, CancelEventArgs e)
         {
-            // Получаем сегодняшнюю дату
-            DateTime today = DateTime.Today;
+            TextBox textBox = sender as TextBox;
 
-            // Проверяем, если значение DateTimePicker больше сегодняшней даты
-            if (dateTimePickerPurchaseDate.Value > today)
+            if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                MessageBox.Show("Выбранная дата не может быть больше сегодняшнего числа.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                // Устанавливаем значение DateTimePicker на сегодняшнюю дату
-                dateTimePickerPurchaseDate.Value = today;
+                MessageBox.Show($"Поле '{textBox.Tag}' не может быть пустым.", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                purchasesBindingSource.CancelEdit();
+                e.Cancel = true; // Отменяем событие, чтобы фокус остался на поле
             }
         }
     }

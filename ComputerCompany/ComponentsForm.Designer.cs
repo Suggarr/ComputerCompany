@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComponentsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonCategories = new System.Windows.Forms.Button();
@@ -284,14 +284,14 @@
             this.componentsDataGridView.AllowUserToDeleteRows = false;
             this.componentsDataGridView.AutoGenerateColumns = false;
             this.componentsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.componentsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.componentsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.componentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.componentsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.componentIDDataGridViewTextBoxColumn,
@@ -347,6 +347,8 @@
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(256, 28);
             this.textBoxPrice.TabIndex = 113;
+            this.textBoxPrice.Tag = "Цена";
+            this.textBoxPrice.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_Validating);
             // 
             // textBoxComponentName
             // 
@@ -355,6 +357,8 @@
             this.textBoxComponentName.Name = "textBoxComponentName";
             this.textBoxComponentName.Size = new System.Drawing.Size(261, 28);
             this.textBoxComponentName.TabIndex = 112;
+            this.textBoxComponentName.Tag = "Название комплектующего";
+            this.textBoxComponentName.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_Validating);
             // 
             // label3
             // 
@@ -370,11 +374,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(913, 308);
+            this.label1.Location = new System.Drawing.Point(871, 308);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 22);
+            this.label1.Size = new System.Drawing.Size(240, 22);
             this.label1.TabIndex = 110;
-            this.label1.Text = "Название компонента";
+            this.label1.Text = "Название комплектующего";
             // 
             // btCancel
             // 

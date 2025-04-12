@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.comboBoxSupplier = new System.Windows.Forms.ComboBox();
+            this.suppliersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
@@ -47,7 +49,6 @@
             this.dataGridViewFull = new System.Windows.Forms.DataGridView();
             this.checkBoxAllTime = new System.Windows.Forms.CheckBox();
             this.GetPurchaseDetailsForSuppliersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.getPurchaseDetailsForSuppliersTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.GetPurchaseDetailsForSuppliersTableAdapter();
             this.categoriesTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.CategoriesTableAdapter();
             this.componentsTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter();
@@ -63,14 +64,17 @@
             this.toolStripButtonComponents = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonCategories = new System.Windows.Forms.ToolStripButton();
             this.buttonFullReport = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.suppliersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFull)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GetPurchaseDetailsForSuppliersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxSupplier
             // 
+            this.comboBoxSupplier.DataSource = this.suppliersBindingSource;
+            this.comboBoxSupplier.DisplayMember = "SupplierName";
             this.comboBoxSupplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSupplier.Enabled = false;
             this.comboBoxSupplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -79,6 +83,17 @@
             this.comboBoxSupplier.Name = "comboBoxSupplier";
             this.comboBoxSupplier.Size = new System.Drawing.Size(212, 30);
             this.comboBoxSupplier.TabIndex = 1;
+            this.comboBoxSupplier.ValueMember = "SupplierID";
+            // 
+            // suppliersBindingSource
+            // 
+            this.suppliersBindingSource.DataMember = "Suppliers";
+            this.suppliersBindingSource.DataSource = this.computerCompanyDBDataSet;
+            // 
+            // computerCompanyDBDataSet
+            // 
+            this.computerCompanyDBDataSet.DataSetName = "ComputerCompanyDBDataSet";
+            this.computerCompanyDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dateTimePicker1
             // 
@@ -192,34 +207,34 @@
             this.dataGridViewFull.AllowUserToAddRows = false;
             this.dataGridViewFull.AllowUserToDeleteRows = false;
             this.dataGridViewFull.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewFull.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewFull.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewFull.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewFull.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewFull.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewFull.Location = new System.Drawing.Point(25, 236);
             this.dataGridViewFull.Name = "dataGridViewFull";
             this.dataGridViewFull.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewFull.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewFull.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewFull.RowHeadersWidth = 60;
             this.dataGridViewFull.RowTemplate.Height = 24;
             this.dataGridViewFull.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -245,11 +260,6 @@
             // 
             this.GetPurchaseDetailsForSuppliersBindingSource.DataMember = "GetPurchaseDetailsForSuppliers";
             this.GetPurchaseDetailsForSuppliersBindingSource.DataSource = this.computerCompanyDBDataSet;
-            // 
-            // computerCompanyDBDataSet
-            // 
-            this.computerCompanyDBDataSet.DataSetName = "ComputerCompanyDBDataSet";
-            this.computerCompanyDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // getPurchaseDetailsForSuppliersTableAdapter
             // 
@@ -403,9 +413,10 @@
             this.Name = "MainForm";
             this.Text = "Информационная система закупки комплектующих";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.suppliersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFull)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GetPurchaseDetailsForSuppliersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
             this.ResumeLayout(false);
@@ -414,7 +425,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox comboBoxSupplier;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Button button1;
@@ -427,13 +437,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dataGridViewFull;
         private ComputerCompanyDBDataSetTableAdapters.GetPurchaseDetailsForSuppliersTableAdapter getPurchaseDetailsForSuppliersTableAdapter;
-        private ComputerCompanyDBDataSet computerCompanyDBDataSet;
         private System.Windows.Forms.CheckBox checkBoxAllTime;
         private ComputerCompanyDBDataSetTableAdapters.CategoriesTableAdapter categoriesTableAdapter;
         private ComputerCompanyDBDataSetTableAdapters.ComponentsTableAdapter componentsTableAdapter;
-        private ComputerCompanyDBDataSetTableAdapters.PurchasesTableAdapter purchasesTableAdapter;
         private ComputerCompanyDBDataSetTableAdapters.PurchaseDetailsTableAdapter purchaseDetailsTableAdapter;
-        private ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter suppliersTableAdapter;
         private System.Windows.Forms.BindingSource GetPurchaseDetailsForSuppliersBindingSource;
         private System.Windows.Forms.Button buttonReport;
         private System.Windows.Forms.Label labelTotals;
@@ -444,5 +451,10 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonComponents;
         private System.Windows.Forms.ToolStripButton toolStripButtonCategories;
         private System.Windows.Forms.Button buttonFullReport;
+        private System.Windows.Forms.BindingSource suppliersBindingSource;
+        public System.Windows.Forms.ComboBox comboBoxSupplier;
+        public ComputerCompanyDBDataSet computerCompanyDBDataSet;
+        public ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter suppliersTableAdapter;
+        public ComputerCompanyDBDataSetTableAdapters.PurchasesTableAdapter purchasesTableAdapter;
     }
 }

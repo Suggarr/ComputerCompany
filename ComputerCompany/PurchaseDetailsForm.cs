@@ -38,8 +38,7 @@ namespace ComputerCompany
             purchaseDetailsBindingSource.DataSource = computerCompanyDBDataSet.PurchaseDetails;
 
             // Привязка элементов управления к полям данных
-            //textBoxPurchaseDetailId.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "PurchaseDetailID", true, DataSourceUpdateMode.Never);
-            //comboBoxPurchaseId.DataBindings.Add("SelectedValue", purchaseDetailsBindingSource, "PurchaseID", true, DataSourceUpdateMode.OnPropertyChanged);
+            comboBoxPurchaseId.DataBindings.Add("SelectedValue", purchaseDetailsBindingSource, "PurchaseID", true, DataSourceUpdateMode.OnPropertyChanged);
             comboBoxComponentId.DataBindings.Add("SelectedValue", fKPurchaseDPurch76969D2EBindingSource, "ComponentID", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxQuantity.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "Quantity", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxUnitPrice.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "UnitPrice", true, DataSourceUpdateMode.Never);
@@ -190,16 +189,13 @@ namespace ComputerCompany
             {
                 if (comboBoxPurchaseId.SelectedItem != null)
                 {
-                    // Приводим SelectedItem к DataRowView
                     DataRowView selectedRow = comboBoxPurchaseId.SelectedItem as DataRowView;
 
                     if (selectedRow != null)
                     {
-                        // Предположим, что идентификатор находится в первом столбце (индекс 0)
-                        // Или используйте имя столбца, например: selectedRow["ColumnName"]
-                        int purchaseId = Convert.ToInt32(selectedRow[0]); // Замените 0 на индекс нужного столбца
+                        int purchaseId = Convert.ToInt32(selectedRow[0]); 
 
-                        checkForm = new CheckForm(purchaseId); // Передаем purchaseId в конструктор
+                        checkForm = new CheckForm(purchaseId); 
                         checkForm.FormClosed += (s, args) => checkForm = null;
                         checkForm.ShowDialog(this);
                     }
@@ -208,6 +204,18 @@ namespace ComputerCompany
                 {
                     MessageBox.Show("Пожалуйста, выберите идентификатор покупки.");
                 }
+            }
+        }
+
+        private void textBox_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (!int.TryParse(textBox.Text, out int quantity) || quantity < 0)
+            {
+                MessageBox.Show($"Поле '{textBox.Tag}' должно содержать положительное целое число.", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                fKPurchaseDPurch76969D2EBindingSource.CancelEdit();
+                e.Cancel = true; // Отменяем событие, чтобы фокус остался на поле
             }
         }
     }

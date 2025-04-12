@@ -30,24 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.getPurchaseDetailsByPurchaseIDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
             this.getPurchaseDetailsByPurchaseIDTableAdapter = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.GetPurchaseDetailsByPurchaseIDTableAdapter();
             this.tableAdapterManager = new ComputerCompany.ComputerCompanyDBDataSetTableAdapters.TableAdapterManager();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.getPurchaseDetailsByPurchaseIDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // computerCompanyDBDataSet
-            // 
-            this.computerCompanyDBDataSet.DataSetName = "ComputerCompanyDBDataSet";
-            this.computerCompanyDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // getPurchaseDetailsByPurchaseIDBindingSource
             // 
             this.getPurchaseDetailsByPurchaseIDBindingSource.DataMember = "GetPurchaseDetailsByPurchaseID";
             this.getPurchaseDetailsByPurchaseIDBindingSource.DataSource = this.computerCompanyDBDataSet;
+            // 
+            // computerCompanyDBDataSet
+            // 
+            this.computerCompanyDBDataSet.DataSetName = "ComputerCompanyDBDataSet";
+            this.computerCompanyDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // getPurchaseDetailsByPurchaseIDTableAdapter
             // 
@@ -74,20 +74,21 @@
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(800, 450);
+            this.reportViewer1.Size = new System.Drawing.Size(1030, 549);
             this.reportViewer1.TabIndex = 0;
+            this.reportViewer1.ReportExport += new Microsoft.Reporting.WinForms.ExportEventHandler(this.reportViewer_ReportExport);
             // 
             // CheckForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1030, 549);
             this.Controls.Add(this.reportViewer1);
             this.Name = "CheckForm";
             this.Text = "Выдача чека";
             this.Load += new System.EventHandler(this.CheckForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.getPurchaseDetailsByPurchaseIDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }

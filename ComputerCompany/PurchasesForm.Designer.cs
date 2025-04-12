@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchasesForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainLabel = new System.Windows.Forms.Label();
             this.btCancel = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
@@ -188,12 +188,14 @@
             this.textBoxPurchaseReason.Name = "textBoxPurchaseReason";
             this.textBoxPurchaseReason.Size = new System.Drawing.Size(331, 63);
             this.textBoxPurchaseReason.TabIndex = 136;
+            this.textBoxPurchaseReason.Tag = "Причина оформления закупок";
+            this.textBoxPurchaseReason.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_Validating);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(872, 403);
+            this.label4.Location = new System.Drawing.Point(872, 391);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(266, 22);
             this.label4.TabIndex = 135;
@@ -240,7 +242,6 @@
             this.dateTimePickerPurchaseDate.Name = "dateTimePickerPurchaseDate";
             this.dateTimePickerPurchaseDate.Size = new System.Drawing.Size(331, 28);
             this.dateTimePickerPurchaseDate.TabIndex = 132;
-            this.dateTimePickerPurchaseDate.ValueChanged += new System.EventHandler(this.dateTimePickerPurchaseDate_ValueChanged);
             // 
             // label2
             // 
@@ -419,14 +420,14 @@
             this.purchasesDataGridView.AllowUserToDeleteRows = false;
             this.purchasesDataGridView.AutoGenerateColumns = false;
             this.purchasesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.purchasesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.purchasesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.purchasesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.purchasesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,

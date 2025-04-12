@@ -28,20 +28,6 @@ namespace ComputerCompany
             suppliersForm.ShowDialog();
         }
 
-        private void dateTimePickerPurchaseDate_ValueChanged(object sender, EventArgs e)
-        {
-            // Получаем сегодняшнюю дату
-            DateTime today = DateTime.Today;
-
-            // Проверяем, если значение DateTimePicker больше сегодняшней даты
-            if (dateTimePickerPurchaseDate.Value > today)
-            {
-                MessageBox.Show("Выбранная дата не может быть больше сегодняшнего числа.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                // Устанавливаем значение DateTimePicker на сегодняшнюю дату
-                dateTimePickerPurchaseDate.Value = today;
-            }
-        }
-
         private void AddPurchaseForm_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Suppliers". При необходимости она может быть перемещена или удалена.

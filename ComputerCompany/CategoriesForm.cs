@@ -108,7 +108,7 @@ namespace ComputerCompany
             if (promptOnClose)
             {
                 DialogResult result = MessageBox.Show(
-                    "Вы хотите обновить список поставщиков?",
+                    "Вы хотите обновить список категорий?",
                     "Обновление данных",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
@@ -120,34 +120,54 @@ namespace ComputerCompany
                     this.categoriesBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
 
-                    // Обновляем привязку в родительской форме
                     if (this.Owner is ComponentsForm mainComponents)
                     {
-                        //mainComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
-
-                        //mainComponents.comboBoxCategoryId.DataSource = mainComponents.categoriesBindingSource; // Связываем заново
-                        //mainComponents.comboBoxCategoryId.DisplayMember = "CategoryName"; // Устанавливаем DisplayMember
-                        //mainComponents.comboBoxCategoryId.ValueMember = "CategoryID"; // Устанавливаем ValueMember
-
                         if (mainComponents.comboBoxCategoryId.Items.Count > 0)
                         {
-                            int remInd = mainComponents.comboBoxCategoryId.SelectedIndex;
+                            object prevCategoryId = mainComponents.comboBoxCategoryId.SelectedValue;
                             mainComponents.categoriesTableAdapter.Fill(mainComponents.computerCompanyDBDataSet.Categories);
-                            mainComponents.comboBoxCategoryId.SelectedIndex = remInd;
+
+                            if (prevCategoryId != null && mainComponents.comboBoxCategoryId.Items.Contains(prevCategoryId))
+                            {
+                                mainComponents.comboBoxCategoryId.SelectedValue = prevCategoryId;
+                            }
+                            else
+                            {
+                                mainComponents.comboBoxCategoryId.SelectedIndex = 0;
+                            }
                         }
                     }
                     else if (this.Owner is AddComponentsForm addComponents)
                     {
-                        //addComponents.comboBoxCategoryId.DataSource = this.computerCompanyDBDataSet.Categories;
-
                         if (addComponents.comboBoxCategoryId.Items.Count > 0)
                         {
-                            int remInd = addComponents.comboBoxCategoryId.SelectedIndex;
+                            object prevCategoryId = addComponents.comboBoxCategoryId.SelectedValue;
                             addComponents.categoriesTableAdapter.Fill(addComponents.computerCompanyDBDataSet.Categories);
-                            addComponents.comboBoxCategoryId.SelectedIndex = remInd;
+
+                            if (prevCategoryId != null && addComponents.comboBoxCategoryId.Items.Contains(prevCategoryId))
+                            {
+                                addComponents.comboBoxCategoryId.SelectedValue = prevCategoryId;
+                            }
+                            else
+                            {
+                                addComponents.comboBoxCategoryId.SelectedIndex = 0;
+                            }
                         }
                     }
                 }
+            }
+        }
+
+
+        private void textBox_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                MessageBox.Show($"Поле '{textBox.Tag}' не может быть пустым.", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                categoriesBindingSource.CancelEdit();
+                e.Cancel = true; // Отменяем событие, чтобы фокус остался на поле
             }
         }
     }

@@ -306,6 +306,8 @@
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(256, 28);
             this.textBoxAddress.TabIndex = 69;
+            this.textBoxAddress.Tag = "Адрес";
+            this.textBoxAddress.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_Validating);
             // 
             // textBoxContactInfo
             // 
@@ -314,6 +316,8 @@
             this.textBoxContactInfo.Name = "textBoxContactInfo";
             this.textBoxContactInfo.Size = new System.Drawing.Size(256, 28);
             this.textBoxContactInfo.TabIndex = 68;
+            this.textBoxContactInfo.Tag = "Контакты";
+            this.textBoxContactInfo.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_Validating);
             // 
             // textBoxSupplierName
             // 
@@ -322,6 +326,8 @@
             this.textBoxSupplierName.Name = "textBoxSupplierName";
             this.textBoxSupplierName.Size = new System.Drawing.Size(261, 28);
             this.textBoxSupplierName.TabIndex = 67;
+            this.textBoxSupplierName.Tag = "Имя поставщика";
+            this.textBoxSupplierName.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_Validating);
             // 
             // label4
             // 
@@ -483,9 +489,7 @@
         #endregion
 
         private System.Windows.Forms.Label MainLabel;
-        private ComputerCompanyDBDataSet computerCompanyDBDataSet;
         private System.Windows.Forms.BindingSource suppliersBindingSource;
-        private ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter suppliersTableAdapter;
         private ComputerCompanyDBDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingNavigator suppliersBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
@@ -519,5 +523,7 @@
         private System.Windows.Forms.Button btPrevious;
         private System.Windows.Forms.Button btLast;
         private System.Windows.Forms.Button btFirst;
+        private ComputerCompanyDBDataSet computerCompanyDBDataSet;
+        private ComputerCompanyDBDataSetTableAdapters.SuppliersTableAdapter suppliersTableAdapter;
     }
 }

@@ -33,9 +33,7 @@
             this.comboBoxComponentId = new System.Windows.Forms.ComboBox();
             this.componentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.computerCompanyDBDataSet = new ComputerCompany.ComputerCompanyDBDataSet();
-            this.textBoxUnitPrice = new System.Windows.Forms.TextBox();
             this.textBoxQuantity = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxPurchaseId = new System.Windows.Forms.ComboBox();
@@ -86,14 +84,6 @@
             this.computerCompanyDBDataSet.DataSetName = "ComputerCompanyDBDataSet";
             this.computerCompanyDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // textBoxUnitPrice
-            // 
-            this.textBoxUnitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxUnitPrice.Location = new System.Drawing.Point(371, 309);
-            this.textBoxUnitPrice.Name = "textBoxUnitPrice";
-            this.textBoxUnitPrice.Size = new System.Drawing.Size(275, 28);
-            this.textBoxUnitPrice.TabIndex = 112;
-            // 
             // textBoxQuantity
             // 
             this.textBoxQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -101,16 +91,6 @@
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(275, 28);
             this.textBoxQuantity.TabIndex = 111;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(101, 315);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(218, 22);
-            this.label4.TabIndex = 110;
-            this.label4.Text = "Стоимость за эту деталь";
             // 
             // label2
             // 
@@ -174,7 +154,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCancel.Location = new System.Drawing.Point(454, 364);
+            this.buttonCancel.Location = new System.Drawing.Point(457, 335);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(198, 51);
             this.buttonCancel.TabIndex = 147;
@@ -186,7 +166,7 @@
             // 
             this.buttonAdd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAdd.Location = new System.Drawing.Point(105, 364);
+            this.buttonAdd.Location = new System.Drawing.Point(108, 335);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(198, 51);
             this.buttonAdd.TabIndex = 146;
@@ -216,7 +196,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 422);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.comboBoxPurchaseId);
@@ -224,9 +204,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonComponents);
             this.Controls.Add(this.comboBoxComponentId);
-            this.Controls.Add(this.textBoxUnitPrice);
             this.Controls.Add(this.textBoxQuantity);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -246,9 +224,7 @@
 
         private System.Windows.Forms.Button buttonComponents;
         public System.Windows.Forms.ComboBox comboBoxComponentId;
-        private System.Windows.Forms.TextBox textBoxUnitPrice;
         private System.Windows.Forms.TextBox textBoxQuantity;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.ComboBox comboBoxPurchaseId;

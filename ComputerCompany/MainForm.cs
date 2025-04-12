@@ -11,11 +11,11 @@ namespace ComputerCompany
 {
     public partial class MainForm : Form
     {
-        PurchasesForm purchasesForm;
-        PurchaseDetailsForm purhaseDetailsForm;
-        ComponentsForm componentsForm;
-        SuppliersForm suppliersForm;
-        CategoriesForm categoriesForm;
+        private PurchasesForm purchasesForm;
+        private PurchaseDetailsForm purhaseDetailsForm;
+        private ComponentsForm componentsForm;
+        private SuppliersForm suppliersForm;
+        private CategoriesForm categoriesForm;
         private ReportForm reportForm;
         public MainForm()
         {
@@ -23,19 +23,20 @@ namespace ComputerCompany
            
         }
 
+        private void RefreshData()
+        {
+            this.purchasesTableAdapter.Fill(computerCompanyDBDataSet.Purchases);
+            this.purchaseDetailsTableAdapter.Fill(computerCompanyDBDataSet.PurchaseDetails);
+            this.componentsTableAdapter.Fill(computerCompanyDBDataSet.Components);
+            this.categoriesTableAdapter.Fill(computerCompanyDBDataSet.Categories);
+            this.suppliersTableAdapter.Fill(computerCompanyDBDataSet.Suppliers);
+        }
+
         private void LoadData()
         {
             try
             {
-                // Заполнение данных с использованием TableAdapter
-                this.suppliersTableAdapter.Fill(computerCompanyDBDataSet.Suppliers);
-                this.purchasesTableAdapter.Fill(computerCompanyDBDataSet.Purchases);
-                this.purchaseDetailsTableAdapter.Fill(computerCompanyDBDataSet.PurchaseDetails);
-                this.componentsTableAdapter.Fill(computerCompanyDBDataSet.Components);
-                this.categoriesTableAdapter.Fill(computerCompanyDBDataSet.Categories);
-
-                // Добавление вычисляемых столбцов
-                // Проверка существования столбцов и добавление их, если необходимо
+                RefreshData();
                 if (!computerCompanyDBDataSet.Purchases.Columns.Contains("TotalQuantity"))
                 {
                     computerCompanyDBDataSet.Purchases.Columns.Add("TotalQuantity", typeof(int));
@@ -44,10 +45,6 @@ namespace ComputerCompany
                 {
                     computerCompanyDBDataSet.Purchases.Columns.Add("TotalPrice", typeof(decimal));
                 }
-                // Заполнение комбобокса с поставщиками
-                comboBoxSupplier.DataSource = computerCompanyDBDataSet.Suppliers;
-                comboBoxSupplier.DisplayMember = "SupplierName";
-                comboBoxSupplier.ValueMember = "SupplierID";
 
                 // Установка источника данных для DataGridView
                 dataGridViewFull.DataSource = computerCompanyDBDataSet.Purchases;
@@ -89,10 +86,8 @@ namespace ComputerCompany
                 dataGridViewFull.Columns.Add(supplierNameColumn);
             }
 
-            // Перемещение столбца SupplierName на вторую позицию (индекс 1)
             dataGridViewFull.Columns["SupplierName"].DisplayIndex = 1;
 
-            // Настройка AutoSizeMode для столбцов
             dataGridViewFull.Columns["PurchaseDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewFull.Columns["PurchaseReason"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewFull.Columns["TotalQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -141,7 +136,6 @@ namespace ComputerCompany
             }
             labelTotals.Text = $"Итого: Количество = {grandTotalQuantity}, Сумма = {grandTotalPrice}";
 
-            // Добавление итоговой строки
             DataRowView totalRow = (DataRowView)computerCompanyDBDataSet.Purchases.DefaultView.AddNew();
             totalRow["PurchaseReason"] = "Итого";
             totalRow["TotalQuantity"] = grandTotalQuantity;
@@ -208,8 +202,15 @@ namespace ComputerCompany
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
+            // Сохраняем выбранного поставщика перед фильтрацией
+            int selectedSupplier = comboBoxSupplier.SelectedIndex;
+
             computerCompanyDBDataSet.Purchases.RejectChanges();
+            RefreshData();
+
+            comboBoxSupplier.SelectedIndex = selectedSupplier; // Восстанавливаем выбранного поставщика
             string filter = "";
+
 
             // Проверяем состояние CheckBox
             if (!checkBoxAllSuppliers.Checked)
@@ -385,8 +386,8 @@ namespace ComputerCompany
 
         private void toolStripButtonSuppliers_Click(object sender, EventArgs e)
         {
-            suppliersForm = new SuppliersForm();
-            suppliersForm.ShowDialog();
+            suppliersForm = new SuppliersForm(true);
+            suppliersForm.ShowDialog(this);
         }
 
         private void toolStripButtonComponents_Click(object sender, EventArgs e)

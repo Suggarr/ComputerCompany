@@ -105,7 +105,6 @@
             this.dateTimePickerPurchaseDate.Name = "dateTimePickerPurchaseDate";
             this.dateTimePickerPurchaseDate.Size = new System.Drawing.Size(331, 28);
             this.dateTimePickerPurchaseDate.TabIndex = 139;
-            this.dateTimePickerPurchaseDate.ValueChanged += new System.EventHandler(this.dateTimePickerPurchaseDate_ValueChanged);
             // 
             // label2
             // 

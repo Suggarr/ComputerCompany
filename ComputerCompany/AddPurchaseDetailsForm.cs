@@ -50,8 +50,7 @@ namespace ComputerCompany
             // Валидация ввода
             if (comboBoxPurchaseId.SelectedValue == null ||
                 comboBoxComponentId.SelectedValue == null ||
-                !int.TryParse(textBoxQuantity.Text, out int quantity) ||
-                !decimal.TryParse(textBoxUnitPrice.Text, out decimal unitPrice))
+                !int.TryParse(textBoxQuantity.Text, out int quantity))
             {
                 MessageBox.Show("Пожалуйста, заполните все поля корректно.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -61,7 +60,6 @@ namespace ComputerCompany
             SelectedPurchaseId = (int)comboBoxPurchaseId.SelectedValue;
             SelectedComponentId = (int)comboBoxComponentId.SelectedValue;
             Quantity = quantity;
-            UnitPrice = unitPrice;
 
             // Закрытие формы
             this.DialogResult = DialogResult.OK;

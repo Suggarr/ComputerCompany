@@ -34,11 +34,8 @@ namespace ComputerCompany
             this.categoriesTableAdapter.Fill(this.computerCompanyDBDataSet.Categories);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Components". При необходимости она может быть перемещена или удалена.
             this.componentsTableAdapter.Fill(this.computerCompanyDBDataSet.Components);
-            componentsBindingSource.DataSource = computerCompanyDBDataSet.Components;
-            categoriesBindingSource.DataSource = computerCompanyDBDataSet.Categories;
 
             // Привязка элементов управления к полям данных
-            //textBoxComponentId.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "ComponentID", true, DataSourceUpdateMode.Never);
             textBoxComponentName.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "ComponentName", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxPrice.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "Price", true, DataSourceUpdateMode.OnPropertyChanged);
             //comboBoxCategoryName.DataBindings.Add("SelectedValue", componentsBindingSource, "CategoryID", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -78,7 +75,6 @@ namespace ComputerCompany
             categoryNameColumn.Visible = false;
 
             componentsDataGridView.CellFormatting += ComponentsDataGridView_CellFormatting;
-            // Автоматическая подгонка ширины столбцов
         }
 
         private void btFirst_Click(object sender, EventArgs e)
@@ -106,22 +102,18 @@ namespace ComputerCompany
             addComponentsForm = new AddComponentsForm();
             if (addComponentsForm.ShowDialog() == DialogResult.OK)
             {
-                // Получаем данные из формы
                 string componentName = addComponentsForm.ComponentName;
                 decimal price = addComponentsForm.Price;
                 int categoryId = addComponentsForm.SelectedCategoryId;
 
-                // Добавление новой строки в DataTable
                 DataRow newRow = computerCompanyDBDataSet.Components.NewRow();
                 newRow["ComponentName"] = componentName;
                 newRow["Price"] = price;
                 newRow["CategoryID"] = categoryId;
                 computerCompanyDBDataSet.Components.Rows.Add(newRow);
 
-                // Обновление привязки данных
                 componentsBindingSource.ResetBindings(false);
 
-                // Установка выбранного значения в комбобоксе
                 comboBoxCategoryId.SelectedValue = categoryId;
             }
         }
@@ -141,7 +133,6 @@ namespace ComputerCompany
         private void btCancel_Click(object sender, EventArgs e)
         {
             computerCompanyDBDataSet.Components.RejectChanges();
-            componentsDataGridView.Refresh();
         }
 
         private void ComponentsDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -178,39 +169,77 @@ namespace ComputerCompany
                     this.Validate();
                     this.componentsBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+
                     if (this.Owner is PurchaseDetailsForm main)
                     {
-                        //// Обновляем привязку в родительской форме
-                        //main.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
-
                         if (main.comboBoxComponentId.Items.Count > 0)
                         {
-                            int remInd = main.comboBoxComponentId.SelectedIndex;
+                            object prevComponentId = main.comboBoxComponentId.SelectedValue;
                             main.componentsTableAdapter.Fill(main.computerCompanyDBDataSet.Components);
-                            main.comboBoxComponentId.SelectedIndex = remInd;
+
+                            if (prevComponentId != null && main.comboBoxComponentId.Items.Contains(prevComponentId))
+                            {
+                                main.comboBoxComponentId.SelectedValue = prevComponentId;
+                            }
+                            else
+                            {
+                                main.comboBoxComponentId.SelectedIndex = 0;
+                            }
                         }
                     }
                     else if (this.Owner is AddPurchaseDetailsForm addPurchaseDetails)
                     {
-                        //// Обновляем привязку в форме AddPurchaseDetailsForm
-                        //addPurchaseDetails.comboBoxComponentId.DataSource = this.computerCompanyDBDataSet.Components;
-
                         if (addPurchaseDetails.comboBoxComponentId.Items.Count > 0)
                         {
-                            int remInd = addPurchaseDetails.comboBoxComponentId.SelectedIndex;
+                            object prevComponentId = addPurchaseDetails.comboBoxComponentId.SelectedValue;
                             addPurchaseDetails.componentsTableAdapter.Fill(addPurchaseDetails.computerCompanyDBDataSet.Components);
-                            addPurchaseDetails.comboBoxComponentId.SelectedIndex = remInd;
+
+                            if (prevComponentId != null && addPurchaseDetails.comboBoxComponentId.Items.Contains(prevComponentId))
+                            {
+                                addPurchaseDetails.comboBoxComponentId.SelectedValue = prevComponentId;
+                            }
+                            else
+                            {
+                                addPurchaseDetails.comboBoxComponentId.SelectedIndex = 0;
+                            }
                         }
                     }
                 }
             }
         }
 
+
         private void buttonCategories_Click(object sender, EventArgs e)
         {
             CategoriesForm categoriesForm = new CategoriesForm(true); // Включаем MessageBox
             categoriesForm.Owner = this;
             categoriesForm.ShowDialog();
+        }
+
+        private void textBox_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Tag.ToString() == "Название комплектующего")
+            {
+                // Валидация для названия
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    MessageBox.Show($"Поле '{textBox.Tag}' не может быть пустым.", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    fKComponentCateg6EF57B66BindingSource.CancelEdit();
+                    e.Cancel = true;
+                }
+            }
+            else if (textBox.Tag.ToString() == "Цена")
+            {
+                // Валидация для цены
+                if (!decimal.TryParse(textBox.Text, out decimal price) || price <= 0)
+                {
+                    MessageBox.Show($"Поле '{textBox.Tag}' должно содержать положительное число.", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    fKComponentCateg6EF57B66BindingSource.CancelEdit();
+                    e.Cancel = true; 
+                }
+            }
         }
     }
 }

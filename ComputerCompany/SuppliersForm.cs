@@ -126,29 +126,76 @@ namespace ComputerCompany
                     this.suppliersBindingSource.EndEdit();
                     this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
 
-                    if (this.Owner is PurchasesForm main)
+                    if (this.Owner is PurchasesForm purchaseForm)
                     {
-                        // Обновляем привязку в родительской форме
-                        //main.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
-
-                        if (main.comboBoxSupplierId.Items.Count > 0)
+                        if (purchaseForm.comboBoxSupplierId.Items.Count > 0)
                         {
-                            int remInd = main.comboBoxSupplierId.SelectedIndex;
-                            main.suppliersTableAdapter.Fill(main.computerCompanyDBDataSet.Suppliers);
-                            main.comboBoxSupplierId.SelectedIndex = remInd;
+                            object prevSupplierId = purchaseForm.comboBoxSupplierId.SelectedValue;
+                            purchaseForm.suppliersTableAdapter.Fill(purchaseForm.computerCompanyDBDataSet.Suppliers);
+
+                            if (prevSupplierId != null && purchaseForm.comboBoxSupplierId.Items.Contains(prevSupplierId))
+                            {
+                                purchaseForm.comboBoxSupplierId.SelectedValue = prevSupplierId;
+                            }
+                            else
+                            {
+                                purchaseForm.comboBoxSupplierId.SelectedIndex = 0;
+                            }
                         }
                     }
                     else if (this.Owner is AddPurchasesForm addPurchase)
                     {
-                        //addPurchase.comboBoxSupplierId.DataSource = this.computerCompanyDBDataSet.Suppliers;
-
                         if (addPurchase.comboBoxSupplierId.Items.Count > 0)
                         {
-                            int remInd = addPurchase.comboBoxSupplierId.SelectedIndex;
+                            object prevSupplierId = addPurchase.comboBoxSupplierId.SelectedValue;
                             addPurchase.suppliersTableAdapter.Fill(addPurchase.computerCompanyDBDataSet.Suppliers);
-                            addPurchase.comboBoxSupplierId.SelectedIndex = remInd;
+
+                            if (prevSupplierId != null && addPurchase.comboBoxSupplierId.Items.Contains(prevSupplierId))
+                            {
+                                addPurchase.comboBoxSupplierId.SelectedValue = prevSupplierId;
+                            }
+                            else
+                            {
+                                addPurchase.comboBoxSupplierId.SelectedIndex = 0;
+                            }
                         }
                     }
+                    else if (this.Owner is MainForm mainForm)
+                    {
+                        if (mainForm.comboBoxSupplier.Items.Count > 0)
+                        {
+                            object prevSupplierId = mainForm.comboBoxSupplier.SelectedValue;
+                            mainForm.suppliersTableAdapter.Fill(mainForm.computerCompanyDBDataSet.Suppliers);
+
+                            if (prevSupplierId != null && mainForm.comboBoxSupplier.Items.Contains(prevSupplierId))
+                            {
+                                mainForm.comboBoxSupplier.SelectedValue = prevSupplierId;
+                            }
+                            else
+                            {
+                                mainForm.comboBoxSupplier.SelectedIndex = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void textBox_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Tag.ToString() == "Имя поставщика" ||
+                textBox.Tag.ToString() == "Контакты" ||
+                textBox.Tag.ToString() == "Адрес")
+            {
+                // Проверка на пустое значение
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    MessageBox.Show($"Поле '{textBox.Tag}' не может быть пустым.", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    suppliersBindingSource.CancelEdit();
+                    e.Cancel = true; // Отменяем событие, чтобы фокус остался на поле
                 }
             }
         }
