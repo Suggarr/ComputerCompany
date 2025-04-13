@@ -172,11 +172,11 @@ namespace ComputerCompany
                     decimal unitPrice = item.Field<decimal>("UnitPrice");
                     decimal itemTotal = quantity * unitPrice;
 
-                    // Получение имени компонента
+                    // Получение имени комплектующего
                     var componentRow = computerCompanyDBDataSet.Components.AsEnumerable()
                         .FirstOrDefault(c => c.Field<int>("ComponentID") == componentId);
 
-                    string componentName = componentRow?.Field<string>("ComponentName") ?? "Неизвестный компонент";
+                    string componentName = componentRow?.Field<string>("ComponentName") ?? "Неизвестное комплектующее";
 
                     // Получение CategoryID
                     int categoryId = componentRow?.Field<int>("CategoryID") ?? 0;
@@ -186,7 +186,7 @@ namespace ComputerCompany
                         .FirstOrDefault(c => c.Field<int>("CategoryID") == categoryId)?.Field<string>("CategoryName") ?? "Неизвестная категория";
 
                     // Добавление информации в ListBox
-                    listBoxItems.Items.Add($"Компонент: {componentName}, Категория: {categoryName}, Количество: {quantity}, Цена: {unitPrice:C}, Общая стоимость: {itemTotal:C}");
+                    listBoxItems.Items.Add($"Комплектующее: {componentName}, Категория: {categoryName}, Количество: {quantity}, Цена: {unitPrice:C}, Общая стоимость: {itemTotal:C}");
                     totalCost += itemTotal;
                 }
 

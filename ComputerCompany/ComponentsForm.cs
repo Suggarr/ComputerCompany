@@ -170,7 +170,7 @@ namespace ComputerCompany
             if (promptOnClose)
             {
                 DialogResult result = MessageBox.Show(
-                    "Вы хотите обновить список компонентов?",
+                    "Вы хотите обновить список комплектующих?",
                     "Обновление данных",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
