@@ -20,12 +20,26 @@ namespace ComputerCompany
             this.promptOnClose = promptOnClose;
         }
 
+        private void SaveComponentsData()
+        {
+            try
+            {
+                this.Validate();
+                this.componentsBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+
+                MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void componentsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.componentsBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
-
+            SaveComponentsData();
         }
 
         private void ComponentsForm_Load(object sender, EventArgs e)
@@ -38,7 +52,6 @@ namespace ComputerCompany
             // Привязка элементов управления к полям данных
             textBoxComponentName.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "ComponentName", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxPrice.DataBindings.Add("Text", fKComponentCateg6EF57B66BindingSource, "Price", true, DataSourceUpdateMode.OnPropertyChanged);
-            //comboBoxCategoryName.DataBindings.Add("SelectedValue", componentsBindingSource, "CategoryID", true, DataSourceUpdateMode.OnPropertyChanged);
 
             // Удаляем все колонки перед добавлением новых
             componentsDataGridView.Columns.Clear();
@@ -125,14 +138,13 @@ namespace ComputerCompany
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.componentsBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+            SaveComponentsData();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             computerCompanyDBDataSet.Components.RejectChanges();
+            componentsDataGridView.Refresh();
         }
 
         private void ComponentsDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -166,9 +178,7 @@ namespace ComputerCompany
 
                 if (result == DialogResult.Yes)
                 {
-                    this.Validate();
-                    this.componentsBindingSource.EndEdit();
-                    this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+                    SaveComponentsData();
 
                     if (this.Owner is PurchaseDetailsForm main)
                     {
@@ -177,7 +187,7 @@ namespace ComputerCompany
                             object prevComponentId = main.comboBoxComponentId.SelectedValue;
                             main.componentsTableAdapter.Fill(main.computerCompanyDBDataSet.Components);
 
-                            if (prevComponentId != null && main.comboBoxComponentId.Items.Contains(prevComponentId))
+                            if (prevComponentId != null && main.comboBoxComponentId.Items.Cast<DataRowView>().Any(item => item.Row["ComponentID"].Equals(prevComponentId)))
                             {
                                 main.comboBoxComponentId.SelectedValue = prevComponentId;
                             }
@@ -194,7 +204,7 @@ namespace ComputerCompany
                             object prevComponentId = addPurchaseDetails.comboBoxComponentId.SelectedValue;
                             addPurchaseDetails.componentsTableAdapter.Fill(addPurchaseDetails.computerCompanyDBDataSet.Components);
 
-                            if (prevComponentId != null && addPurchaseDetails.comboBoxComponentId.Items.Contains(prevComponentId))
+                            if (prevComponentId != null && addPurchaseDetails.comboBoxComponentId.Items.Cast<DataRowView>().Any(item => item.Row["ComponentID"].Equals(prevComponentId)))
                             {
                                 addPurchaseDetails.comboBoxComponentId.SelectedValue = prevComponentId;
                             }
@@ -207,6 +217,7 @@ namespace ComputerCompany
                 }
             }
         }
+
 
 
         private void buttonCategories_Click(object sender, EventArgs e)

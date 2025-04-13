@@ -20,25 +20,34 @@ namespace ComputerCompany
             this.promptOnClose = promptOnClose;
         }
 
+        private void SavePurchases()
+        {
+            try
+            {
+                this.Validate();
+                this.purchasesBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+
+                MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void purchasesBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.purchasesBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
-
+            SavePurchases();
         }
 
         private void PurchasesForm_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Suppliers". При необходимости она может быть перемещена или удалена.
             this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Suppliers". При необходимости она может быть перемещена или удалена.
-            this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Purchases". При необходимости она может быть перемещена или удалена.
             this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
-
-            purchasesBindingSource.DataSource = computerCompanyDBDataSet.Purchases;
-            suppliersBindingSource.DataSource = computerCompanyDBDataSet.Suppliers;
 
             // Привязка элементов управления к полям данных
             textBoxPurchaseId.DataBindings.Add("Text", purchasesBindingSource, "PurchaseID", true, DataSourceUpdateMode.Never);
@@ -156,14 +165,13 @@ namespace ComputerCompany
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.purchasesBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+            SavePurchases();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             computerCompanyDBDataSet.Purchases.RejectChanges();
+            purchasesDataGridView.Refresh();
         }
         private void PurchasesForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -178,26 +186,22 @@ namespace ComputerCompany
 
                 if (result == DialogResult.Yes)
                 {
-                    this.Validate();
-                    this.purchasesBindingSource.EndEdit();
-                    this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+                    SavePurchases();
 
                     if (this.Owner is PurchaseDetailsForm purchaseDetailsForm)
                     {
                         if (purchaseDetailsForm.comboBoxPurchaseId.Items.Count > 0)
                         {
-                            // Сохраняем текущий PurchaseID
                             object prevPurchaseId = purchaseDetailsForm.comboBoxPurchaseId.SelectedValue;
                             purchaseDetailsForm.purchasesTableAdapter.Fill(purchaseDetailsForm.computerCompanyDBDataSet.Purchases);
 
-                            // Пытаемся снова выбрать предыдущий PurchaseID
-                            if (prevPurchaseId != null && purchaseDetailsForm.comboBoxPurchaseId.Items.Contains(prevPurchaseId))
+                            if (prevPurchaseId != null && purchaseDetailsForm.comboBoxPurchaseId.Items.Cast<DataRowView>().Any(item => item.Row["PurchaseID"].Equals(prevPurchaseId)))
                             {
                                 purchaseDetailsForm.comboBoxPurchaseId.SelectedValue = prevPurchaseId;
                             }
                             else
                             {
-                                purchaseDetailsForm.comboBoxPurchaseId.SelectedIndex = 0; 
+                                purchaseDetailsForm.comboBoxPurchaseId.SelectedIndex = 0;
                             }
                         }
                     }
@@ -208,7 +212,7 @@ namespace ComputerCompany
                             object prevPurchaseId = addPurchaseDetails.comboBoxPurchaseId.SelectedValue;
                             addPurchaseDetails.purchasesTableAdapter.Fill(addPurchaseDetails.computerCompanyDBDataSet.Purchases);
 
-                            if (prevPurchaseId != null && addPurchaseDetails.comboBoxPurchaseId.Items.Contains(prevPurchaseId))
+                            if (prevPurchaseId != null && addPurchaseDetails.comboBoxPurchaseId.Items.Cast<DataRowView>().Any(item => item.Row["PurchaseID"].Equals(prevPurchaseId)))    
                             {
                                 addPurchaseDetails.comboBoxPurchaseId.SelectedValue = prevPurchaseId;
                             }

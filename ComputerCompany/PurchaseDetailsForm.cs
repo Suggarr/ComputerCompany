@@ -19,12 +19,26 @@ namespace ComputerCompany
             InitializeComponent();
         }
 
+        private void SavePurchaseDetails()
+        {
+            try
+            {
+                this.Validate();
+                this.purchaseDetailsBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+
+                MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void purchaseDetailsBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.purchaseDetailsBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
-
+            SavePurchaseDetails();
         }
 
         private void PurchaseDetailsForm_Load(object sender, EventArgs e)
@@ -35,14 +49,13 @@ namespace ComputerCompany
             this.purchasesTableAdapter.Fill(this.computerCompanyDBDataSet.Purchases);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.PurchaseDetails". При необходимости она может быть перемещена или удалена.
             this.purchaseDetailsTableAdapter.Fill(this.computerCompanyDBDataSet.PurchaseDetails);
-            purchaseDetailsBindingSource.DataSource = computerCompanyDBDataSet.PurchaseDetails;
 
             // Привязка элементов управления к полям данных
             comboBoxPurchaseId.DataBindings.Add("SelectedValue", purchaseDetailsBindingSource, "PurchaseID", true, DataSourceUpdateMode.OnPropertyChanged);
             comboBoxComponentId.DataBindings.Add("SelectedValue", fKPurchaseDPurch76969D2EBindingSource, "ComponentID", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxQuantity.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "Quantity", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxUnitPrice.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "UnitPrice", true, DataSourceUpdateMode.Never);
-            // Удаляем все колонки перед добавлением новых
+
             purchaseDetailsDataGridView.Columns.Clear();
             purchaseDetailsDataGridView.AutoGenerateColumns = false;
 
@@ -159,14 +172,13 @@ namespace ComputerCompany
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.purchaseDetailsBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+            SavePurchaseDetails();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             computerCompanyDBDataSet.PurchaseDetails.RejectChanges();
+            purchaseDetailsDataGridView.Refresh();
         }
 
         private void buttonComponents_Click(object sender, EventArgs e)

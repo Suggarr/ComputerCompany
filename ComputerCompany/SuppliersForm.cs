@@ -20,22 +20,33 @@ namespace ComputerCompany
             this.promptOnClose = promptOnClose;
         }
 
+        private void SaveSuppliersData()
+        {
+            try
+            {
+                this.Validate();
+                this.suppliersBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+
+                MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void suppliersBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.suppliersBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
-
+            SaveSuppliersData();
         }
 
         private void SuppliersForm_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Suppliers". При необходимости она может быть перемещена или удалена.
             this.suppliersTableAdapter.Fill(this.computerCompanyDBDataSet.Suppliers);
-            suppliersBindingSource.DataSource = computerCompanyDBDataSet.Suppliers;
 
-            // Привязка элементов управления к полям данных
-            //textBoxSupplierId.DataBindings.Add("Text", suppliersBindingSource, "SupplierID", true, DataSourceUpdateMode.Never);
             textBoxSupplierName.DataBindings.Add("Text", suppliersBindingSource, "SupplierName", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxContactInfo.DataBindings.Add("Text", suppliersBindingSource, "ContactInfo", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxAddress.DataBindings.Add("Text", suppliersBindingSource, "Address", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -99,14 +110,13 @@ namespace ComputerCompany
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.suppliersBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+            SaveSuppliersData();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             computerCompanyDBDataSet.Suppliers.RejectChanges();
+            suppliersDataGridView.Refresh();
         }
 
         private void SuppliersForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -122,9 +132,7 @@ namespace ComputerCompany
 
                 if (result == DialogResult.Yes)
                 {
-                    this.Validate();
-                    this.suppliersBindingSource.EndEdit();
-                    this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+                    SaveSuppliersData();
 
                     if (this.Owner is PurchasesForm purchaseForm)
                     {
@@ -133,7 +141,7 @@ namespace ComputerCompany
                             object prevSupplierId = purchaseForm.comboBoxSupplierId.SelectedValue;
                             purchaseForm.suppliersTableAdapter.Fill(purchaseForm.computerCompanyDBDataSet.Suppliers);
 
-                            if (prevSupplierId != null && purchaseForm.comboBoxSupplierId.Items.Contains(prevSupplierId))
+                            if (prevSupplierId != null && purchaseForm.comboBoxSupplierId.Items.Cast<DataRowView>().Any(item => item.Row["SupplierID"].Equals(prevSupplierId)))
                             {
                                 purchaseForm.comboBoxSupplierId.SelectedValue = prevSupplierId;
                             }
@@ -150,7 +158,7 @@ namespace ComputerCompany
                             object prevSupplierId = addPurchase.comboBoxSupplierId.SelectedValue;
                             addPurchase.suppliersTableAdapter.Fill(addPurchase.computerCompanyDBDataSet.Suppliers);
 
-                            if (prevSupplierId != null && addPurchase.comboBoxSupplierId.Items.Contains(prevSupplierId))
+                            if (prevSupplierId != null && addPurchase.comboBoxSupplierId.Items.Cast<DataRowView>().Any(item => item.Row["SupplierID"].Equals(prevSupplierId)))
                             {
                                 addPurchase.comboBoxSupplierId.SelectedValue = prevSupplierId;
                             }
@@ -167,7 +175,7 @@ namespace ComputerCompany
                             object prevSupplierId = mainForm.comboBoxSupplier.SelectedValue;
                             mainForm.suppliersTableAdapter.Fill(mainForm.computerCompanyDBDataSet.Suppliers);
 
-                            if (prevSupplierId != null && mainForm.comboBoxSupplier.Items.Contains(prevSupplierId))
+                            if (prevSupplierId != null && mainForm.comboBoxSupplier.Items.Cast<DataRowView>().Any(item => item.Row["SupplierID"].Equals(prevSupplierId)))
                             {
                                 mainForm.comboBoxSupplier.SelectedValue = prevSupplierId;
                             }
@@ -180,6 +188,7 @@ namespace ComputerCompany
                 }
             }
         }
+
 
 
         private void textBox_Validating(object sender, CancelEventArgs e)

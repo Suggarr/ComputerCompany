@@ -20,22 +20,34 @@ namespace ComputerCompany
             this.promptOnClose = promptOnClose;
         }
 
+        private void SaveCategoriesData()
+        {
+            try
+            {
+                this.Validate();
+                this.categoriesBindingSource.EndEdit();
+                this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+
+                MessageBox.Show("Данные успешно сохранены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         private void categoriesBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.categoriesBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
-
+            SaveCategoriesData();
         }
 
         private void CategoriesForm_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "computerCompanyDBDataSet.Categories". При необходимости она может быть перемещена или удалена.
             this.categoriesTableAdapter.Fill(this.computerCompanyDBDataSet.Categories);
-            categoriesBindingSource.DataSource = computerCompanyDBDataSet.Categories;
 
             // Привязка элементов управления к полям данных
-            //textBoxCategoryId.DataBindings.Add("Text", categoriesBindingSource, "CategoryID", true, DataSourceUpdateMode.Never);
             textBoxCategoryName.DataBindings.Add("Text", categoriesBindingSource, "CategoryName", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxDescription.DataBindings.Add("Text", categoriesBindingSource, "Description", true, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -93,14 +105,13 @@ namespace ComputerCompany
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.categoriesBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+            categoriesBindingNavigatorSaveItem_Click(sender, e);
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             computerCompanyDBDataSet.Categories.RejectChanges();
+            categoriesDataGridView.Refresh();
         }
 
         private void CategoriesForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -116,9 +127,7 @@ namespace ComputerCompany
 
                 if (result == DialogResult.Yes)
                 {
-                    this.Validate();
-                    this.categoriesBindingSource.EndEdit();
-                    this.tableAdapterManager.UpdateAll(this.computerCompanyDBDataSet);
+                    SaveCategoriesData();
 
                     if (this.Owner is ComponentsForm mainComponents)
                     {
@@ -127,7 +136,7 @@ namespace ComputerCompany
                             object prevCategoryId = mainComponents.comboBoxCategoryId.SelectedValue;
                             mainComponents.categoriesTableAdapter.Fill(mainComponents.computerCompanyDBDataSet.Categories);
 
-                            if (prevCategoryId != null && mainComponents.comboBoxCategoryId.Items.Contains(prevCategoryId))
+                            if (prevCategoryId != null && mainComponents.comboBoxCategoryId.Items.Cast<DataRowView>().Any(item => item.Row["CategoryID"].Equals(prevCategoryId)))
                             {
                                 mainComponents.comboBoxCategoryId.SelectedValue = prevCategoryId;
                             }
@@ -144,7 +153,7 @@ namespace ComputerCompany
                             object prevCategoryId = addComponents.comboBoxCategoryId.SelectedValue;
                             addComponents.categoriesTableAdapter.Fill(addComponents.computerCompanyDBDataSet.Categories);
 
-                            if (prevCategoryId != null && addComponents.comboBoxCategoryId.Items.Contains(prevCategoryId))
+                            if (prevCategoryId != null && addComponents.comboBoxCategoryId.Items.Cast<DataRowView>().Any(item => item.Row["CategoryID"].Equals(prevCategoryId)))
                             {
                                 addComponents.comboBoxCategoryId.SelectedValue = prevCategoryId;
                             }
@@ -157,6 +166,7 @@ namespace ComputerCompany
                 }
             }
         }
+
 
 
         private void textBox_Validating(object sender, CancelEventArgs e)

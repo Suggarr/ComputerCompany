@@ -46,7 +46,6 @@ namespace ComputerCompany
                     computerCompanyDBDataSet.Purchases.Columns.Add("TotalPrice", typeof(decimal));
                 }
 
-                // Установка источника данных для DataGridView
                 dataGridViewFull.DataSource = computerCompanyDBDataSet.Purchases;
 
                 // Обновление данных для новых полей
@@ -81,7 +80,7 @@ namespace ComputerCompany
                 {
                     Name = "SupplierName",
                     HeaderText = "Имя Поставщика",
-                    ReadOnly = true // Только для чтения
+                    ReadOnly = true 
                 };
                 dataGridViewFull.Columns.Add(supplierNameColumn);
             }
@@ -256,10 +255,9 @@ namespace ComputerCompany
                     dataGridViewFull.Columns.Add(supplierNameColumn);
                 }
 
-                // Перемещение столбца SupplierName на вторую позицию
                 dataGridViewFull.Columns["SupplierName"].DisplayIndex = 1;
 
-                dataGridViewFull.Columns["PurchaseID"].Visible = false; // Всегда скрываем PurchaseID
+                dataGridViewFull.Columns["PurchaseID"].Visible = false; 
                 dataGridViewFull.Columns["SupplierID"].Visible = false;
                 dataGridViewFull.Columns["SupplierName"].Visible = checkBoxAllSuppliers.Checked;
 
@@ -269,13 +267,11 @@ namespace ComputerCompany
                 dataGridViewFull.Columns["TotalQuantity"].HeaderText = "Общее Количество";
                 dataGridViewFull.Columns["TotalPrice"].HeaderText = "Общая Стоимость";
 
-                // Настройка AutoSizeMode для столбцов
                 dataGridViewFull.Columns["PurchaseDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGridViewFull.Columns["PurchaseReason"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridViewFull.Columns["TotalQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGridViewFull.Columns["TotalPrice"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-                // Обновление новых полей (TotalQuantity и TotalPrice)
                 int grandTotalQuantity = 0;
                 decimal grandTotalPrice = 0;
 
@@ -297,7 +293,7 @@ namespace ComputerCompany
                 labelTotals.Text = $"Итого: Количество = {grandTotalQuantity}, Сумма = {grandTotalPrice}";
 
                 // Проверка на наличие хотя бы одной строки перед добавлением итоговой строки
-                if (view.Count > 0) // Если есть хотя бы одна строка в отфильтрованных данных
+                if (view.Count > 0) 
                 {
                     // Добавление итоговой строки
                     DataRowView totalRow = view.AddNew();
@@ -317,12 +313,11 @@ namespace ComputerCompany
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LoadData(); // Загрузка данных
+            LoadData(); 
         }
 
         private void checkBoxAllSuppliers_CheckedChanged(object sender, EventArgs e)
         {
-            // Блокируем или разблокируем ComboBox в зависимости от состояния CheckBox
             comboBoxSupplier.Enabled = !checkBoxAllSuppliers.Checked;
         }
 
@@ -339,7 +334,6 @@ namespace ComputerCompany
             DateTime? startDate = null;
             DateTime? endDate = null;
 
-            // Получение выбранного SupplierID из ComboBox
             if (!checkBoxAllSuppliers.Checked)
             {
                 if (comboBoxSupplier.SelectedItem != null)
@@ -356,7 +350,7 @@ namespace ComputerCompany
 
             if (reportForm == null || reportForm.IsDisposed)
             {
-                reportForm = new ReportForm(startDate, endDate, supplierId, supplierName, reportFlag); // Передаем даты в конструктор
+                reportForm = new ReportForm(startDate, endDate, supplierId, supplierName, reportFlag); 
                 reportForm.FormClosed += (s, args) => reportForm = null;
                 reportForm.ShowDialog(this);
             }

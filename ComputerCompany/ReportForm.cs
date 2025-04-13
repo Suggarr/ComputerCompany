@@ -41,7 +41,6 @@ namespace ComputerCompany
             string reportDataSet;
             DataTable dataTable;
 
-            // Determine which dataset to use based on the reportFlag
             if (reportFlag)
             {
                 this.getFilteredPurchasesTableAdapter.Fill(this.computerCompanyDBDataSet.GetFilteredPurchases, supplierId, startDate, endDate);
@@ -57,7 +56,6 @@ namespace ComputerCompany
                 dataTable = computerCompanyDBDataSet.GetPurchaseDetailsForSuppliers;
             }
 
-            // Prepare the total text based on the supplied parameters
             string total;
             bool flag;
 
