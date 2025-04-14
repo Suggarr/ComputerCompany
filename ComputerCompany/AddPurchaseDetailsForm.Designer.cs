@@ -137,7 +137,7 @@
             this.buttonPurchases.Name = "buttonPurchases";
             this.buttonPurchases.Size = new System.Drawing.Size(275, 39);
             this.buttonPurchases.TabIndex = 116;
-            this.buttonPurchases.Text = "Список покупок";
+            this.buttonPurchases.Text = "Список закупок";
             this.buttonPurchases.UseVisualStyleBackColor = true;
             this.buttonPurchases.Click += new System.EventHandler(this.buttonPurchases_Click);
             // 
@@ -147,9 +147,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(181, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 22);
+            this.label1.Size = new System.Drawing.Size(137, 22);
             this.label1.TabIndex = 115;
-            this.label1.Text = "Номер покупки";
+            this.label1.Text = "Номер закупки";
             // 
             // buttonCancel
             // 
@@ -210,7 +210,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddPurchaseDetailsForm";
-            this.Text = "Добавление деталей покупки";
+            this.Text = "Добавление записи в журнал закупок";
             this.Load += new System.EventHandler(this.AddPurchaseDetailsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.componentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerCompanyDBDataSet)).EndInit();
