@@ -51,7 +51,6 @@ namespace ComputerCompany
             this.purchaseDetailsTableAdapter.Fill(this.computerCompanyDBDataSet.PurchaseDetails);
 
             // Привязка элементов управления к полям данных
-            comboBoxPurchaseId.DataBindings.Add("SelectedValue", purchaseDetailsBindingSource, "PurchaseID", true, DataSourceUpdateMode.OnPropertyChanged);
             comboBoxComponentId.DataBindings.Add("SelectedValue", fKPurchaseDPurch76969D2EBindingSource, "ComponentID", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxQuantity.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "Quantity", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxUnitPrice.DataBindings.Add("Text", fKPurchaseDPurch76969D2EBindingSource, "UnitPrice", true, DataSourceUpdateMode.Never);

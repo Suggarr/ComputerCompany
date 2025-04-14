@@ -135,7 +135,7 @@
             this.listBoxItems.ItemHeight = 18;
             this.listBoxItems.Location = new System.Drawing.Point(981, 236);
             this.listBoxItems.Name = "listBoxItems";
-            this.listBoxItems.Size = new System.Drawing.Size(729, 506);
+            this.listBoxItems.Size = new System.Drawing.Size(804, 506);
             this.listBoxItems.TabIndex = 5;
             // 
             // checkBoxAllSuppliers
@@ -318,7 +318,7 @@
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStripMain.Size = new System.Drawing.Size(1722, 27);
+            this.toolStripMain.Size = new System.Drawing.Size(1797, 27);
             this.toolStripMain.TabIndex = 16;
             this.toolStripMain.Text = "toolStripMain";
             // 
@@ -390,7 +390,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1722, 762);
+            this.ClientSize = new System.Drawing.Size(1797, 762);
             this.Controls.Add(this.buttonFullReport);
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.labelTotals);
